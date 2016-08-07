@@ -4,6 +4,7 @@ belongs_to :departement
 belongs_to :region
 mount_uploader :image, ImageUploader
 
+resourcify
 #Geocoding par adresse
 geocoded_by :fulladress
 after_validation :geocode

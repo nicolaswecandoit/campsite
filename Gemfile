@@ -29,6 +29,8 @@ gem 'ransack',             github: 'activerecord-hackery/ransack'
 gem 'draper',              '> 3.x'
 gem 'sass-rails',          github: 'rails/sass-rails' # For Sprockets 4
 gem 'devise'
+gem 'cancancan'
+gem "rolify"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

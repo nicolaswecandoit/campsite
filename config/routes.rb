@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :campeurs
+  devise_for :proprietaires
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :villes

@@ -1,4 +1,5 @@
 class CampingsController < ApplicationController
+  before_action :authenticate_proprietaire!
   before_action :set_camping, only: [:show, :edit, :update, :destroy]
 
   # GET /campings
