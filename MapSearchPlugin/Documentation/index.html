@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Map Search jQuery Plugin</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;MapSearch jQuery Plugin&rdquo; Documentation by &ldquo;Ashfaq Ahmed&rdquo; v1.0</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;MapSearch jQuery Plugin Using Google Maps&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 1/7/2015<br>
+					By: Ashfaq Ahmed<br>
+					Email: <a href="mailto:youremail@yourdomain.com">ashfaqashfaq007@gmail.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing my plugin. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://themeforest.net/user/mentallyretarded">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#htmlStructure">Requirements</a></li>
+			<li><a href="#cssFiles">Example Usage</a></li>
+			<li><a href="#javascript">Using Filters</a></li>
+			<li><a href="#javascript">Available Options</a></li>
+			<li><a href="#javascript">Using Clusters</a></li>
+			<li><a href="#">Server Side Explanation</a></li>
+		</ol>
+		
+		<hr>
+		
+		<h3 id="htmlStructure"><strong>A) Requirements</strong> - <a href="#toc">top</a></h3>
+		<ul>
+			<li>Minimum 1.7 version of jQuery.</li>
+			<li>Google Maps API V3</li>
+			<li>Google Places library if you are using searchbox</li>
+		</ul>
+
+		<hr>
+
+		<h3 id="cssFiles"><strong>B) Example Usage</strong> - <a href="#toc">top</a></h3>
+		
+		<p><strong>HTML </strong>(file must have 3 required elements) :</p>
+		<p><strong>&lt;div id=&quot;ms-canvas&quot;&gt;&lt;/div&gt;</strong>  To hold the map</p>
+		<p><strong>&lt;div id=&quot;ms-listings&quot;&gt;&lt;/div&gt;</strong> To hold the listings (Customizable in options)</p>
+		<p><strong>&lt;div id=&quot;ms-pagination&quot;&gt;&lt;/div&gt;</strong> To To hold the pagination (Customizable in options)</p>
+		where ID's are customizable through options
+		<p><strong>Plugin Initialization :</strong></p>
+		<pre>
+		$('#map-canvas').mapSearch({
+			request_uri : 'http://sbadb.herokuapp.com/v1/bizs' , //The url to json response containing 
+										//listings array and meta data
+			initialPosition:[40, -100], //A pair of Coordinates for initial map location or center 
+		});
+		</pre>
+		The above example is valid in case the json response is having following structure (which is customizable , please follow along)
+		<pre>
+			{
+				"results" : [
+					{
+						"name" : "value",
+						"latlon": [-111.012654,32.339807],
+						"address" : "value"
+					},
+					{
+						"name" : "value",
+						"latlon": [-111.012654,32.339807],
+						"address" : "value"
+					},
+					...
+				],
+				
+				"meta" : {
+					"page" : 2
+				}
+			}
+		</pre>
+		If the response is having different structure, no worries. You can tell the plugin how to get data using following initialization
+		<pre>
+		$('#map-canvas').mapSearch({
+			/*
+			*The url to json response containing 
+			*listings array and meta data
+			*/
+			request_uri : 'http://sbadb.herokuapp.com/v1/bizs' , 
+			/*
+			*  A pair of Coordinates for initial map location or center 
+			*/			
+			initialPosition:[40, -100],
+			/*
+			* change the value to whatever is the name of array containing listings
+			*/
+			results_key: 'results' ,
+			/*
+			*Tell the plugin where to find latitude and longitude for a listing. This function receives 
+			*a listing as parameter.
+			*/
+			listing_latlng : function(listing){
+				return [listing.latlng[1] , listing.latlng[0]]
+			},
+			/*
+			*Tell the plugin what to display in listings section for each listing
+			*This function receives a listing as parameter, in other words,
+			*serves as a template for each listing
+			*/
+			listing_template : function(listing){	
+				return '&lt;p&gt;' + listing.name + '&lt;/p&gt;';
+			},
+			/*
+			*Tell the plugin what to show when someone clicks a marker
+			*This funciton receives a listing as parameter
+			*/
+			infowindow_content : function(listing){	
+				return '&lt;p&gt;' + listing.name + '&lt;/p&gt;';
+			},
+			/*
+			*Tell the plugin where to find the current page number for pagination
+			*Receives entire response as parameter
+			*/
+			page_number: function(data){	
+				return data.meta.page;
+			},
+		});
+		</pre>
+		<hr>
+		
+		<h3 id="javascript"><strong>C) Using Filters</strong> - <a href="#toc">top</a></h3>
+		
+		<p>Usint the plugin with filters is extremely easy. Just create a form somewhere in the page with an ID. Example</p>
+		<form>
+		
+		<p>&lt;form id=&quot;filters&quot;&gt;</p>
+		<p>&lt;input name="some_filter" type=&quot;checkbox&quot; value=&quot;true&quot;&gt;</p>
+		<p>....</p>
+		<p>&lt;/form&gt;</p>
+		<p>and give the ID in the plugin options like</p>
+		<p>filters_form : '#filters'</p>
+		<p>And you are done. When requesting data, the plugin will send all the fields (which are not empty) along the ajax
+		request as GET variables. Like in the above example, the server will receive $_GET['some_filter'] = true if this checkbox
+		is checked.</p>
+		
+		<h3 id="psdFiles"><strong>D) Available Options:</strong> - <a href="#toc">top</a></h3>
+		<table>
+			<tr>
+				<td><strong>Option</strong></td>
+				<td><strong>Type</strong></td>
+				<td><strong>Default Value</strong></td>
+				<td><strong>Description</strong></td>
+			</tr>
+			<tr>
+				<td>zoom</td>
+				<td>Number</td>
+				<td>6</td>
+				<td>Zoom level of the map</td>
+			</tr>
+			<tr>
+				<td>initialPosition</td>
+				<td>Array</td>
+				<td>[40 , 100]</td>
+				<td>A pair of coordinates making initial center point of the map</td>
+			</tr>
+			<tr>
+				<td>request_uri(Required)</td>
+				<td>String</td>
+				<td>null</td>
+				<td>URL to the server where plugin will send ajax request for data</td>
+			</tr>
+			<tr>
+				<td>listings_el</td>
+				<td>String</td>
+				<td>'#ms_listings'</td>
+				<td>Selector ID or Class of an element to hold listings</td>
+			</tr>
+			<tr>
+				<td>pagination_el</td>
+				<td>String</td>
+				<td>'#ms_pagination'</td>
+				<td>Selector ID or Class of an element to hold pagination links</td>
+			</tr>
+			<tr>
+				<td>listing_template</td>
+				<td>function</td>
+				<td></td>
+				<td>A function that receives a listing/result as parameter and returns it as html</td>
+			</tr>
+			<tr>
+				<td>listing_wrapper</td>
+				<td>string</td>
+				<td>'&lt;div&gt;&lt;/div&gt;'</td>
+				<td>Element to be wrapped around each listing</td>
+			</tr>
+			<tr>
+				<td>page_number(required)</td>
+				<td>function</td>
+				<td> - </td>
+				<td>Returns the identifier for current page number (pagination)</td>
+			</tr>
+			<tr>
+				<td>infowindow_content(required)</td>
+				<td>function</td>
+				<td> - </td>
+				<td>Receives a listing as parameter and Returns html to be inserted into infowindow of marker</td>
+			</tr>
+			<tr>
+				<td>pagi_class</td>
+				<td>string</td>
+				<td>'ms-pagination-button'</td>
+				<td>Class to be added to each pagination button</td>
+			</tr>
+			<tr>
+				<td>next_btn_text</td>
+				<td>string</td>
+				<td>'Next'</td>
+				<td>Text to appeaar on next pagination button</td>
+			</tr>
+			<tr>
+				<td>prev_btn_text</td>
+				<td>string</td>
+				<td>'Previous'</td>
+				<td>Text to appeaar on previous pagination button</td>
+			</tr>
+			<tr>
+				<td>loading_class</td>
+				<td>string</td>
+				<td>'loading'</td>
+				<td>Class to be added to show loading indicator</td>
+			</tr>
+			<tr>
+				<td>icon</td>
+				<td>string</td>
+				<td>'img/normal.png'</td>
+				<td>Marker Icon path/URL</td>
+			</tr>
+			<tr>
+				<td>highlighted_icon</td>
+				<td>string</td>
+				<td>'img/highlight.png'</td>
+				<td>Hightlighted Marker Icon path/URL (When someone hovers over a particular listing)</td>
+			</tr>
+			<tr>
+				<td>results_key</td>
+				<td>string</td>
+				<td>'results'</td>
+				<td>Identifier for the listings array in the response</td>
+			</tr>
+			<tr>
+				<td>filters_form</td>
+				<td>string</td>
+				<td>false</td>
+				<td>ID or Class of the form containing filters, setting to false will disable this feature</td>
+			</tr>
+			<tr>
+				<td>marker_clusterer</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>To turn on the clusterer, set this to true, and include the file markerclusterer.js to document.</td>
+			</tr>
+			<tr>
+				<td>search_box</td>
+				<td>Boolean</td>
+				<td>true</td>
+				<td>To turn on the Location Searchbox, set this to false.</td>
+			</tr>
+			<tr>
+				<td>searchbox_class</td>
+				<td>String</td>
+				<td>'form-control'</td>
+				<td>Class to be added to search box input for styling</td>
+			</tr>
+			<tr>
+				<td>searchbox_placeholder</td>
+				<td>String</td>
+				<td>'Search or a location'</td>
+				<td>A placeholder sentence for searchbox</td>
+			</tr>
+		</table>
+		
+		<h3 id="psdFiles"><strong>E) Using Clusters:</strong> - <a href="#toc">top</a></h3>
+		<p>For using clusters, just include the file maerkerclusterer.js included in the js folder of the plugin and set the marker_clusterer
+		option to true</p>
+		<h3 id="psdFiles"><strong>F) Server Side Explanation:</strong> - <a href="#toc">top</a></h3>
+		
+		<p>When the plugin gets initiallized , it creates a map and sends an ajax request to the server. It always sends the following parameters
+		along the request as GET variables to help you filter the listings falling within the map</p>
+		<p>ne_lat : NorthEast corner of map (latitude)</p>
+		<p>ne_lng : NorthEast corner of map (longitude)</p>
+		<p>sw_lat : SouthWest corner of map (latitude)</p>
+		<p>sw_lng : SouthWest corner of map (longitude)</p>
+		<p>page : Page number. Not included if requesting page number 1.
+		Using them you can filter the results in your queries . Example query (Assuming PHP / MySQL)
+		<?php
+		<p>$ne_lat = $_GET['ne_lat'];</p>
+		<p>$sw_lat = $_GET['sw_lat'];</p>
+		<p>$ne_lng = $_GET['ne_lng';</p>
+		<p>$sw_lng = $_GET['sw_lng'];</p>
+		$qry = "SELECT * FROM listings WHERE latitude < '$ne_lat' AND latitude > '$sw_lat' AND longitude < '$ne_lng' AND longitude > '$sw_lng'";
+		
+		<hr>
+		
+		<p>Once again, thank you so much for purchasing this plugin. As I said at the beginning, I'd be glad to help you if you have any questions relating to this plugin. No guarantees, but I'll do my best to assist. If you have a more general question relating to the plugins on CodeCanyon, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p> 
+		
+		<p class="append-bottom alt large"><strong>Ashfaq Ahmed</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>

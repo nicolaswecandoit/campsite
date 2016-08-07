@@ -1,0 +1,106 @@
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@camping.latitude}%2C#{@camping.longitude}" %>
+
+<h3>Les campings proches de <%=@camping.commune%></h3>
+<ul>
+<% for camping in @camping.nearbys(10) %>
+  <li><%= link_to camping.name, camping %> (<%= camping.distance.round(2) %> kilomètres)</li>
+<% end %>
+</ul>
+
+<%= @camping.image %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @camping.name %>
+</p>
+
+<p>
+  <strong>Adresse:</strong>
+  <%= @camping.adresse %>
+</p>
+
+<p>
+  <strong>Code postale:</strong>
+  <%= @camping.code_postale %>
+</p>
+
+<p>
+  <strong>Commune:</strong>
+  <%= @camping.commune %>
+</p>
+
+<p>
+  <strong>Courriel:</strong>
+  <%= @camping.courriel %>
+</p>
+
+<p>
+  <strong>Site internet:</strong>
+  <%= @camping.site_internet %>
+</p>
+
+<p>
+  <strong>Tel:</strong>
+  <%= @camping.tel %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @camping.description %>
+</p>
+
+<p>
+  <strong>Nomdep:</strong>
+  <%= @camping.nomdep %>
+</p>
+
+<p>
+  <strong>Nomregion:</strong>
+  <%= @camping.nomregion %>
+</p>
+
+<p>
+  <strong>Numdep:</strong>
+  <%= @camping.numdep %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @camping.slug %>
+</p>
+
+<p>
+  <strong>Ville:</strong>
+  <%= @camping.ville_id %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @camping.region_id %>
+</p>
+
+<p>
+  <strong>Departement:</strong>
+  <%= @camping.departement_id %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @camping.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @camping.longitude %>
+</p>
+
+<p>
+  <strong>Etoile:</strong>
+  <%= @camping.etoile %>
+</p>
+
+
+<%= link_to 'Edit', edit_camping_path(@camping) %> |
+<%= link_to 'Back', campings_path %>

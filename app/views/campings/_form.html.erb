@@ -1,0 +1,115 @@
+<%= form_for(camping) do |f| %>
+  <% if camping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(camping.errors.count, "error") %> prohibited this camping from being saved:</h2>
+
+      <ul>
+      <% camping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :adresse %>
+    <%= f.text_field :adresse %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code_postale %>
+    <%= f.text_field :code_postale %>
+  </div>
+
+  <div class="field">
+    <%= f.label :commune %>
+    <%= f.text_field :commune %>
+  </div>
+
+  <div class="field">
+    <%= f.label :courriel %>
+    <%= f.text_field :courriel %>
+  </div>
+
+  <div class="field">
+    <%= f.label :site_internet %>
+    <%= f.text_field :site_internet %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tel %>
+    <%= f.text_field :tel %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nomdep %>
+    <%= f.text_field :nomdep %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nomregion %>
+    <%= f.text_field :nomregion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numdep %>
+    <%= f.text_field :numdep %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slug %>
+    <%= f.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ville_id %>
+    <%= f.number_field :ville_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :region_id %>
+    <%= f.number_field :region_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :departement_id %>
+    <%= f.number_field :departement_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= f.label :etoile %>
+    <%= f.text_field :etoile %>
+  </div>
+
+<div class="field">
+   <%= f.file_field :image %>
+  </div>
+<div class="field">
+   <%= f.label :remote_image_url, "or image URL" %><br />
+   <%= f.text_field :remote_image_url %>
+   </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

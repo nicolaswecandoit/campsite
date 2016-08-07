@@ -1,0 +1,33 @@
+<%= form_for(region) do |f| %>
+  <% if region.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(region.errors.count, "error") %> prohibited this region from being saved:</h2>
+
+      <ul>
+      <% region.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :descriptionregion %>
+    <%= f.text_area :descriptionregion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nomderegion %>
+    <%= f.text_area :nomderegion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slug %>
+    <%= f.text_area :slug %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

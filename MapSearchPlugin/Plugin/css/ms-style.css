@@ -1,0 +1,23 @@
+.ms-results.loading:after{
+  content: ' ';
+  background: url("../img/1.gif") no-repeat;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 50%;
+  top: 150px;
+  margin: -6px 0 0 -22px;
+}
+.ms-map.loading:after {
+  content: ' ';
+  background: url("../img/1.gif") no-repeat;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 50%;
+  top: 50%;
+  margin: -6px 0 0 -22px;
+}
+.ms-map {
+	height:100%;
+}

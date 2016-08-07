@@ -1,0 +1,56 @@
+
+.listing {
+	border: 1px solid #cdcdcd;
+	padding: 20px;
+	margin: 10px 0;
+}
+
+body {
+  padding-top: 0px;
+  font-family: 'Montserrat', sans-serif;
+}
+.filter_heading{
+margin-top:0;
+}
+.loading {
+  opacity: 0.7;
+}
+
+.navbar-brand {
+	font-size: 36px;
+	color:white !important;
+	font-weight:700;
+}
+
+.map-search {
+position: absolute;
+top: 0px;
+bottom: 0;
+left: 0;
+right: 0;
+}
+
+.side-bar {
+position: fixed;
+top: 47px;
+right: auto;
+left: 0;
+bottom: 0;
+width: 60%;
+overflow-y: scroll;
+-webkit-overflow-scrolling: touch;
+background: #f7f7f7;
+padding:0 10px;
+}
+.filters {
+	margin-top:20px;
+}
+.map {
+display: block;
+width: 40%;
+position: fixed;
+top: 47px;
+bottom: 0;
+left: auto;
+right: 0;
+}

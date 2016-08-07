@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Villes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nomcommune</th>
+      <th>Description</th>
+      <th>Nomdep</th>
+      <th>Departement</th>
+      <th>Code postale</th>
+      <th>Region</th>
+      <th>Region</th>
+      <th>Slug</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @villes.each do |ville| %>
+      <tr>
+        <td><%= ville.nomcommune %></td>
+        <td><%= ville.description %></td>
+        <td><%= ville.nomdep %></td>
+        <td><%= ville.departement_id %></td>
+        <td><%= ville.code_postale %></td>
+        <td><%= ville.region %></td>
+        <td><%= ville.region_id %></td>
+        <td><%= ville.slug %></td>
+        <td><%= link_to 'Show', ville %></td>
+        <td><%= link_to 'Edit', edit_ville_path(ville) %></td>
+        <td><%= link_to 'Destroy', ville, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ville', new_ville_path %>

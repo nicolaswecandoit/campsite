@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nomcommune:</strong>
+  <%= @ville.nomcommune %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ville.description %>
+</p>
+
+<p>
+  <strong>Nomdep:</strong>
+  <%= @ville.nomdep %>
+</p>
+
+<p>
+  <strong>Departement:</strong>
+  <%= @ville.departement_id %>
+</p>
+
+<p>
+  <strong>Code postale:</strong>
+  <%= @ville.code_postale %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @ville.region %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @ville.region_id %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @ville.slug %>
+</p>
+
+<%= link_to 'Edit', edit_ville_path(@ville) %> |
+<%= link_to 'Back', villes_path %>

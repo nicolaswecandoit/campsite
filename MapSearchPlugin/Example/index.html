@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Google Map Search</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="css/starter-template.css" rel="stylesheet">
+	<link href="css/ms-style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Map Search Plugin</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="index.html">Example With Filters</a></li>
+				<li><a href="filters.html">Example With Clusters</a></li>
+			  </ul>
+			</div><!--/.nav-collapse -->
+		</nav>
+	
+		<div class="map-search">
+			<div class="side-bar">
+				<div class="well filters">
+					<h3 class="filter_heading">Apply Filters</h3>
+					<form id="filters">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<input type="checkbox" value="true" name="gcc"/> Accepts Govt Credit Cards
+								</div>
+								<div class="form-group">
+									<input type="checkbox" value="true" name="women"/> Owned by women 
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="reg-year">Registration year</label>
+									<select  class="form-control" id="reg-year" name="yrest">
+										  <option value="">Reg Year</option>
+										  <option value="2003">2003</option>
+										  <option value="2004">2004</option>
+										  <option value="2005">2005</option>
+										  <option value="2006">2006</option>
+										  <option value="2007">2007</option>
+										  <option value="2008">2008</option>
+									</select>									
+								</div>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+				<div id="ms-listings"></div>
+				<div id="ms-pagination"></div>
+			</div>
+			<div class="map">
+				<div id="map-canvas">
+	  
+				</div>
+			</div>
+		</div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+	<script type="text/javascript" src="js/jquery.mapSearch.min.js"></script>
+	<script>
+		(function ( $ ) {
+
+			$('#map-canvas').mapSearch({
+				initialPosition:[40, -100],
+				request_uri : 'http://sbadb.herokuapp.com/v1/bizs',
+				filters_form : '#filters',
+				search_box : true,
+				listing_template : function(listing){	
+										return '<div class="listing">'
+											+     '<h3>'+listing.name + '</h3>'
+											+	  '<div class="row">'
+											+	       '<div class="col-sm-2">'
+											+	  			'<img class="thumbnail img-responsive" src="http://dummyimage.com/150x150/000/fff.jpg">'
+											+          '</div>'
+											+	       '<div class="col-sm-5">'
+											+     			'<p><strong>Address : </strong>' + listing.address+ '</p>'
+											+               '<p>'+listing.city+', '+listing.state+' '+listing.zip+'</p>'
+											+               '<p>Reg Year: ' + listing.yrest+'</p>'
+											+          '</div>'
+											+	       '<div class="col-sm-5">'
+											+	  			'<p><strong>Women owned:</strong> '+listing.women+'</p>'
+											+	  			'<p><strong>Accept Govt Credit card:</strong> '+listing.gcc+'</p>'
+											+          '</div>'
+											+	  '</div>'
+											+  '</div>';
+									},
+			});
+		}( jQuery ));
+		
+	</script>
+  </body>
+</html>

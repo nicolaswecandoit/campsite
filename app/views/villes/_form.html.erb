@@ -1,0 +1,57 @@
+<%= form_for(ville) do |f| %>
+  <% if ville.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ville.errors.count, "error") %> prohibited this ville from being saved:</h2>
+
+      <ul>
+      <% ville.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nomcommune %>
+    <%= f.text_area :nomcommune %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nomdep %>
+    <%= f.text_field :nomdep %>
+  </div>
+
+  <div class="field">
+    <%= f.label :departement_id %>
+    <%= f.number_field :departement_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code_postale %>
+    <%= f.number_field :code_postale %>
+  </div>
+
+  <div class="field">
+    <%= f.label :region %>
+    <%= f.text_area :region %>
+  </div>
+
+  <div class="field">
+    <%= f.label :region_id %>
+    <%= f.number_field :region_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slug %>
+    <%= f.text_area :slug %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
