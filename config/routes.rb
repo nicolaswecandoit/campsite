@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get '/departement/' => 'departements#index'
   get '/ville/' => 'villes#index'
   get '/camping/' => 'campings#index'
+  get '/profil/' => 'profils#index'
 end

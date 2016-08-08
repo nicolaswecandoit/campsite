@@ -1,5 +1,4 @@
-class Proprietaire < ApplicationRecord
-  rolify
+class Proprietaire < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
