@@ -1,6 +1,9 @@
 class Ability
   include CanCan::Ability
 
+  can [:edit, :update], Proprietaire do |camping|
+    camping.proprietaire_id == proprietaire.id
+  end
 
     # Define abilities for the passed in user here. For example:
     #

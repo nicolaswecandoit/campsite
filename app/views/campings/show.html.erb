@@ -4,6 +4,7 @@
 <ul>
 <% for camping in @camping.nearbys(10) %>
   <li><%= link_to camping.name, camping %> (<%= camping.distance.round(2) %> kilomètres)</li>
+
 <% end %>
 </ul>
 
@@ -101,6 +102,10 @@
   <%= @camping.etoile %>
 </p>
 
+<%if (proprietaire_signed_in? && (current_proprietaire.id == @camping.proprietaire_id)) %>
+    <%=  link_to "Edit", edit_camping_path(@camping) %>
+  <%else%>
+      <%end%>
 
-<%= link_to 'Edit', edit_camping_path(@camping) %> |
+
 <%= link_to 'Back', campings_path %>

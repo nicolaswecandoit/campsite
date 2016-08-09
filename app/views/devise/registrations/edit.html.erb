@@ -1,83 +1,104 @@
+<div class="container">
+<div class="col-md-9">
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+  <div class="form-group">
+    <label for="name">Nom</label><br />
+    <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Entrez votre nom" %>
   </div>
 
-  <div class="field">
-    <%= f.label :surname %><br />
-    <%= f.text_field :surname, autofocus: true %>
+  <div class="form-group">
+    <label for="surname">Prénom</label><br />
+    <%= f.text_field :surname, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>
   </div>
 
-<div class="field">
-    <%= f.label :gender %><br />
-    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@proprietaire.gender?)}) %>
+<div class="form-group">
+    <label for="gender">Sexe</label><br />
+    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@proprietaire.gender?)}, {class:"form-control", id:"exampleSelect1"}) %>
 </div>
 
-<div class="field">
-  <%= f.label :adresse %><br />
-  <%= f.text_field :adresse, autofocus: true %>
+<div class="form-group">
+  <label for="adresse">Adresse</label><br />
+  <%= f.text_field :adresse, autofocus: true, class:"form-control", placeholder:"Votre adresse" %>
 </div>
 
-<div class="field">
-  <%= f.label "Zip code" %><br />
-  <%= f.text_field :cp, autofocus: true %>
+<div class="form-group">
+  <label for="cp">Code postal</label><br />
+  <%= f.text_field :cp, autofocus: true, class:"form-control", placeholder:"Votre adresse" %>
 </div>
 
-<div class="field">
-  <%= f.label "Téléphone" %><br />
-  <%= f.text_field :telephone, autofocus: true %>
+<div class="form-group">
+  <label for="ville">Commune</label><br />
+  <%= f.text_field :ville, autofocus: true, class:"form-control", placeholder:"Indiquez votre lieu de résisdence" %>
 </div>
 
-<div class="field">
-  <%= f.label :ville %><br />
-  <%= f.text_field :ville, autofocus: true %>
+<div class="form-group">
+  <label for="telephone">Téléphone</label><br />
+  <%= f.text_field :telephone, autofocus: true, class:"form-control", placeholder:"Indiquez votre numéro de téléphone sans indicatif" %>
 </div>
 
-<div class="field">
-  <%= f.label :fonction %><br />
-  <%= f.text_field :fonction, autofocus: true %>
+<div class="form-group">
+    <label for="fonction">Fonction</label><br />
+<small class="form-text text-muted">Indiquez la fonction que vous exercez au sein de l'établissement.</small>
+    <%= f.select(:fonction, [['Non renseigné',"Non renseigné"], ['Dirigeant',"Dirigeant"], ['Employé',"Employé"], ['Chargé de la promotion',"Chargé de la promotion"], ['Autre',"Autre"]], {:selected => (@proprietaire.fonction?)}, {class:"form-control", id:"exampleSelect1"}) %>
 </div>
 
-  <div class="field">
+ <fieldset disabled>
+<div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, id:"disabledTextInput", class:"form-control" %>
   </div>
+  </fieldset>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Entrez votre mot de passe</label>
+    <%= f.password_field :current_password, autocomplete: "off", class:"form-control", id:"exampleInputPassword1", placeholder:"Pour confirmer les changements indiquez votre mot de passe" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <br /><p><%= f.submit "Enregistrer", class:"btn btn-success" %></p>
   </div>
+  <hr />
+<h3>Changer votre mot de passe</h3>
+
+<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<div class="form-group">
+  <label for="exampleInputPassword1">Votre nouveau mot de passe</label>
+  <% if @minimum_password_length %>
+  <small id="emailHelp" class="form-text text-muted">(Votre mot de passe doit contenir plus de <%= @minimum_password_length %> caractères)</small>
+  <% end %><br />
+  <%= f.password_field :password, autocomplete: "off", class:"form-control", id:"exampleInputPassword1", placeholder:"Indiquez votre nouveau mot de passe" %>
+</div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class="form-group">
+  <label for="exampleInputPassword1">Confirmez votre nouveau mot de passe</label>
+  <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", id:"exampleInputPassword1", placeholder:"Confirmation du mot de passe" %>
+</div>
+<div class="actions">
+  <br /><p><%= f.submit "Enregistrer", class:"btn btn-success" %></p>
+</div>
 
-<%= link_to "Back", :back %>
+<% end %>
+
+<hr />
+<h3>Supprimer mon compte ?</h3>
+<div class="alert alert-danger" role="alert">
+<p>Pensez-vous vraiment que notre histoire est terminée ? Nous ne pouvons vraiement rien faire pour prolonger celle-ci ? <p><small>Alors si c'est le cas cliquer ci-dessous... snif</small></p>
+</div>
+<%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%>
+</div>
+<div class="col-md-3">
+  <div class="alert alert-warning text-justify" role="alert">
+    <strong>Attention!<br /></strong> Vous êtes sur la page édition de votre compte. Vous pouvez mettre à jour vos informations et les changer à tout moment. <br /><br /> Si vous avez une question nous vous invitons à nous contacter.
+  </div>
+</div>
+
+</div>

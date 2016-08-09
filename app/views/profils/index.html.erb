@@ -9,9 +9,8 @@
 <p><%= current_proprietaire.telephone %></p>
 <p><%= current_proprietaire.email %></p>
 
-<button type="button" class="btn btn-primary">
+
 <% if proprietaire_signed_in? %>
-<%= link_to('Edit registration', edit_proprietaire_registration_path) %>
+<%= link_to 'Edit registration', edit_proprietaire_registration_path, :class => "btn btn-primary" %>
 <% else %>
 <% end %>
-</button>

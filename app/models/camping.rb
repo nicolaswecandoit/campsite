@@ -2,6 +2,7 @@ class Camping < ApplicationRecord
 belongs_to :ville
 belongs_to :departement
 belongs_to :region
+belongs_to :proprietaire
 mount_uploader :image, ImageUploader
 
 resourcify
@@ -13,7 +14,4 @@ after_validation :geocode
 def fulladress
     [adresse,code_postale,commune].to_a.compact.join(",")
 end
-
-
-
 end

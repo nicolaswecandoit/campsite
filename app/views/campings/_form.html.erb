@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+<% f.hidden_field :proprietaire_id , :value => current_proprietaire.id %>
+
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>

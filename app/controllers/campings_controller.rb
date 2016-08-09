@@ -4,6 +4,8 @@ class CampingsController < ApplicationController
 
   # GET /campings
   # GET /campings.json
+
+
   def index
 
     if params[:search].present?
@@ -11,8 +13,7 @@ class CampingsController < ApplicationController
  else
    @campings = Camping.all
  end
-  end
-
+end
   # GET /campings/1
   # GET /campings/1.json
   def show
