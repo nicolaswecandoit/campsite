@@ -1,7 +1,15 @@
 class CampingsController < ApplicationController
-  before_action :authenticate_proprietaire!
-  before_action :set_camping, only: [:show, :edit, :update, :destroy]
+    before_action :set_camping, only: [:show, :edit, :update, :proprio_owner]
+     before_action :authenticate_proprietaire!,except:[:index, :show]
+     before_action :proprio_owner, only: [:edit, :update, :destroy]
 
+     #Autoriser le proprietaire à modifier son camping s'il a le proprietaire_id
+     def proprio_owner
+      unless @camping.proprietaire_id == current_proprietaire.id
+       flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
+       redirect_to campings_path
+      end
+     end
   # GET /campings
   # GET /campings.json
 
@@ -13,10 +21,15 @@ class CampingsController < ApplicationController
  else
    @campings = Camping.all
  end
+
 end
   # GET /campings/1
   # GET /campings/1.json
   def show
+
+ @camping = Camping.find(params[:id])
+
+
   end
 
   # GET /campings/new

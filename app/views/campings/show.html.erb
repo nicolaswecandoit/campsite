@@ -1,111 +1,62 @@
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@camping.latitude}%2C#{@camping.longitude}" %>
-
-<h3>Les campings proches de <%=@camping.commune%></h3>
-<ul>
-<% for camping in @camping.nearbys(10) %>
-  <li><%= link_to camping.name, camping %> (<%= camping.distance.round(2) %> kilomètres)</li>
-
-<% end %>
-</ul>
-
 <%= @camping.image %>
 
-<p id="notice"><%= notice %></p>
+<div class="col-md-8">
+    <h3><span class="label label-success" style="float:right"><%= "#{@camping.etoile} étoiles" %></span></h3>
+    <h1><%= @camping.name %></h1>
+    <p><strong><%= @camping.code_postale %> <%= @camping.commune %> - <%= @camping.nomdep %></strong></p>
+    <p><h3>Description du camping:</h3></p>
+    <p><%= @camping.description %></p>
+    <hr />
 
-<p>
-  <strong>Name:</strong>
-  <%= @camping.name %>
-</p>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d21175.118094629812!2d1.4652520999999998!3d48.4394555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1470862563036" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
-<p>
-  <strong>Adresse:</strong>
-  <%= @camping.adresse %>
-</p>
+    <hr />
+    <p><strong>Adresse:</strong><%= @camping.adresse %></p>
 
-<p>
-  <strong>Code postale:</strong>
-  <%= @camping.code_postale %>
-</p>
+    <p><strong>Nomregion:</strong><%= @camping.nomregion %></p>
+    <p><strong>Numdep:</strong><%= @camping.numdep %></p>
+    <p><strong>Slug:</strong><%= @camping.slug %></p>
+    <p><strong>Ville:</strong><%= @camping.ville_id %></p>
+    <p><strong>Region:</strong><%= @camping.region_id %></p>
+    <p><strong>Departement:</strong><%= @camping.departement_id %></p>
+    <p><strong>Latitude:</strong><%= @camping.latitude %></p>
+    <p><strong>Longitude:</strong><%= @camping.longitude %></p>
+    <p><strong>Etoile:</strong><%= @camping.etoile %></p>
 
-<p>
-  <strong>Commune:</strong>
-  <%= @camping.commune %>
-</p>
+<hr />
 
-<p>
-  <strong>Courriel:</strong>
-  <%= @camping.courriel %>
-</p>
+</div>
 
-<p>
-  <strong>Site internet:</strong>
-  <%= @camping.site_internet %>
-</p>
 
-<p>
-  <strong>Tel:</strong>
-  <%= @camping.tel %>
-</p>
+<div class="col-md-4">
+  <div class="alert alert-warning text-justify" role="alert">
 
-<p>
-  <strong>Description:</strong>
-  <%= @camping.description %>
-</p>
 
-<p>
-  <strong>Nomdep:</strong>
-  <%= @camping.nomdep %>
-</p>
+    <p><strong>Courriel:</strong><%= @camping.courriel %></p>
+    <p><strong>Site internet:</strong><%= @camping.site_internet %></p>
+    <p><strong>Tel:</strong><%= @camping.tel %></p>
 
-<p>
-  <strong>Nomregion:</strong>
-  <%= @camping.nomregion %>
-</p>
+    <!--Affiche le nom du proprietaire -->
+    <p><% if @camping.proprietaire.present? %>
+      <%= "Propriétaire : #{@camping.proprietaire.name} #{@camping.proprietaire.surname}" %>
+    <%else%>
+    <%end%></p>
+    <!-- Fin -->
+  </div>
+</div>
 
-<p>
-  <strong>Numdep:</strong>
-  <%= @camping.numdep %>
-</p>
 
-<p>
-  <strong>Slug:</strong>
-  <%= @camping.slug %>
-</p>
-
-<p>
-  <strong>Ville:</strong>
-  <%= @camping.ville_id %>
-</p>
-
-<p>
-  <strong>Region:</strong>
-  <%= @camping.region_id %>
-</p>
-
-<p>
-  <strong>Departement:</strong>
-  <%= @camping.departement_id %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @camping.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @camping.longitude %>
-</p>
-
-<p>
-  <strong>Etoile:</strong>
-  <%= @camping.etoile %>
-</p>
+<div class="col-md-12">
+    <!--Affiche les campings -->
+    <h3>Les campings proches de <%=@camping.commune%></h3>
+      <% for camping in @camping.nearbys(10) %>
+      <p><%= link_to camping.name, camping %> - <%="#{@camping.etoile} étoiles"%> à <%= camping.distance.round(2) %> kilomètres) </p>
+      <% end %>
+</div>
 
 <%if (proprietaire_signed_in? && (current_proprietaire.id == @camping.proprietaire_id)) %>
     <%=  link_to "Edit", edit_camping_path(@camping) %>
   <%else%>
       <%end%>
-
 
 <%= link_to 'Back', campings_path %>
