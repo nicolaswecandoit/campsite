@@ -1,3 +1,5 @@
+<div class="col-md-12">
+
 <%= form_for(camping) do |f| %>
   <% if camping.errors.any? %>
     <div id="error_explanation">
@@ -13,105 +15,84 @@
 
 <% f.hidden_field :proprietaire_id , :value => current_proprietaire.id %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<div class="form-group">
+   <label for="name">Nom du camping</label>
+      <%= f.text_field :name, autofocus: true, class:"form-control", id:"name"%>
   </div>
 
-  <div class="field">
-    <%= f.label :adresse %>
-    <%= f.text_field :adresse %>
+  <div class="form-group">
+    <label for="adresse">Adresse du camping</label>
+    <%= f.text_field :adresse, class:"form-control"%>
   </div>
 
-  <div class="field">
-    <%= f.label :code_postale %>
-    <%= f.text_field :code_postale %>
+<div class="form-group">
+    <label for="code_postale">Code postal</label>
+    <%= f.text_field :code_postale, class:"form-control"%>
   </div>
 
-  <div class="field">
-    <%= f.label :commune %>
-    <%= f.text_field :commune %>
+<div class="form-group">
+    <label for="commune">Commune</label>
+    <%= f.text_field :commune, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :courriel %>
-    <%= f.text_field :courriel %>
+<div class="form-group">
+    <label for="courriel">Email</label>
+    <%= f.text_field :courriel, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :site_internet %>
-    <%= f.text_field :site_internet %>
+<div class="form-group">
+    <label for="site_internet">Site internet</label>
+    <%= f.text_field :site_internet, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :tel %>
-    <%= f.text_field :tel %>
+<div class="form-group">
+    <label for="tel">Numéro de téléphone <small>(permettant de joindre l'accueil)</small></label>
+    <%= f.text_field :tel, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <label for="description">Description de votre camping <small>(Rédigez 5 à 15 lignes pour présenter votre camping)</small></label>
+    <%= f.text_area :description, class:"form-control", rows:"9", placeholder:"Décrivez en 5 à 15 lignes tous les atouts de votre camping (situation géographique, proche de la mer, d'un lieu touristique, les offres, les petits plus...). Evitez les listes de mots et préférez des phrases. Ne faites pas de copier/coller d'autres sites. Le plus important c'est de donner envie à vos clients ! Courage vous allez y arriver :)"%>
   </div>
 
-  <div class="field">
-    <%= f.label :nomdep %>
-    <%= f.text_field :nomdep %>
+<fieldset disabled>
+  <div class="form-group">
+    <label for="nomdep">Département</label>
+    <%= f.text_field :nomdep, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :nomregion %>
-    <%= f.text_field :nomregion %>
+  <div class="form-group">
+    <label for="nomregion">Région</label>
+    <%= f.text_field :nomregion, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :numdep %>
-    <%= f.text_field :numdep %>
+  <div class="form-group">
+    <label for="latitude">Latitude</label>
+    <%= f.text_field :latitude, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :slug %>
-    <%= f.text_field :slug %>
+<div class="form-group">
+    <label for="longitude">Longitude</label>
+    <%= f.text_field :longitude, class:"form-control" %>
+  </div>
+</fieldset>
+
+<div class="form-group">
+    <label for="etoile">Nombre d'étoiles</label>
+    <%= f.text_field :etoile, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :ville_id %>
-    <%= f.number_field :ville_id %>
-  </div>
 
-  <div class="field">
-    <%= f.label :region_id %>
-    <%= f.number_field :region_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :departement_id %>
-    <%= f.number_field :departement_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :latitude %>
-    <%= f.text_field :latitude %>
-  </div>
-
-  <div class="field">
-    <%= f.label :longitude %>
-    <%= f.text_field :longitude %>
-  </div>
-
-  <div class="field">
-    <%= f.label :etoile %>
-    <%= f.text_field :etoile %>
-  </div>
-
-<div class="field">
+<div class="form-group">
    <%= f.file_field :image %>
   </div>
-<div class="field">
+<div class="form-group">
    <%= f.label :remote_image_url, "or image URL" %><br />
-   <%= f.text_field :remote_image_url %>
+   <%= f.text_field :remote_image_url, class:"form-control" %>
    </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enregistrer", class:"btn btn-success" %>
   </div>
 <% end %>
+</div>
