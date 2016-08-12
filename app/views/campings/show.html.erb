@@ -47,7 +47,7 @@
     <!--Affiche les campings -->
     <h3>Les campings proches de <%=@camping.commune%></h3>
       <% for camping in @camping.nearbys(10) %>
-      <p><%= link_to camping.name, camping %> - <%="#{@camping.etoile} étoiles"%> à <%= camping.distance.round(2) %> kilomètres) </p>
+      <p><%= link_to camping.name, camping %> - <%= camping.distance.round(2) %> kilomètres </p>
       <% end %>
 </div>
 
