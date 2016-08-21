@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
 class Camping < ApplicationRecord
+  # ElasticSearch
+include Elasticsearch::Model
+include Elasticsearch::Model::Callbacks
 
 belongs_to :ville
 belongs_to :departement
@@ -16,4 +20,9 @@ after_validation :geocode
 
 #Permet de coller les labes pour avoir une adresse geocodable
 
+self.per_page = 10
+
+
 end
+# Index all article records from the DB to Elasticsearch
+Camping.import(force: true)

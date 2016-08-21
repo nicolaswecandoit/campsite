@@ -15,11 +15,22 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-#gem 'will_paginate'
-gem 'kaminari'
+
+
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
+
+#Pagination
+gem 'will_paginate'
+
+#Google map
+gem 'gmaps4rails'
+
 gem 'record_tag_helper', '~> 1.0'
+
 #Upload d'images
 gem 'carrierwave'
+
 #gem 'rmagick'
 #activeadmin
 gem 'activeadmin', '~> 1.0.0.pre4'
@@ -31,6 +42,7 @@ gem 'devise'
 gem 'cancancan'
 gem "rolify"
 
+gem 'kaminari'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

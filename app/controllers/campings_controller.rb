@@ -18,18 +18,26 @@ class CampingsController < ApplicationController
 
     if params[:search].present?
    @campings = Camping.near(params[:search], 10, :order => :distance)
- else
+    else
    @campings = Camping.all
- end
+    end
 
+    @campings = Camping.search(params)
+
+    @campings = Camping.paginate(page: params[:page], per_page: 14)
+
+
+    @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
+      marker.lat camping.latitude
+      marker.lng camping.longitude
 end
+
+  end
   # GET /campings/1
   # GET /campings/1.json
+
   def show
-
  @camping = Camping.find(params[:id])
-
-
   end
 
   # GET /campings/new
