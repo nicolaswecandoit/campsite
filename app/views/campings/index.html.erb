@@ -39,14 +39,14 @@
   <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 
 
-<script>
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
- markers = handler.addMarkers(<%=raw @hash.to_json %>);
+  <script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers(<%=raw @hash.to_json %>);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
-});
-</script>
+  });
+  </script>
 
 
 
@@ -59,9 +59,5 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 
 
 <br>
-
-<div id="infinite-scrolling">
-<%= will_paginate @campings, renderer: BootstrapPagination::Rails %>
-</div>
-
+ <%= paginate(@campings) %>
 <%= link_to 'New Camping', new_camping_path %>

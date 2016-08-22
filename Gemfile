@@ -21,7 +21,8 @@ gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 
 #Pagination
-gem 'will_paginate'
+gem 'kaminari'
+#gem 'will_paginate'
 
 #Google map
 gem 'gmaps4rails'
@@ -42,7 +43,6 @@ gem 'devise'
 gem 'cancancan'
 gem "rolify"
 
-gem 'kaminari'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

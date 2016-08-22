@@ -17,20 +17,22 @@ class CampingsController < ApplicationController
   def index
 
     if params[:search].present?
-   @campings = Camping.near(params[:search], 10, :order => :distance)
+   @campings = Camping.near(params[:search], 10, :order => :distance).page(params[:page]).per(14)
     else
-   @campings = Camping.all
+   @campings = Camping.all.page(params[:page]).per(14)
     end
 
-    @campings = Camping.search(params)
-
-    @campings = Camping.paginate(page: params[:page], per_page: 14)
 
 
     @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
       marker.lat camping.latitude
       marker.lng camping.longitude
-end
+      marker.infowindow render_to_string(:partial => "/campings/infowindow", :locals => { :camping => camping})
+      marker.picture ({
+        "url" => "http://avantjetaisriche.com/map-pin.png",
+        "width" =>  29,
+        "height" => 32})
+      end
 
   end
   # GET /campings/1
@@ -38,6 +40,16 @@ end
 
   def show
  @camping = Camping.find(params[:id])
+ #@camp = Caracteristiquetest.find(params[:id])
+
+  @hash = Gmaps4rails.build_markers(@camping) do |camping, marker|
+    marker.lat camping.latitude
+    marker.lng camping.longitude
+    marker.picture ({
+     "url" => "http://avantjetaisriche.com/map-pin.png",
+     "width" =>  29,
+     "height" => 32})
+   end
   end
 
   # GET /campings/new

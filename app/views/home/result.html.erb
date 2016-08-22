@@ -18,12 +18,13 @@
 <% @campings.each do |camping| %>
 <div class="col-md-6">
 <div class="campingitem">
-<p><%= camping.name %></p>
+<p><%= link_to camping.name, camping_path(camping.id) %></p>
 <%= camping.adresse %> <%= camping.code_postale %> <%= camping.commune %>
 <p><%= camping.nomdep %></p>
 <%= camping.nomregion %> <%= camping.numdep %> <%= camping.slug %> <%= camping.ville_id %>
 <%= camping.region_id %> <%= camping.departement_id %> <%= camping.latitude %> <%= camping.longitude %>
 <%= camping.etoile %>
+
 
 
 </div>
@@ -53,3 +54,4 @@ handler.fitMapToBounds();
 
 
 </div>
+<%= paginate(@campings) %>

@@ -8,6 +8,7 @@ belongs_to :ville
 belongs_to :departement
 belongs_to :region
 belongs_to :proprietaire
+has_many :Caracteristiquetests
 mount_uploader :image, ImageUploader
 
 resourcify
@@ -20,7 +21,7 @@ after_validation :geocode
 
 #Permet de coller les labes pour avoir une adresse geocodable
 
-self.per_page = 10
+
 
 
 end
