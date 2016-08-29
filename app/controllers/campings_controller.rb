@@ -3,7 +3,7 @@ class CampingsController < ApplicationController
      before_action :authenticate_proprietaire!,except:[:index, :show]
      before_action :proprio_owner, only: [:edit, :update, :destroy]
 
-     #Autoriser le proprietaire à modifier son camping s'il a le proprietaire_id
+  #Autoriser le proprietaire à modifier son camping s'il a le proprietaire_id
      def proprio_owner
       unless @camping.proprietaire_id == current_proprietaire.id
        flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
@@ -15,15 +15,14 @@ class CampingsController < ApplicationController
 
 
   def index
-
+#Permet de chercher les campings proches du camping courant
     if params[:search].present?
    @campings = Camping.near(params[:search], 10, :order => :distance).page(params[:page]).per(14)
     else
    @campings = Camping.all.page(params[:page]).per(14)
     end
 
-
-
+#Systeme de Geocode avec marker permet d'encoder les adresse en GEOTAG
     @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
       marker.lat camping.latitude
       marker.lng camping.longitude
@@ -39,9 +38,10 @@ class CampingsController < ApplicationController
   # GET /campings/1.json
 
   def show
+#Affiche le camping suivant l'ID
  @camping = Camping.find(params[:id])
- #@camp = Caracteristiquetest.find(params[:id])
 
+#Systeme de Geotag avec map pour les campings
   @hash = Gmaps4rails.build_markers(@camping) do |camping, marker|
     marker.lat camping.latitude
     marker.lng camping.longitude
@@ -61,8 +61,6 @@ class CampingsController < ApplicationController
   def edit
   end
 
-  # POST /campings
-  # POST /campings.json
   def create
     @camping = Camping.new(camping_params)
 
@@ -109,6 +107,6 @@ class CampingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def camping_params
-      params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id)
+      params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, caracteristiquetest_attributes: [:piscine, :barbecue])
     end
 end

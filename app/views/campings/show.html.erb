@@ -25,7 +25,12 @@
     <p><strong>Etoile :</strong><%= @camping.etoile %></p>
 
 <!--Problème si aucun parametre present dans la table-->
-    <p><%#if @camp.piscine.present? %>  <%#="Piscine : oui" %> <%#else%> <%#end%></p>
+<% if @camping.caracteristiquetest.present? %>
+  <p>Piscine: <%= @camping.caracteristiquetest.piscine %></p>
+  <p>Barbecue: <%= @camping.caracteristiquetest.barbecue %></p>
+<%else%>
+<%end%>
+
 
 <hr />
 
@@ -52,10 +57,13 @@
 
 <div class="col-md-12">
     <!--Affiche les campings -->
+   <% if @camping.nearbys(10).present?%>
     <h3>Les campings proches de <%=@camping.commune%></h3>
       <% for camping in @camping.nearbys(10) %>
       <p><%= link_to camping.name, camping %> - <%= camping.distance.round(2) %> kilomètres </p>
       <% end %>
+      <%else%>
+      <%end%>
 </div>
 
 <%if (proprietaire_signed_in? && (current_proprietaire.id == @camping.proprietaire_id)) %>

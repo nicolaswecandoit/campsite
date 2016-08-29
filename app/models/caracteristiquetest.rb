@@ -1,3 +1,4 @@
 class Caracteristiquetest < ApplicationRecord
-  belongs_to :camping
+  has_one :camping
+  accepts_nested_attributes_for :camping
 end
