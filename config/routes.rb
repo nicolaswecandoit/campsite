@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   resources :campings
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'home#index'
-  get '/result/' => 'home#result'
+  root 'campings#homesearch'
+  get '/result/' => 'campings#result'
+  get '/resultnohome/' => 'campings#resultnohome'
   get '/region/' => 'regions#index'
   get '/departement/' => 'departements#index'
   get '/ville/' => 'villes#index'

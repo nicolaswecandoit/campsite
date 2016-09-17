@@ -91,8 +91,8 @@
 <%#= f.select :piscine, ['oui',"oui"], ['non',"non"] %>
 </div>
 <%= f.fields_for :caracteristiquetest do |builder| %>
-<%= builder.select(:piscine, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.caracteristiquetest.piscine?)}, {class:"form-control", id:"exampleSelect1"}) %>
-<%= builder.select(:barbecue, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.caracteristiquetest.barbecue?)}, {class:"form-control", id:"exampleSelect1"}) %>
+<%= builder.select(:piscine, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.caracteristiquetest.piscine)}, {class:"form-control", id:"exampleSelect1"}) %>
+<%= builder.select(:barbecue, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.caracteristiquetest.barbecue)}, {class:"form-control", id:"exampleSelect1"}) %>
 
   <% end %>
 <%#= f.select(:piscine, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.caracteristiquetest.piscine?)}, {class:"form-control", id:"exampleSelect1"}) %>

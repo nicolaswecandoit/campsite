@@ -3,6 +3,19 @@
 <div class="container-fluid">
 
 <h1>Campings</h1>
+
+<% @camping.facets['etoile'].each do |facet| %>
+      <li>
+        <%= link_to_unless_current Camping.find(facet['term']).name, params.merge(id: facet['term']) %>
+        <% if params[:id] == facet['term'].to_s %>
+          (<%= link_to "remove", id: nil %>)
+        <% else %>
+          (<%= facet['count'] %>)
+        <% end %>
+      </li>
+    <% end %>
+
+
 <div class="row">
 
 

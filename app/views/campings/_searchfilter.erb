@@ -1,0 +1,77 @@
+<div class="col-md-12">
+<%= form_tag(resultnohome_path, method: :get) %>
+<%#= text_field_tag :piscine, params[:piscine], class:"pasdeclassepourlemoment", placeholder:"Piscine" %>
+<%#= select_tag(:piscine, [ 'oui', 'non', 'absent' ]) %>
+<%#= select_tag :piscine, "Red","Green","Blue" %>
+<%#= check_box_tag :piscine, "oui", "non", :class => "piscine" %>
+<%= text_field_tag :nomdep, params[:nomdep], class:"SearchFilter", placeholder:"Ex : Vendée, Corse..." %>
+<div class="dropdown">
+<p><span class="btn btn-default dropdown-toggle">Equipements <span class="caret"></span></span></p>
+<div class="dropdown-content">
+
+
+<li><p><span class="IcoSwim" aria-hidden="true"></span> Piscine : <%= check_box_tag :piscine, "oui", !!params[:piscine], :class => "piscine" %></p></li>
+<li><p><span class="IcoSlide" aria-hidden="true"></span>Toboggan aquatique </p></li>
+<li><p><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Barbecue : <%= check_box_tag :barbecue, "oui", !!params[:barbecue], :class => "barbecue" %></p></li>
+<li><p><span class="IcoHandi" aria-hidden="true"></span> Accès handicapé</p></li>
+<li><p><span class="IcoPets" aria-hidden="true"></span> Animaux acceptés</p></li>
+<li><p><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>  Supérette</p></li>
+<li><p><span class="glyphicon glyphicon glyphicon-glass" aria-hidden="true"></span> Bar / Restaurant</p></li>
+<li><p><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Wifi</p></li>
+<li><p><span class="IcoCommerce" aria-hidden="true"></span> Commerces</p></li>
+<li><p><span class="IcoTelevision" aria-hidden="true"></span> Location TV</p></li>
+<li><p><span class="IcoWash" aria-hidden="true"></span> Location lave-linge</p></li>
+<li><p><span class="IcoFridge" aria-hidden="true"></span> Location de réfrigérateurs</p></li>
+<li><p><span class="IcoBike" aria-hidden="true"></span> Location vélo</p></li>
+<li><p><span class="IcoBus" aria-hidden="true"></span> Gare ou Bus à proximité</p></li>
+<li><p><span class="IcoNature" aria-hidden="true"></span> Naturisme autorisé</p></li>
+
+
+
+<%= submit_tag "Appliquer les filtres", class:"btn btn-danger2", name: nil %>
+</div>
+</div>
+
+<div class="dropdown">
+  <p><span class="btn btn-default dropdown-toggle">Type de logements <span class="caret"></span></span></p>
+  <div class="dropdown-content">
+
+
+<li><p><span class="IcoCaravane" aria-hidden="true"></span> Caravane</p></li>
+<li><p><span class="IcoMobilhome" aria-hidden="true"></span> Mobilhome</p></li>
+<li><p><span class="IcoTente" aria-hidden="true"></span> Tente</p></li>
+<li><p><span class="IcoChalet" aria-hidden="true"></span> Chalet</p></li>
+<li><p><span class="IcoStudio" aria-hidden="true"></span> Studio</p></li>
+<li><p><span class="IcoCaravaneige" aria-hidden="true"></span> Caravaneige</p></li>
+<%= submit_tag "Appliquer les filtres", class:"btn btn-danger2", name: nil %>
+</div>
+</div>
+
+
+<div class="dropdown">
+  <p><span class="btn btn-default dropdown-toggle">Activités <span class="caret"></span></span></p>
+  <div class="dropdown-content">
+
+  <li><p>Tennis </p></li>
+  <li><p>Visites culturelles</p></li>
+  <li><p>Canaoë / Kayak</p></li>
+  <li><p>Salle musculation - fitness</p></li>
+  <li><p>Tir à l'arc </p></li>
+  <li><p>Ping-pong </p></li>
+  <li><p>Salle de jeux </p></li>
+  <li><p>Pétanque</p></li>
+  <li><p>Salle de télévision</p></li>
+  <li><p>Soirées animées</p></li>
+  <li><p>Activités sportives</p></li>
+  <li><p>Spectacles</p></li>
+  <li><p>Soirées dansantes </p></li>
+  <li><p>  Garderie</p></li>
+  <li><p>  Discothèque</p></li>
+  <li><p>  Jeux enfants / Aire de jeux</p></li>
+  <li><p>  Club enfants</p></li>
+
+
+<%= submit_tag "Appliquer les filtres", class:"btn btn-danger2", name: nil %>
+</div>
+</div>
+</div>

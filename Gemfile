@@ -14,11 +14,13 @@ gem 'coffee-rails', '~> 4.2'
 #Recherche
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
+gem 'searchkick'
 #Pagination
 gem 'kaminari'
 #Google map
 gem 'gmaps4rails'
-
+#Gem pour faciliter les scopes des recherches
+gem 'has_scope'
 gem 'record_tag_helper', '~> 1.0'
 #Upload d'images
 gem 'carrierwave'

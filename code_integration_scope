@@ -1,0 +1,42 @@
+## pour aller camper dans le 93 avec du wifi et un prix entre 205 et 50 € :
+##[frontal & ugly]
+Camping.where('local = 93').where('price >50').where('price < 250').where(:wifi => true)
+
+##[scoped + methoded version]
+
+class Camping < ACtivekkhkj
+    #scope syntax (return a colection for convention and be chainable)
+    :neuf_trois ~>{where('local = 93')}
+
+    def self.middle_price_range
+        where('price >50').where('price < 250')
+    end
+    def self.wifi
+        where('wifi = true')
+    end
+end
+
+## this way is more sustainable && railsy
+Camping.neuf_trois.middle_price_range.wifi
+
+
+
+
+
+## make form with standard params syntax , a route to search method and retrieve campings like this :
+## you may want use an ugly case/switch operator to make query adapted to patial filters selections
+
+def search
+    search_field_1 = params[:location]
+    search_field_2 = params[:range_price]
+    search_field_3 = params[:bathroom_type]
+    Camping.where("department LIKE ? AND price LIKE ? AND toilet_type LIKE ? ", "%#{search_field_1}%","%#{search_field_2}%","%#{search_field_3}%")
+end
+## make form with standard params syntax , a route to search method and retrieve campings like this :
+## you may want use an ugly case/switch operator to make query adapted to patial filters selections
+
+def search
+	search_field_1 = params[:location]
+	search_field_2 = params[:range_price]
+	search_field_3 = params[:bathroom_type]
+	Camping.where("department LIKE ? AND price LIKE ? AND toilet_type LIKE ? ", "%#{search_field_1}%","%#{search_field_2}%","%#{search_field_3}%")

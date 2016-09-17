@@ -5,7 +5,7 @@
 			    <div class="search">
             <%= form_tag(result_path, method: :get) %>
 						<%= select_tag :nomdep, options_from_collection_for_select(@camping, :nomdep, :nomdep), prompt: "Département" %>
-			      <%= text_field_tag :q, params[:q], class:"search-query form-control" %>
+						<%= text_field_tag :q, params[:q], class:"search-query form-control" %>
 			      <%= submit_tag "Partez", class:"btn btn-danger", name: nil %>
         </div>
 

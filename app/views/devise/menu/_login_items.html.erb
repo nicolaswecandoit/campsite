@@ -1,9 +1,8 @@
 <% if proprietaire_signed_in? %>
   <li>
-  <%= link_to('Logout', destroy_proprietaire_session_path, :method => :delete) %>
+  <%= link_to('Déconnexion', destroy_proprietaire_session_path, :method => :delete) %>
   </li>
 <% else %>
-  <li>
-  <%= link_to('Login', new_proprietaire_session_path)  %>
-  </li>
+  <li> <%= link_to('Insciption', new_proprietaire_registration_path)  %></li>
+  <li class="BoutonLogin"> <%= link_to('Connexion', new_proprietaire_session_path)  %></li>
 <% end %>

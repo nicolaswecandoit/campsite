@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
       @camping = Departement.all
+      @region = Region.all
       if params[:q].blank? || params[:nomdep].blank?
       @campings = Camping.__elasticsearch__.search params[:nomdep]
       else
@@ -10,10 +11,9 @@ class HomeController < ApplicationController
   end
 
 
-
   def result
 
-    querystring = params.slice(:nomdep, :other_param, :any_params_except_q_because_we_will_process_q_separately)
+    querystring = params.slice(:nomdep, :nomderegion, :barbecue)
     .select{|k,v| v.present?}
     .map {|key, value| "#{key}:\"#{value.gsub(/([#{Regexp.escape('\\+-&|!(){}[]^~*?:/')}])/, '\\\\\1') }\""}
     .join(" AND ")
@@ -33,6 +33,7 @@ class HomeController < ApplicationController
     }}).page(params[:page]).per(14).results
     end
 
+    
 
         @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
           marker.lat camping.latitude
