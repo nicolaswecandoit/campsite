@@ -13,6 +13,7 @@ class CampingsController < ApplicationController
     end
   end
 
+
   #Permet de chercher les campings proches du camping courant
   def index
     if params[:search].present?
