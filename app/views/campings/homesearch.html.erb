@@ -4,21 +4,15 @@
 
 <h1 class="textover">
 
-	<script>
-$(function(){
-		$(".element").typed({
-			strings: ["EN VENDEE ", "EN CORSE ", "DANS LES ALPES ", "EN BRETAGNE ", "EN CHARENTE ", "A ARCACHON ", "DANS L'AUBE ", "EN SAVOIE ", "A BISCAROSSE ", "EN FRANCE "],
-			typeSpeed: 0
-		});
-});
-</script>
 
 	TROUVER UN CAMPING <p><div class="texttyped"><div class="element"></div></div></p>
+<!--<p><span id="countUP"></span> campings</p>-->
 </h1>
+
 
 <div class="search2">
 	<%= form_tag(result_path, method: :get) %>
-	<%= text_field_tag :nomdep, params[:nomdep], class:"search-query form-control", placeholder:"Ex : Vendée, Corse..." %>
+	<%= text_field_tag :nomdep, params[:nomdep], class:"search-query form-control", placeholder:"Entrez votre département"  %>
 	<%= submit_tag "Partez", class:"btn btn-danger", name: nil %>
 
 	<%#= form_tag result_path, :method => 'get' do %>
@@ -39,28 +33,39 @@ $(function(){
 
 
 	<div class="logosvganim">
-	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 542.031 542.031" style="enable-background:new 0 0 542.031 542.031;" xml:space="preserve" width="200px" height="200px">
-		<g>
-		<path fill="none" stroke="#ffffff" stroke-width="5" d="M354.019,294.828c-0.12-0.511-0.293-1.007-0.517-1.481c-8.936-18.976-24.285-34.394-43.219-43.416  c-12.116-5.773-25.608-8.833-39.029-8.855c-0.014,0-0.028-0.002-0.042-0.002c-0.008,0-0.016,0.001-0.024,0.001  c-0.028,0-0.056-0.001-0.084-0.001c-13.398,0-26.879,3.031-38.987,8.767l-6.835,3.237c-20.399,9.662-36.413,26.459-45.091,47.298  c-0.223,0.535-0.383,1.095-0.477,1.667l-16.365,99.612c-0.357,2.173,0.259,4.392,1.684,6.07c1.425,1.678,3.515,2.646,5.717,2.646  h200.923c0.008,0.001,0.015,0.001,0.02,0c4.142,0,7.5-3.357,7.5-7.5c0-0.788-0.122-1.548-0.347-2.262L354.019,294.828z   M278.713,395.37V285.044c0-4.143-3.358-7.5-7.5-7.5s-7.5,3.357-7.5,7.5V395.37h-84.129l14.789-90.015  c7.32-17.043,20.549-30.772,37.332-38.722l6.835-3.237c7.886-3.735,16.469-6.091,25.173-6.95v1.596c0,4.143,3.358,7.5,7.5,7.5  s7.5-3.357,7.5-7.5v-1.575c8.689,0.883,17.251,3.256,25.118,7.004c15.584,7.426,28.26,20.039,35.77,35.57l22.61,96.328H278.713z   M540.879,361.205l-78.878-125.468c-18.408-31.755-39.109-57.986-61.786-78.234c-37.872-33.813-81.274-50.959-129.002-50.959  s-91.131,17.146-129.002,50.959c-22.652,20.226-43.333,46.421-61.725,78.128L1.16,361.192c-2.212,3.502-1.167,8.134,2.335,10.347  c1.244,0.785,2.629,1.16,3.999,1.16c2.488,0,4.921-1.237,6.348-3.495l23.652-37.437c-17.798,51.965-24.466,92.695-24.84,95.036  c-0.347,2.168,0.274,4.38,1.699,6.051c1.425,1.671,3.511,2.634,5.707,2.634h66.783h368.742h66.783c2.196,0,4.282-0.963,5.707-2.634  c1.425-1.671,2.046-3.883,1.699-6.051c-0.372-2.326-6.96-42.564-24.509-94.065l22.917,36.453c1.425,2.267,3.863,3.509,6.357,3.509  c1.364,0,2.745-0.372,3.984-1.151C542.028,369.342,543.084,364.712,540.879,361.205z M77.051,274.261  c5.064-10.549,10.311-20.549,15.734-30.014l0.391-0.62c0.186-0.294,0.341-0.599,0.481-0.908  c27.475-47.487,59.505-81.126,95.822-100.726c-5.157,4.939-10.192,10.379-15.094,16.341  c-21.967,26.719-41.395,63.791-57.744,110.188c-22.999,65.27-33.46,131.266-36.369,151.964H29.067  C33.474,398.102,47.47,335.889,77.051,274.261z M95.431,420.486c7.158-49.305,49.677-298.942,175.782-298.942  c31.266,0,59.923,15.557,85.176,46.238c20.844,25.325,39.407,60.825,55.172,105.512c21.913,62.111,32.243,124.992,35.442,147.192  H95.431z M465.237,273.976c29.641,61.65,43.695,124.074,48.12,146.511h-51.205c-2.909-20.698-13.37-86.694-36.369-151.964  c-16.349-46.397-35.777-83.47-57.744-110.188c-4.9-5.96-9.933-11.398-15.089-16.336c36.305,19.596,68.327,53.222,95.796,100.688  c0.142,0.315,0.298,0.627,0.487,0.928l0.467,0.743C455.054,253.704,460.235,263.571,465.237,273.976z">
-	</g>
-	</svg>
+
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Capa_1" version="1.1" x="0px" y="0px" viewBox="1328.971 -21.343 219.936 137.574" enable-background="new 1328.971 -21.343 219.936 137.574" xml:space="preserve" width="200px" height="200px">
+<path stroke="#fff" fill="none" stroke-width="2.5" id="Capa_12" d="M1547.345,101.023c-1.387-0.674-3.066-0.113-3.75,1.248l-1.867,3.715v-4.713c0-0.01-0.003-0.02-0.003-0.029  c0-0.008,0.002-0.016,0.002-0.025c-0.647-32.781-10.94-63.5-28.982-86.492c-18.253-23.26-42.426-36.068-68.067-36.068  c-1.979,0-3.947,0.086-5.907,0.236c-1.959-0.15-3.928-0.236-5.907-0.236c-25.641,0-49.814,12.809-68.066,36.068  c-17.479,22.275-27.658,51.807-28.866,83.434c-0.069,0.24-0.117,0.486-0.117,0.748v6.84l-1.529-3.041  c-0.684-1.363-2.367-1.92-3.751-1.248c-1.388,0.672-1.956,2.32-1.271,3.682l4.804,9.559c0.487,0.971,1.48,1.533,2.514,1.533  c0.416,0,0.84-0.092,1.237-0.285c0.185-0.088,0.352-0.197,0.506-0.318c0.098,0.01,0.191,0.029,0.291,0.029h11.814h176.685h11.814  c0.37,0,0.722-0.074,1.044-0.203c0.032,0.018,0.059,0.041,0.092,0.057c0.399,0.193,0.821,0.285,1.237,0.285  c1.033,0,2.026-0.562,2.514-1.533l4.805-9.559C1549.302,103.343,1548.733,101.695,1547.345,101.023z M1486.44-2.587  c-0.781-0.016-1.636-0.031-2.559-0.049c-3.105-2.492-6.31-4.748-9.6-6.76C1478.453-7.518,1482.515-5.245,1486.44-2.587z   M1438.77-15.589c12.498,1.049,24.542,5.418,35.521,12.779c-9.651-0.168-22.17-0.361-34.682-0.492  c-16.057-0.168-27.394-0.197-35.438-0.123C1414.9-10.417,1426.623-14.569,1438.77-15.589z M1403.258-9.393  c-3.02,1.846-5.965,3.9-8.83,6.152c-0.909,0.029-1.739,0.062-2.491,0.098C1395.6-5.563,1399.381-7.651,1403.258-9.393z   M1396.509,2.191c17.779-0.383,55.881,0.074,85.278,0.629c5.229,4.375,10.16,9.471,14.705,15.264  c13.316,16.971,22.215,38.381,25.907,61.74h-30.539c-2.559-15.201-7.698-29.074-15.002-40.131  c-10.239-15.5-23.767-24.035-38.088-24.035c-2.113,0-4.204,0.207-6.274,0.574c-0.118,0.016-0.234,0.035-0.347,0.064  c-11.831,2.213-22.822,10.311-31.467,23.396c-7.304,11.057-12.443,24.93-15.001,40.131h-29.203c-0.512,0-0.986,0.145-1.4,0.381  c3.657-23.508,12.58-45.059,25.97-62.121C1385.812,12.013,1390.996,6.7,1396.509,2.191z M1492.666,85.323h30.502  c0.527,4.348,0.899,8.748,1.064,13.199h-31.265c0.418-0.502,0.666-1.143,0.638-1.84C1493.453,92.843,1493.132,89.05,1492.666,85.323  z M1488.644,98.523h-43.611V21.833c23.055,4.852,41.419,36.068,42.975,75.064C1488.033,97.519,1488.273,98.075,1488.644,98.523z   M1439.431,21.183v77.34h-3.768V21.337c1.028-0.107,2.062-0.18,3.106-0.18C1438.992,21.157,1439.211,21.179,1439.431,21.183z   M1430.061,22.45v76.072h-41.173c0.376-0.445,0.619-1.004,0.645-1.625C1391.033,59.29,1408.166,28.919,1430.061,22.45z   M1384.573,98.523h-31.265c0.176-4.734,0.586-9.412,1.171-14.027c0.508,0.51,1.216,0.828,1.999,0.828h28.396  c-0.465,3.727-0.785,7.52-0.939,11.359C1383.907,97.38,1384.155,98.021,1384.573,98.523z M1347.745,98.159  c-0.069,0.24-0.117,0.486-0.117,0.748v11.25h-6.213V101.3c0.63-31.605,10.509-61.156,27.818-83.217  c1.609-2.051,3.266-4.016,4.968-5.893c3.193-3.52,6.545-6.723,10.027-9.611c0.842,0.531,1.903,0.58,2.781,0.143  c0.161-0.035,0.371-0.068,0.612-0.1c-3.862,3.648-7.544,7.686-11.011,12.104C1359.132,37.001,1348.954,66.532,1347.745,98.159z   M1516.389,110.157c-8.5,0-152.04,0-157.5,0s-5.66-5.729-5.66-5.729l88.789-0.207c0.071,0.006,0.141,0.021,0.215,0.021  c0.076,0,0.149-0.018,0.224-0.023l81.854-0.191C1524.311,104.029,1524.889,110.157,1516.389,110.157z M1536.126,110.157h-6.212  v-8.885c0-0.01-0.004-0.02-0.004-0.029c0-0.008,0.002-0.016,0.002-0.025c-0.646-32.781-10.939-63.5-28.981-86.492  c-3.352-4.27-6.904-8.186-10.628-11.736c0.483,0.01,0.965,0.02,1.438,0.029c0.021,0.002,0.043,0.002,0.062,0.002  c0.557,0,1.074-0.164,1.513-0.439c5.336,4.426,10.363,9.604,14.992,15.502c17.311,22.061,27.188,51.611,27.818,83.217V110.157z">
+</path>
+</svg>
 	</div>
 
 	<script>
 	var camera = new Vivus('Capa_1', {
-	    type: 'scenario-sync',
-	    duration: 1800,
+	    type: 'async',
+	    duration: 2200,
 	    start: 'autostart',
-	    dashGap: 25,
+	    dashGap: 1000,
 	    animTimingFunction: Vivus.EASE
 	  },
-	 function () {
-	    if (window.console) {
-	      console.log('Animation finished. [log triggered from callback]');
+		function(){
+  document.getElementById("svgid").className = "white";
+});
+	</script>
+<!--
+<script>
+//countUP.js http://inorganik.github.io/countUp.js/
 
-	    }
-	  }
-	);	</script>
+function countUp(a,b,c,d,e,f){for(var g=0,h=["webkit","moz","ms"],i=0;i<h.length&&!window.requestAnimationFrame;++i)window.requestAnimationFrame=window[h[i]+"RequestAnimationFrame"],window.cancelAnimationFrame=window[h[i]+"CancelAnimationFrame"]||window[h[i]+"CancelRequestAnimationFrame"];window.requestAnimationFrame||(window.requestAnimationFrame=function(a){var c=(new Date).getTime(),d=Math.max(0,16-(c-g)),e=window.setTimeout(function(){a(c+d)},d);return g=c+d,e}),window.cancelAnimationFrame||(window.cancelAnimationFrame=function(a){clearTimeout(a)}),this.options=f||{useEasing:!0,useGrouping:!0,separator:",",decimal:"."},""==this.options.separator&&(this.options.useGrouping=!1);var j=this;this.d="string"==typeof a?document.getElementById(a):a,this.startVal=Number(b),this.endVal=Number(c),this.countDown=this.startVal>this.endVal?!0:!1,this.startTime=null,this.timestamp=null,this.remaining=null,this.frameVal=this.startVal,this.rAF=null,this.decimals=Math.max(0,d||0),this.dec=Math.pow(10,this.decimals),this.duration=1e3*e||2e3,this.version=function(){return"1.1.2"},this.easeOutExpo=function(a,b,c,d){return 1024*c*(-Math.pow(2,-10*a/d)+1)/1023+b},this.count=function(a){null===j.startTime&&(j.startTime=a),j.timestamp=a;var b=a-j.startTime;if(j.remaining=j.duration-b,j.options.useEasing)if(j.countDown){var c=j.easeOutExpo(b,0,j.startVal-j.endVal,j.duration);j.frameVal=j.startVal-c}else j.frameVal=j.easeOutExpo(b,j.startVal,j.endVal-j.startVal,j.duration);else if(j.countDown){var c=(j.startVal-j.endVal)*(b/j.duration);j.frameVal=j.startVal-c}else j.frameVal=j.startVal+(j.endVal-j.startVal)*(b/j.duration);j.frameVal=Math.round(j.frameVal*j.dec)/j.dec,j.frameVal=j.countDown?j.frameVal<j.endVal?j.endVal:j.frameVal:j.frameVal>j.endVal?j.endVal:j.frameVal,j.d.innerHTML=j.formatNumber(j.frameVal.toFixed(j.decimals)),b<j.duration?j.rAF=requestAnimationFrame(j.count):null!=j.callback&&j.callback()},this.start=function(a){return j.callback=a,isNaN(j.endVal)||isNaN(j.startVal)?(console.log("countUp error: startVal or endVal is not a number"),j.d.innerHTML="--"):j.rAF=requestAnimationFrame(j.count),!1},this.stop=function(){cancelAnimationFrame(j.rAF)},this.reset=function(){j.startTime=null,j.startVal=b,cancelAnimationFrame(j.rAF),j.d.innerHTML=j.formatNumber(j.startVal.toFixed(j.decimals))},this.resume=function(){j.startTime=null,j.duration=j.remaining,j.startVal=j.frameVal,requestAnimationFrame(j.count)},this.formatNumber=function(a){a+="";var b,c,d,e;if(b=a.split("."),c=b[0],d=b.length>1?j.options.decimal+b[1]:"",e=/(\d+)(\d{3})/,j.options.useGrouping)for(;e.test(c);)c=c.replace(e,"$1"+j.options.separator+"$2");return c+d},j.d.innerHTML=j.formatNumber(j.startVal.toFixed(j.decimals))}
 
+var options = {
+  useEasing : true,
+  useGrouping : true,
+  separator : ',',
+  decimal : '.'
+}
+var demo = new countUp("countUP", 0, 6200, 0, 10, options);
+demo.start();
+</script>-->
 </div>
 			    	<%#= select_tag :nomdep, options_from_collection_for_select(@camping, :nomdep, :nomdep), prompt: "Département" %>

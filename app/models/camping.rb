@@ -2,8 +2,8 @@ require 'elasticsearch/model'
 class Camping < ApplicationRecord
   scope :nomdep, -> (nomdep) { where nomdep: "aube" }
 # ElasticSearch
-include Elasticsearch::Model
-include Elasticsearch::Model::Callbacks
+#include Elasticsearch::Model
+#include Elasticsearch::Model::Callbacks
 #searchkick
 
 belongs_to :ville
@@ -14,29 +14,29 @@ belongs_to :caracteristiquetest
 accepts_nested_attributes_for :caracteristiquetest
 attr_accessor :piscine
 
-mapping do
-   indexes :name, boost: 8
-   indexes :adresse
-   indexes :commune, boost: 10
-   indexes :description
-   indexes :nomdep, boost: 10
-   indexes :nomregion, boost: 10
-   indexes :ville_id
-   indexes :region_id
-   indexes :departement_id
-   indexes :latitude
-   indexes :longitude
-   indexes :etoile
-   indexes :user_id
-   indexes :caracteristiquetest_id
+#mapping do
+#   indexes :name, boost: 8
+#   indexes :adresse
+#   indexes :commune, boost: 10
+#   indexes :description
+#   indexes :nomdep, boost: 10
+#   indexes :nomregion, boost: 10
+#   indexes :ville_id
+#   indexes :region_id
+#   indexes :departement_id
+#   indexes :latitude
+#   indexes :longitude
+#   indexes :etoile
+#   indexes :user_id
+#   indexes :caracteristiquetest_id
    #On implante les données du modèle supplémentaire
-    indexes :caracteristiquetests, type: 'nested' do
-      indexes :id,   type: 'integer'
-      indexes :piscine, type: 'string'
-      indexes :barbecue, type: 'string'
-      indexes :camping_id, type: 'integer'
-    end
-end
+#    indexes :caracteristiquetests, type: 'nested' do
+#      indexes :id,   type: 'integer'
+#      indexes :piscine, type: 'string'
+#      indexes :barbecue, type: 'string'
+#      indexes :camping_id, type: 'integer'
+#    end
+# end
 
 # def self.search(commune,nomdep)
 #    where("commune like ?", "%#{commune}%").where("nomdep like ?", "%#{nomdep}%")
@@ -99,6 +99,4 @@ after_validation :geocode
     [adresse,code_postale,commune].to_a.compact.join(",")
   end
 
-    has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }
-    validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
-end
+  end

@@ -30,3 +30,44 @@
           </div><!--/.nav-collapse -->
         </div>
       </nav>
+
+      <script>
+      $( function() {
+        var availableTags = [
+          "Aube",
+          "Aude",
+          "Ain",
+          "BASIC",
+          "C",
+          "C++",
+          "Clojure",
+          "COBOL",
+          "ColdFusion",
+          "Erlang",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        $( "#nomdep" ).autocomplete({
+          source: availableTags
+        });
+      } );
+      </script>
+
+      	<script>
+      $(function(){
+      		$(".element").typed({
+      			strings: ["EN VENDEE ", "EN CORSE ", "DANS LES ALPES ", "EN BRETAGNE ", "EN CHARENTE ", "A ARCACHON ", "DANS L'AUBE ", "EN SAVOIE ", "A BISCAROSSE ", "EN FRANCE "],
+      			typeSpeed: 0
+      		});
+      });
+      </script>
