@@ -12,7 +12,16 @@ accepts_nested_attributes_for :caracteristiquetests
 
 def self.searchi(query, handicap, animaux, television, plage, etang, lac)
    return scoped unless query.present?
-   left_outer_joins(:caracteristiquetests, :situations).where(['(nomdep LIKE ? OR name LIKE ? OR nomregion LIKE ?) AND (handicap LIKE ? AND animaux LIKE ? AND television LIKE ? AND plage LIKE ? AND etang LIKE ? AND lac LIKE ?)', "%#{query}%", "%#{query}%", "%#{query}%", "%#{handicap}%", "%#{animaux}%", "%#{television}%", "%#{plage}%", "%#{etang}%", "%#{lac}%"])
+
+   result = left_outer_joins(:caracteristiquetests, :situations).where('nomdep LIKE ? OR name LIKE ? OR nomregion LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%")
+   result = result.where('handicap LIKE ?', "%#{handicap}%") if handicap
+   result = result.where('animaux LIKE ?', "%#{animaux}%") if animaux
+   result = result.where('television LIKE ?', "%#{television}%") if television
+   result = result.where('plage LIKE ?', "%#{plage}%") if plage
+   result = result.where('etang LIKE ?', "%#{etang}%") if etang
+   result = result.where('lac LIKE ?', "%#{lac}%") if lac
+
+ return result
 end
 
 def self.search(query)

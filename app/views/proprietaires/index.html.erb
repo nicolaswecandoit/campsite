@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Mes infos</a></li>
+  <li><a data-toggle="tab" href="#menu1">Mon camping</a></li>
+  <li><a data-toggle="tab" href="#menu2">Boostez votre visibilité</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <h3>Mes infos personnelles</h3>
+    <p><%= current_proprietaire.surname %></p>
+    <p><%= current_proprietaire.name %></p>
+    <p><%= current_proprietaire.gender.to_s %></p>
+    <p><%= current_proprietaire.adresse %></p>
+    <p><%= current_proprietaire.cp %></p>
+    <p><%= current_proprietaire.ville %></p>
+    <p><%= current_proprietaire.fonction %></p>
+    <p><%= current_proprietaire.telephone %></p>
+    <p><%= current_proprietaire.email %></p>
+    <p><% if proprietaire_signed_in? %>
+    <%= link_to 'Éditer votre profil', edit_proprietaire_registration_path, :class => "btn btn-primary" %>
+
+    <% else %>
+    <% end %></p>
+
+  </div>
+  <div id="menu1" class="tab-pane fade">
+    <h3>Mon camping</h3>
+    <!--Si le proprietaire possède un camping alors il affiche le camping sinon il invite à nous contacter -->
+    <p><% if @campings.present? %>
+       <% @campings.each do |camping| %>
+        <p><%= camping.name %></p>
+        <p><%= camping.adresse %></p>
+        <p><%= camping.code_postale%></p>
+        <p><%= camping.ville%></p>
+            <%=  link_to "Éditer mon camping", edit_camping_path(camping), :class => "btn btn-primary" %>
+
+       <% end %>
+       <%else%>
+       Vous avez un camping mais il ne figure pas encore dans notre base. Ou vous souhaitez pouvoir éditer votre fiche camping ? contactez-nous
+    <% end %></p>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+    <h3>Boostez votre visibilité</h3>
+    <p>Vous souhaitez mettre en avant votre camping ? Contactez notre service publicité.</p>
+  </div>
+</div>
+</div>

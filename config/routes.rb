@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   get '/departement/' => 'departements#index'
   get '/ville/' => 'villes#index'
   get '/camping/' => 'campings#index'
-  get '/profil/' => 'profils#index'
+  get '/profil/' => 'proprietaires#index'
   get '/search/' => 'search#search'
 end

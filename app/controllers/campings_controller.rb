@@ -32,7 +32,7 @@ class CampingsController < ApplicationController
         <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
         <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
         marker.picture ({
-          "url" => "map-pin.png",
+          "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
         end
@@ -46,7 +46,7 @@ class CampingsController < ApplicationController
         marker.lat camping.latitude
         marker.lng camping.longitude
         marker.picture ({
-          "url" => "http://img4.hostingpics.net/pics/955094mappin.png",
+          "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
         marker.infowindow "
@@ -139,7 +139,7 @@ class CampingsController < ApplicationController
         <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
         <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
         marker.picture ({
-          "url" => "http://img4.hostingpics.net/pics/955094mappin.png",
+          "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
         end
@@ -159,7 +159,7 @@ class CampingsController < ApplicationController
             <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
             <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
             marker.picture ({
-              "url" => "http://img4.hostingpics.net/pics/955094mappin.png",
+              "url" => "http://avantjetaisriche.com/map-pin.png",
               "width" =>  29,
               "height" => 32})
             end
