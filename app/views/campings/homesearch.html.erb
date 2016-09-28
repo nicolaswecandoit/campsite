@@ -12,7 +12,7 @@
 
 <div class="search2">
 	<%= form_tag(result_path, method: :get) %>
-	<%= text_field_tag :nomdep, params[:nomdep], class:"search-query form-control", placeholder:"Entrez votre département"  %>
+	<%= text_field_tag :query, params[:query], class:"search-query form-control", placeholder:"Entrez votre département"  %>
 	<%= submit_tag "Partez", class:"btn btn-danger", name: nil %>
 
 	<%#= form_tag result_path, :method => 'get' do %>

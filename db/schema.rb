@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916173527) do
+ActiveRecord::Schema.define(version: 20160925165154) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20160916173527) do
     t.integer  "camping_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "handicap"
+    t.string   "animaux"
+    t.string   "television"
   end
 
   create_table "departements", force: :cascade do |t|
@@ -162,6 +165,30 @@ ActiveRecord::Schema.define(version: 20160916173527) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
+  end
+
+  create_table "situations", force: :cascade do |t|
+    t.string   "plage"
+    t.float    "distanceplage"
+    t.string   "etang"
+    t.float    "distanceetang"
+    t.string   "lac"
+    t.float    "distancelac"
+    t.string   "riviere"
+    t.float    "distanceriviere"
+    t.string   "baseloisir"
+    t.float    "distancebaseloisir"
+    t.string   "foret"
+    t.float    "distanceforet"
+    t.string   "parcnaturel"
+    t.float    "distanceparcnaturel"
+    t.string   "montagne"
+    t.float    "distancemontagne"
+    t.string   "sporthiver"
+    t.float    "distancesporthiver"
+    t.integer  "camping_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "villes", force: :cascade do |t|

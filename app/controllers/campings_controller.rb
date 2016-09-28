@@ -63,6 +63,7 @@ class CampingsController < ApplicationController
 
   # Edition du cammping
     def edit
+
     end
 # Nouveau camping
     def create
@@ -116,21 +117,19 @@ class CampingsController < ApplicationController
 
 #Page de résultats
     def result
-      #    if params[:commune].blank?
-      #      redirect_to action: :index and return
-      if params[:nomdep].blank?
+      if params[:query].blank?
         redirect_to action: :index and return
       else
-        @campings = Camping.searchi(params[:nomdep])
-        ##    @campings = Camping.search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results, aggs: [:nomdep]
-        #Fonctionne avec elasticsearch classique
-        #  @campings = Camping.custom_search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results
-        #Test qui ne fonctionne pas pour la facet...
-        #@campings = Camping.search((params[:q].present? ? params[:q] : '*'))
-        #@campings = Camping.search(params[:q].present?, params[:nomdep].present?)
-        #@response = Camping.search(@campings).to_json
-        #@campings = Camping.search(params[:q]) if params[:q].present?
-        #@campings = @campings.nomdep(params[:nomdep]) if params[:nomdep].present?
+        @campings = Camping.search(params[:query])
+        # @campings = Camping.search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results, aggs: [:nomdep]
+        # Fonctionne avec elasticsearch classique
+        # @campings = Camping.custom_search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results
+        # Test qui ne fonctionne pas pour la facet...
+        # @campings = Camping.search((params[:q].present? ? params[:q] : '*'))
+        # @campings = Camping.search(params[:q].present?, params[:nomdep].present?)
+        # @response = Camping.search(@campings).to_json
+        # @campings = Camping.search(params[:q]) if params[:q].present?
+        # @campings = @campings.nomdep(params[:nomdep]) if params[:nomdep].present?
       end
 
       @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
@@ -147,11 +146,12 @@ class CampingsController < ApplicationController
       end
 
       def resultnohome
-        if params[:piscine] && params[:barbecue] && params[:nomdep].blank?
-          redirect_to action: :index and return
-        else
-          @campings = Camping.search(params[:piscine], params[:barbecue], params[:nomdep])
+          if params[:query].blank?
+            redirect_to action: :index and return
+          else
+          @campings = Camping.searchi(params[:query], params[:handicap], params[:animaux], params[:television], params[:plage], params[:etang], params[:lac])
         end
+
           @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
             marker.lat camping.latitude
             marker.lng camping.longitude
@@ -173,6 +173,6 @@ class CampingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
       def camping_params
-        params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :image_content_type, caracteristiquetest_attributes: [:piscine, :barbecue])
+        params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :image_content_type, caracteristiquetests_attributes: [:id, :animaux, :handicap])
       end
 end

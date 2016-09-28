@@ -24,13 +24,27 @@
     <p><strong>Longitude: </strong><%= @camping.longitude %></p>
     <p><strong>Etoile :</strong><%= @camping.etoile %></p>
 
-<!--Problème si aucun parametre present dans la table-->
-<% if @camping.caracteristiquetest.present? %>
-  <p>Piscine: <%= @camping.caracteristiquetest.piscine %></p>
-  <p>Barbecue: <%= @camping.caracteristiquetest.barbecue %></p>
-<%else%>
-<%end%>
+    <!--Affiche les parametres de la table caracteristiquetest -->
+    <% @camping.caracteristiquetests.each do |caracteristiquetest| %>
+      <p> Piscine: <%= caracteristiquetest.piscine %></p>
+      <p> Barbecue: <%= caracteristiquetest.barbecue %></p>
+      <p> Animaux: <%= caracteristiquetest.animaux %></p>
+      <p> Handicap: <%= caracteristiquetest.handicap %></p>
+    <%end%>
 
+    <!--Affiche les parametres de la table situation-->
+    <% @camping.situations.each do |situation| %>
+      <p> Plage: <%=situation.plage %> à <%=situation.distanceplage%> km</p>
+      <p> Etang: <%=situation.etang%></p>
+      <p> Montagne: <%=situation.montagne %></p>
+      <p> Rivière: <%=situation.riviere%></p>
+    <%end%>
+
+<!--Problème si aucun parametre present dans la table-->
+<%# if @camping.caracteristiquetests.present? %>
+<%#= @camping.caracteristiquetests.piscine %>
+<%#else%>
+<%#end%>
 
 <hr />
 

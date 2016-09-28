@@ -1,5 +1,5 @@
 class CaracteristiquetestsController < ApplicationController
   def camping_params
-    params.require(:caracteristiquetest).permit(:piscine)
+    params.require(:caracteristiquetests).permit(:piscine, :barbecue, :animaux, :handicap)
   end
 end

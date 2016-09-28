@@ -81,9 +81,6 @@
     <%= f.text_field :etoile, class:"form-control" %>
   </div>
 
-<div class="form-group">
-   <%= f.file_field :image %>
-  </div>
 
 
    <div class="form-group">
@@ -93,11 +90,18 @@
 
 
 </div>
-<%= f.fields_for :caracteristiquetest do |builder| %>
-<%= builder.select(:barbecue, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.barbecue)}, {class:"form-control", id:"exampleSelect1"}) %>
 
-  <% end %>
-<%#= f.select(:piscine, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (@camping.caracteristiquetest.piscine?)}, {class:"form-control", id:"exampleSelect1"}) %>
+<%= f.fields_for :caracteristiquetests do |builder| %>
+<%#= builder.text_field :animaux %>
+<%#= builder.select(:animaux, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (:animaux?)}, {class:"form-control", id:"exampleSelect1"}) %>
+<%#= check_box_tag :animaux, "oui", :class => "barbecue"%>
+<label for="animaux">Animaux</label>
+<%= builder.select :animaux?, ["", "oui","non"] %>
+<label for="handicap">Handicap</label>
+<%= builder.select :handicap?, ["", "oui","non"] %>
+<% end %>
+
+
   <div class="actions">
     <%= f.submit "Enregistrer", class:"btn btn-success" %>
   </div>
