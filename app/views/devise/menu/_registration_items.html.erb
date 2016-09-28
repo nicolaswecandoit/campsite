@@ -1,7 +1,9 @@
 <% if proprietaire_signed_in? %>
   <li>
-<%= link_to('Mon profil', profil_path) %>
+<%= link_to('Mon profil', profil_proprietaire_path) %>
 </li>
-<% else %>
-
+<% elsif campeur_signed_in?%>
+<li>
+  <%= link_to('Mon profil', profil_campeur_path) %>
+</li>
 <% end %>

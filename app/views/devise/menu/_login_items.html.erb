@@ -6,3 +6,12 @@
   <li> <%= link_to('Insciption', new_proprietaire_registration_path)  %></li>
   <li class="BoutonLogin"> <%= link_to('Connexion', new_proprietaire_session_path)  %></li>
 <% end %>
+
+<% if campeur_signed_in? %>
+  <li>
+  <%= link_to('Déconnexion', destroy_campeur_session_path, :method => :delete) %>
+  </li>
+<% else %>
+  <li> <%= link_to('Insciption', new_campeur_registration_path)  %></li>
+  <li class="BoutonLogin"> <%= link_to('Connexion', new_campeur_session_path)  %></li>
+<% end %>

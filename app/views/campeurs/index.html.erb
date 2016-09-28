@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Mes infos</a></li>
+  <li><a data-toggle="tab" href="#menu1">Mon camping</a></li>
+
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <h3>Mes infos personnelles</h3>
+    <p><%= current_campeur.surname %></p>
+    <p><%= current_campeur.name %></p>
+    <p><%= current_campeur.gender.to_s %></p>
+    <p><%= current_campeur.adresse %></p>
+    <p><%= current_campeur.cp %></p>
+    <p><%= current_campeur.ville %></p>
+    <p><%= current_campeur.fonction %></p>
+    <p><%= current_campeur.telephone %></p>
+    <p><%= current_campeur.email %></p>
+    <p><% if proprietaire_signed_in? %>
+    <%= link_to 'Éditer votre profil', edit_campeur_registration_path, :class => "btn btn-primary" %>
+
+    <% else %>
+    <% end %></p>
+
+  </div>
+  <div id="menu1" class="tab-pane fade">
+    <h3>Mon campings préférés</h3>
+    <!--Si le proprietaire possède un camping alors il affiche le camping sinon il invite à nous contacter -->
+
+  </div>
+
+</div>
+</div>

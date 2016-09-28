@@ -1,18 +1,2 @@
-
-<p><%= current_proprietaire.surname %></p>
-<p><%= current_proprietaire.name %></p>
-<p><%= current_proprietaire.gender.to_s %></p>
-<p><%= current_proprietaire.adresse %></p>
-<p><%= current_proprietaire.cp %></p>
-<p><%= current_proprietaire.ville %></p>
-<p><%= current_proprietaire.fonction %></p>
-<p><%= current_proprietaire.telephone %></p>
-<p><%= current_proprietaire.email %></p>
-<%#= @user.campings.name %>
-
-
-
-<% if proprietaire_signed_in? %>
-<%= link_to 'Edit registration', edit_proprietaire_registration_path, :class => "btn btn-primary" %>
-<% else %>
-<% end %>
+<li><%= render 'devise/menu/registration_items' %></li>
+ <li><%= render 'devise/menu/login_items' %></li>
