@@ -1,2 +1,21 @@
-<li><%= render 'devise/menu/registration_items' %></li>
- <li><%= render 'devise/menu/login_items' %></li>
+<div class="container marketing">
+<H1> Accès proprietaires</H1>
+<% if proprietaire_signed_in? %>
+<p>  <%= link_to('Déconnexion', destroy_proprietaire_session_path, :method => :delete) %></p>
+<p><%= link_to('Mon profil', profil_proprietaire_path) %></p>
+<% else %>
+<h4>Vous êtes proprietaire d'un camping ? Connectez-vous ou inscrivez-vous !</h4>
+<p> <%= link_to('Insciption', new_proprietaire_registration_path)  %></p>
+<p class="BoutonLogin"> <%= link_to('Connexion', new_proprietaire_session_path)  %></p>
+<% end %>
+
+<H1> Accès campeurs</H1>
+<h4>Vous êtes un campeur à la recherche du camping parfait ? Connectez-vous ou inscrivez-vous !</h4>
+  <% if campeur_signed_in? %>
+<p>  <%= link_to('Déconnexion', destroy_campeur_session_path, :method => :delete) %></p>
+<p>    <%= link_to('Mon profil', profil_campeur_path) %></p>
+  <% else %>
+<p> <%= link_to('Insciption', new_campeur_registration_path)  %></p>
+<p class="BoutonLogin"> <%= link_to('Connexion', new_campeur_session_path)  %></p>
+  <% end %>
+</div>

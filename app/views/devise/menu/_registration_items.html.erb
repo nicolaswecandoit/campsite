@@ -1,9 +1,10 @@
 <% if proprietaire_signed_in? %>
-  <li>
-<%= link_to('Mon profil', profil_proprietaire_path) %>
-</li>
+  <li><%= link_to("#{current_proprietaire.name}", profil_proprietaire_path) %></li>
+  <li><%= link_to('Déconnexion', destroy_proprietaire_session_path, :method => :delete) %></li>
 <% elsif campeur_signed_in?%>
-<li>
-  <%= link_to('Mon profil', profil_campeur_path) %>
-</li>
+  <li><%= link_to("#{current_campeur.name}", profil_campeur_path) %></li>
+  <li><%= link_to('Déconnexion', destroy_campeur_session_path, :method => :delete) %></li>
+<%else%>
+  <li><%= link_to('Accès campeurs', connexion_path)  %></li>
+  <li><%= link_to('Accès professionnels', connexion_path)  %></li>
 <% end %>

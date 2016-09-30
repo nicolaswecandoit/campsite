@@ -30,7 +30,8 @@ class CampingsController < ApplicationController
         marker.lng camping.longitude
         marker.infowindow "
         <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
-        <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
+        <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>
+        "
         marker.picture ({
           "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
@@ -157,7 +158,9 @@ class CampingsController < ApplicationController
             marker.lng camping.longitude
             marker.infowindow "
             <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
-            <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
+            <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>
+            <img src='http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg' width='350px' height='200px'>
+            "
             marker.picture ({
               "url" => "http://avantjetaisriche.com/map-pin.png",
               "width" =>  29,
