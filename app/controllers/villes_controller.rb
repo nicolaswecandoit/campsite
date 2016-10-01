@@ -1,5 +1,6 @@
 class VillesController < ApplicationController
-  before_action :set_ville, only: [:show, :edit, :update, :destroy]
+  before_action :set_ville, only: [:show]
+  before_action :authenticate_proprietaire!,except:[:index, :show]
 
   # GET /villes
   # GET /villes.json
@@ -10,6 +11,10 @@ class VillesController < ApplicationController
   # GET /villes/1
   # GET /villes/1.json
   def show
+    @ville = Ville.find(params[:id])
+    if request.path != ville_path(@ville)
+      redirect_to @ville, status: :moved_permanently
+    end
   end
 
   # GET /villes/new

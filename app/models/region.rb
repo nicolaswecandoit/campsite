@@ -6,6 +6,10 @@ class Region < ApplicationRecord
   def to_s
     nomderegion
   end
+  #Génère des URLS propres
+  def to_param
+      "#{id} #{nomderegion}".parameterize
+    end
 
 
 end

@@ -8,4 +8,8 @@ class Departement < ApplicationRecord
     nomdep
   end
 
+  def to_param
+      "#{id} #{nomdep}".parameterize
+    end
+
 end

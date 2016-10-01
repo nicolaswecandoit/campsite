@@ -1,28 +1,42 @@
 class RegionsController < ApplicationController
-  before_action :set_region, only: [:show, :edit, :update, :destroy]
+  before_action :set_region, only: [:show]
+  before_action :authenticate_proprietaire!,except:[:index, :show]
 
-  # GET /regions
-  # GET /regions.json
+  #Afficher toutes les régions
   def index
     @regions = Region.all
   end
 
-  # GET /regions/1
-  # GET /regions/1.json
+  #Affiche la région sélectionnée
   def show
+    @campings = Camping.all
+      @departements = Departement.all
+        @region = Region.find(params[:id])
+          #Pour générer les URLs propres
+            if request.path != region_path(@region)
+              redirect_to @region, status: :moved_permanently
+            end
+      #Génère la carte avec l'infowindow
+      @hash = Gmaps4rails.build_markers(@region.campings) do |camping, marker|
+      marker.lat camping.latitude
+      marker.lng camping.longitude
+      marker.infowindow "
+        <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
+        <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
+      marker.picture ({
+        "url" => "http://avantjetaisriche.com/map-pin.png",
+        "width" =>  29,
+        "height" => 32})
+      end
   end
 
-  # GET /regions/new
   def new
     @region = Region.new
   end
 
-  # GET /regions/1/edit
   def edit
   end
 
-  # POST /regions
-  # POST /regions.json
   def create
     @region = Region.new(region_params)
 
@@ -37,8 +51,6 @@ class RegionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /regions/1
-  # PATCH/PUT /regions/1.json
   def update
     respond_to do |format|
       if @region.update(region_params)
@@ -51,9 +63,7 @@ class RegionsController < ApplicationController
     end
   end
 
-  # DELETE /regions/1
-  # DELETE /regions/1.json
-  def destroy
+def destroy
     @region.destroy
     respond_to do |format|
       format.html { redirect_to regions_url, notice: 'Region was successfully destroyed.' }

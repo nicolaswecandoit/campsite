@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Campsite</title>
+      <!--Permet d'afficher les balises SEO -->
+    <%= display_meta_tags %>
 
-
+  <!--Lien vers le repertoire JS et StyleSheet -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="http://www.mattboldt.com/demos/typed-js/js/typed.custom.js"></script>
@@ -17,8 +18,9 @@
   </head>
     <%= csrf_meta_tags %>
   <body>
+      <!--Si le proprietaire a un camping et que celui-ci est connecté alors il peut éditer -->
   <%= render 'layouts/partials/nav' %>
-
+  <!--Message d'alerte -->
       <%= render 'layouts/partials/messages' %>
 <%= yield(:search) %>
       <%= yield %>

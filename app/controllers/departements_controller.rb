@@ -1,5 +1,7 @@
 class DepartementsController < ApplicationController
-  before_action :set_departement, only: [:show, :edit, :update, :destroy]
+  before_action :set_departement, only: [:show]
+  before_action :authenticate_proprietaire!,except:[:index, :show]
+
 
   # GET /departements
   # GET /departements.json
@@ -10,6 +12,25 @@ class DepartementsController < ApplicationController
   # GET /departements/1
   # GET /departements/1.json
   def show
+    @ville = Ville.all
+    @camping = Camping.all
+    @departement = Departement.find(params[:id])
+    if request.path != departement_path(@departement)
+      redirect_to @departement, status: :moved_permanently
+    end
+
+    @hash = Gmaps4rails.build_markers(@departement.campings) do |camping, marker|
+      marker.lat camping.latitude
+      marker.lng camping.longitude
+      marker.infowindow "
+      <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
+      <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>
+      "
+      marker.picture ({
+        "url" => "http://avantjetaisriche.com/map-pin.png",
+        "width" =>  29,
+        "height" => 32})
+      end
   end
 
   # GET /departements/new

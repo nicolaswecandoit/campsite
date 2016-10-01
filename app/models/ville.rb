@@ -7,5 +7,9 @@ class Ville < ApplicationRecord
     nomcommune
   end
 
+  def to_param
+      "#{id} #{nomcommune}".parameterize
+    end
+
 
 end

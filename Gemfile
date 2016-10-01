@@ -45,6 +45,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'geocoder'
 #ImageUploader
 gem "paperclip"
+#friendly url
+gem 'friendly_id'
+#balise SEO
+gem 'meta-tags'
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 #Traduction

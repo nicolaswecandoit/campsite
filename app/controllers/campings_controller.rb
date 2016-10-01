@@ -42,6 +42,9 @@ class CampingsController < ApplicationController
   #Affiche le camping suivant l'ID
     def show
       @camping = Camping.find(params[:id])
+      if request.path != camping_path(@camping)
+    redirect_to @camping, status: :moved_permanently
+      end
       #Systeme de Geotag avec map pour les campings
       @hash = Gmaps4rails.build_markers(@camping) do |camping, marker|
         marker.lat camping.latitude
