@@ -162,7 +162,7 @@ class CampingsController < ApplicationController
             marker.infowindow "
             <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
             <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>
-            <img src='http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg' width='350px' height='200px'>
+            <img src='http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg' width='265px' height='150px'>
             "
             marker.picture ({
               "url" => "http://avantjetaisriche.com/map-pin.png",

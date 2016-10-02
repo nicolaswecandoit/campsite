@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
   <!--MAPS -->
 <div class="container-fluid">
   <div class="row">
@@ -17,8 +15,9 @@
   <% @campings.each do |camping| %>
     <div class="col-md-6">
       <div class="campingitem">
-        <p><%= link_to camping.name, camping_path(camping.id) %></p>
-        <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="475px" height="250px">
+        <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="265px" height="150px">
+        <p class="titleblock"><%= link_to camping.name, camping_path(camping.id) %></p>
+
         <%= camping.adresse %> <%= camping.code_postale %> <%= camping.commune %>
         <p><%= camping.nomdep %></p>
         <%= camping.nomregion %>

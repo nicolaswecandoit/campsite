@@ -1,3 +1,5 @@
+
+
 <div class="col-md-12">
 <%= form_tag(resultnohome_path, method: :get) %>
 <%#= text_field_tag :piscine, params[:piscine], class:"pasdeclassepourlemoment", placeholder:"Piscine" %>
@@ -9,12 +11,11 @@
 <p><span class="btn btn-default dropdown-toggle">Equipements <span class="caret"></span></span></p>
 <div class="dropdown-content">
 
-
 <li><p><span class="IcoSwim" aria-hidden="true"></span> Piscine : <%= check_box_tag :piscine, "oui", !!params[:piscine], :class => "piscine" %></p></li>
 <li><p><span class="IcoSlide" aria-hidden="true"></span>Toboggan aquatique </p></li>
 <li><p><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Barbecue : <%= check_box_tag :barbecue, "oui", !!params[:barbecue], :class => "barbecue" %></p></li>
 <li><p><span class="IcoHandi" aria-hidden="true"></span> Accès handicapé : <%= check_box_tag :handicap, "oui", !!params[:handicap], :class => "handicap" %></p></li>
-<li><p><span class="IcoPets" aria-hidden="true"></span> Animaux acceptés : <%= check_box_tag :animaux, "oui", !!params[:animaux], :class => "animaux" %></p></li>
+<li><p><span class="IcoPets" aria-hidden="true" name="skills"></span> Animaux acceptés : <%= check_box_tag :animaux, "oui", !!params[:animaux], :class => "animaux" %></p></li>
 <li><p><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Supérette</p></li>
 <li><p><span class="glyphicon glyphicon glyphicon-glass" aria-hidden="true"></span> Bar / Restaurant</p></li>
 <li><p><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Wifi</p></li>
@@ -27,9 +28,6 @@
 <li><p><span class="IcoBus" aria-hidden="true"></span> Gare ou Bus à proximité</p></li>
 <li><p><span class="IcoNature" aria-hidden="true"></span> Naturisme autorisé</p></li>
 
-
-
-
 <%= submit_tag "Appliquer les filtres", class:"btn btn-danger2", name: nil %>
 </div>
 </div>
@@ -37,7 +35,6 @@
 <div class="dropdown">
   <p><span class="btn btn-default dropdown-toggle">Type de logements <span class="caret"></span></span></p>
   <div class="dropdown-content">
-
 
 <li><p><span class="IcoCaravane" aria-hidden="true"></span> Caravane</p></li>
 <li><p><span class="IcoMobilhome" aria-hidden="true"></span> Mobilhome</p></li>
@@ -73,8 +70,38 @@
   <li><p>  Jeux enfants / Aire de jeux</p></li>
   <li><p>  Club enfants</p></li>
 
-
 <%= submit_tag "Appliquer les filtres", class:"btn btn-danger2", name: nil %>
 </div>
 </div>
 </div>
+
+<div class="col-md-12">
+<div id="divfilter"></div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+// find and retrieve all <input> elements of
+// 'type=checkbox':
+  var checkboxes = $('input[type=checkbox]');
+  // use the on() method to bind the anonymous function
+  // as the event-handler of the 'change' event:
+  checkboxes.on('change', function(){
+  // update the '#divfilter' element's text:
+    $('#divfilter').text(function(){
+    // we return the following as the new text:
+    // first we filter the checkboxes collection to
+    // retain only those that match the ':checked'
+    // pseudo-class, and then create a map:
+    return checkboxes.filter(':checked').map(function(){
+    // the contents of the map are comprised of
+    // the 'name' property of each checked check-box:
+    return this.name;
+    // we convert the map() into an Array, using get():
+      }).get()
+      // and join the Array elements together with the
+      // supplied String, and finished with a period:
+      .join(' | ') + '' ;
+      });
+    });
+  });
+</script>
