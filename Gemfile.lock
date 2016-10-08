@@ -29,6 +29,12 @@ GIT
       sprockets (~> 4.x)
       sprockets-rails (< 4.0)
 
+GIT
+  remote: git://github.com/wazery/ratyrate.git
+  revision: b738c56a4b53260d4083bbbc7895d7d32f3c0264
+  specs:
+    ratyrate (1.2.2.alpha)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -310,6 +316,7 @@ DEPENDENCIES
   rails (~> 5.0.0)
   rails-i18n
   ransack!
+  ratyrate!
   record_tag_helper (~> 1.0)
   rolify
   sass-rails!

@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     #Lors de la modification
     devise_parameter_sanitizer.permit(:account_update, keys: [:surname, :name, :gender, :telephone, :adresse, :cp, :ville, :fonction, :birthday])
   end
+
+  def current_user
+  current_campeur
+end
+helper_method :current_user
+
 end

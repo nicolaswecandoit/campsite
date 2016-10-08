@@ -4,6 +4,8 @@ class CampeursController < ApplicationController
     #@user = Camping.find(params[:proprietaire_id])
     #@campings = @user.camping
     #@posts = current_user.camping
-  
+
   end
+
+
 end

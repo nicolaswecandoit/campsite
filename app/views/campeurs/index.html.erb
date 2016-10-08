@@ -17,7 +17,7 @@
     <p><%= current_campeur.fonction %></p>
     <p><%= current_campeur.telephone %></p>
     <p><%= current_campeur.email %></p>
-    <p><% if proprietaire_signed_in? %>
+    <p><% if campeur_signed_in? %>
     <%= link_to 'Éditer votre profil', edit_campeur_registration_path, :class => "btn btn-primary" %>
 
     <% else %>

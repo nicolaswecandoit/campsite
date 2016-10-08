@@ -16,7 +16,13 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
           else
           @camping.description
           end %></p>
+          <div class="rating">
 
+           <%= rating_for @camping, "prix", disable_after_rate: true, imdb_avg: false, stars: 10  %>
+
+          Prix : <%= rating_for @camping, 'situation', stars: 10 %>
+          Propreté  : <%= rating_for @camping, 'propreté', stars: 10 %>
+</div>
     <hr />
 <!--Affichage de la map-->
       <div id="map_fiche"></div>
@@ -43,6 +49,13 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       <p> Montagne: <%=situation.montagne %></p>
       <p> Rivière: <%=situation.riviere%></p>
     <%end%>
+
+      <% if @camping.youtube_url.present? %>
+    <div class="embed-container">
+    <%= embed(@camping.youtube_url) %>
+  </div>
+    <%end%>
+
     <hr />
 
 </div>

@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <!--Permet d'afficher les balises SEO -->
-    <%= display_meta_tags %>
-
-  <!--Lien vers le repertoire JS et StyleSheet -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="http://www.mattboldt.com/demos/typed-js/js/typed.custom.js"></script>
     <script src="http://maxwellito.github.io/vivus/dist/vivus.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -14,6 +9,13 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Baloo+Chettan">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/hanken" type="text/css"/>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+      <!--Permet d'afficher les balises SEO -->
+
+    <%= display_meta_tags %>
+
 
 
   </head>
@@ -29,8 +31,11 @@
 
 
   </body>
+  <!--Lien vers le repertoire JS et StyleSheet -->
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 </html>

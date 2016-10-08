@@ -16,10 +16,6 @@
     <%= f.text_field :surname, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>
   </div>
 
-<div class="form-group">
-    <label for="gender">Sexe</label><br />
-    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@proprietaire.gender?)}, {class:"form-control", id:"exampleSelect1"}) %>
-</div>
 
 <div class="form-group">
   <label for="adresse">Adresse</label><br />
@@ -35,17 +31,52 @@
   <label for="ville">Commune</label><br />
   <%= f.text_field :ville, autofocus: true, class:"form-control", placeholder:"Indiquez votre lieu de résisdence" %>
 </div>
-
+<%if campeur_signed_in? %>
+<!--Si c'est un campeur-->
 <div class="form-group">
   <label for="telephone">Téléphone</label><br />
   <%= f.text_field :telephone, autofocus: true, class:"form-control", placeholder:"Indiquez votre numéro de téléphone sans indicatif" %>
+  <div class="form-group">
+      <label for="fonction">Profession</label><br />
+  <small class="form-text text-muted">Indiquez votre profession.</small>
+      <%= f.select(:fonction, [['Non renseigné',"Non renseigné"],
+      ['Agriculteurs exploitants',"Agriculteurs exploitants"],
+      ["Artisans, commerçants et chefs d'entreprise","Artisans, commerçants et chefs d'entreprise"],
+      ['Cadres et professions intellectuelles supérieures',"Cadres et professions intellectuelles supérieures"],
+      ['Professions Intermédiaires',"Professions Intermédiaires"],
+      ["Employés","Employés"],
+      ['Ouvriers',"Ouvriers"],
+      ["Retraités","Retraités"],
+      ["sans activité professionnelle","sans activité professionnelle"]], {:selected => (@campeur.fonction?)}, {class:"form-control", id:"exampleSelect1"}) %>
+  </div>
+</div>
+<div class="form-group">
+    <label for="gender">Sexe</label><br />
+    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@campeur.gender?)}, {class:"form-control", id:"exampleSelect1"}) %>
+</div>
+
+
+
+<% else %>
+<!--Si c'est un proprietaire-->
+<div class="form-group">
+  <label for="telephone">Téléphone</label><br />
+  <%= f.text_field :telephone, autofocus: true, class:"form-control", placeholder:"Indiquez votre numéro de téléphone sans indicatif" %>
+  <div class="form-group">
+      <label for="fonction">Fonction</label><br />
+  <small class="form-text text-muted">Indiquez la fonction que vous exercez au sein de l'établissement.</small>
+      <%= f.select(:fonction, [['Non renseigné',"Non renseigné"], ['Dirigeant',"Dirigeant"], ['Employé',"Employé"], ['Chargé de la promotion',"Chargé de la promotion"], ['Autre',"Autre"]], {:selected => (@proprietaire.fonction?)}, {class:"form-control", id:"exampleSelect1"}) %>
+  </div>
 </div>
 
 <div class="form-group">
-    <label for="fonction">Fonction</label><br />
-<small class="form-text text-muted">Indiquez la fonction que vous exercez au sein de l'établissement.</small>
-    <%= f.select(:fonction, [['Non renseigné',"Non renseigné"], ['Dirigeant',"Dirigeant"], ['Employé',"Employé"], ['Chargé de la promotion',"Chargé de la promotion"], ['Autre',"Autre"]], {:selected => (@proprietaire.fonction?)}, {class:"form-control", id:"exampleSelect1"}) %>
+    <label for="gender">Sexe</label><br />
+    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@proprietaire.gender?)}, {class:"form-control", id:"exampleSelect1"}) %>
 </div>
+
+
+<% end %></p>
+
 
  <fieldset disabled>
 <div class="form-group">

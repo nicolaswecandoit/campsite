@@ -179,6 +179,6 @@ class CampingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
       def camping_params
-        params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :image_content_type, caracteristiquetests_attributes: [:id, :animaux, :handicap])
+        params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :image_content_type, :youtube_url, caracteristiquetests_attributes: [:id, :animaux, :handicap])
       end
 end
