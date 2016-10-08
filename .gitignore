@@ -19,3 +19,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# DS_Store (Macintosh files)
+.DS_Store
+app/.DS_Store
+app/views/.DS_Store
