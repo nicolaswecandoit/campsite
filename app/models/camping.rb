@@ -9,8 +9,6 @@ class Camping < ApplicationRecord
 
   accepts_nested_attributes_for :caracteristiquetests
 
-#rating
-ratyrate_rateable "situation", "prix", "propreté"
 #Permet de générer les URL SEO
   def to_param
       "#{id} #{name}".parameterize

@@ -1,0 +1,14 @@
+  <h3>Mon camping</h3>
+    <!--Si le proprietaire possède un camping alors il affiche le camping sinon il invite à nous contacter -->
+    <p><% if @campings.present? %>
+       <% @campings.each do |camping| %>
+        <p><%= camping.name %></p>
+        <p><%= camping.adresse %></p>
+        <p><%= camping.code_postale%></p>
+        <p><%= camping.ville%></p>
+            <%=  link_to "Éditer mon camping", edit_camping_path(camping), :class => "btn btn-primary" %>
+
+       <% end %>
+       <%else%>
+       Vous avez un camping mais il ne figure pas encore dans notre base. Ou vous souhaitez pouvoir éditer votre fiche camping ? contactez-nous
+    <% end %></p>

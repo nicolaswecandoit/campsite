@@ -53,8 +53,8 @@ gem 'meta-tags'
 gem 'bootstrap-sass', '~> 3.3.6'
 #Traduction
 gem 'rails-i18n'
-#rating Systeme
-gem 'ratyrate', :github => 'wazery/ratyrate'
+#mailboxer
+gem 'mailboxer', github: 'mailboxer/mailboxer'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -6,4 +6,8 @@ class ProprietairesController < ApplicationController
     #@posts = current_user.camping
     @campings = Camping.where(:proprietaire_id => current_proprietaire.id)
   end
+
+  def moncamping
+      @campings = Camping.where(:proprietaire_id => current_proprietaire.id)
+  end
 end

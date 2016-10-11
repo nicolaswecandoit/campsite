@@ -1,3 +1,4 @@
+<p><%= link_to 'Start conversation', new_message_path, class: 'btn btn-lg btn-primary' %></p>
 <!--Balises SEO-->
 <% set_meta_tags site: "Nomsite",
 title: "#{@camping.name.titleize}",
@@ -16,13 +17,7 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
           else
           @camping.description
           end %></p>
-          <div class="rating">
 
-           <%= rating_for @camping, "prix", disable_after_rate: true, imdb_avg: false, stars: 10  %>
-
-          Prix : <%= rating_for @camping, 'situation', stars: 10 %>
-          Propreté  : <%= rating_for @camping, 'propreté', stars: 10 %>
-</div>
     <hr />
 <!--Affichage de la map-->
       <div id="map_fiche"></div>
@@ -37,17 +32,24 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
     <!--Affiche les parametres de la table caracteristiquetest -->
     <% @camping.caracteristiquetests.each do |caracteristiquetest| %>
-      <p> Piscine: <%= caracteristiquetest.piscine %></p>
+      <p> Piscine: <%= caracteristiquetest.handicap %></p>
       <p> Barbecue: <%= caracteristiquetest.barbecue %></p>
       <p> Animaux: <%= caracteristiquetest.animaux %></p>
       <p> Handicap: <%= caracteristiquetest.handicap %></p>
+      <%if caracteristiquetest.animaux =="oui"%>animaux<%else%><s>animaux</s><%end%>
+      <%if caracteristiquetest.handicap =="oui"%>handicap<%else%><s>handicap</s><%end%>
+
     <%end%>
     <!--Affiche les parametres de la table situation-->
     <% @camping.situations.each do |situation| %>
-      <p> Plage: <%=situation.plage %> à <%=situation.distanceplage%> km</p>
-      <p> Etang: <%=situation.etang%></p>
-      <p> Montagne: <%=situation.montagne %></p>
-      <p> Rivière: <%=situation.riviere%></p>
+      <%if situation.plage =="oui"%>plage<%else%><s>plage</s><%end%>
+      <%if situation.etang =="oui"%>etang<%else%><s>etang</s><%end%>
+      <%if situation.montagne =="oui"%>montagne<%else%><s>montagne</s><%end%>
+      <%if situation.riviere =="oui"%>riviere<%else%><s>riviere</s><%end%>
+          <p> Plage: <%=situation.plage %> à <%=situation.distanceplage%> km</p>
+          <p> Etang: <%=situation.etang%></p>
+          <p> Montagne: <%=situation.montagne %></p>
+          <p> Rivière: <%=situation.riviere%></p>
     <%end%>
 
       <% if @camping.youtube_url.present? %>

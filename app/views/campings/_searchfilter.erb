@@ -78,24 +78,20 @@
 <div class="col-md-12">
 <div id="divfilter"></div>
 </div>
-<script type="text/javascript">
+<script>
 $(document).ready(function () {
 // find and retrieve all <input> elements of
 // 'type=checkbox':
-  var checkboxes = $('input[type=checkbox]');
+  var checkboxes = $('input[type=checkbox]'.checkgroup);
   // use the on() method to bind the anonymous function
   // as the event-handler of the 'change' event:
   checkboxes.on('change', function(){
   // update the '#divfilter' element's text:
-    $('#divfilter').text(function(){
-    // we return the following as the new text:
-    // first we filter the checkboxes collection to
-    // retain only those that match the ':checked'
-    // pseudo-class, and then create a map:
+  $('#divfilter').html("").append(function() {
     return checkboxes.filter(':checked').map(function(){
     // the contents of the map are comprised of
     // the 'name' property of each checked check-box:
-    return this.name;
+    return "<span class='remover' data-uncheckme='" + this.name + "'>X " + this.name + "</span>";
     // we convert the map() into an Array, using get():
       }).get()
       // and join the Array elements together with the
@@ -103,5 +99,10 @@ $(document).ready(function () {
       .join(' | ') + '' ;
       });
     });
+    $("#divfilter").on('click', '.remover', function() {
+      var me = $(this).data("uncheckme");
+      $('.checkgroup').filter("." + me).prop("checked", false).trigger('change');
+    });
+
   });
 </script>
