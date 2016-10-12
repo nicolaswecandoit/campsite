@@ -20,10 +20,42 @@
 <!--<article>-->
 <div class="col-md-62">
 
+<!--prenium 1-->
 <%if @pub.present? %>
-<%= @pub.name%>
+<div class="col-md-6">
+  <div class="campingitem">
+      SPONSORISÉ
+    <p><%= link_to @pub.name, camping_path(@pub.id) %></p>
+    <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="475px" height="250px">
+    <%= @pub.adresse %> <%= @pub.code_postale %> <%= @pub.commune %>
+    <p><%= @pub.nomdep %></p>
+    <%= @pub.nomregion %>
+    <p>Latitude : <%= @pub.latitude %></p>
+    <p>Longitude : <%= @pub.longitude %></p>
+    Nombre d'étoiles : <%= @pub.etoile %>
+  </div>
+</div>
 <%else%>
 <%end%>
+
+<!--prenium 2-->
+<%if @pubtwo.present? %>
+<div class="col-md-6">
+  <div class="campingitem">
+      SPONSORISÉ
+    <p><%= link_to @pubtwo.name, camping_path(@pubtwo.id) %></p>
+    <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="475px" height="250px">
+    <%= @pubtwo.adresse %> <%= @pubtwo.code_postale %> <%= @pubtwo.commune %>
+    <p><%= @pubtwo.nomdep %></p>
+    <%= @pubtwo.nomregion %>
+    <p>Latitude : <%= @pubtwo.latitude %></p>
+    <p>Longitude : <%= @pubtwo.longitude %></p>
+    Nombre d'étoiles : <%= @pubtwo.etoile %>
+  </div>
+</div>
+<%else%>
+<%end%>
+
 
   <% @campings.each do |camping| %>
     <div class="col-md-6">

@@ -12,28 +12,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:surname, :name, :gender, :telephone, :adresse, :cp, :ville, :fonction, :birthday])
   end
 
-  def mailbox
-      @mailbox ||= current_user.mailbox
+  def current_user
+    if current_campeur
+       current_campeur
+     else
+      current_proprietaire
     end
-
-def current_user
-  if current_campeur
-     current_campeur
-   else
-    current_proprietaire
   end
-end
-
-helper_method :current_user
-helper_method :mailbox, :conversation
-
- private
- # [...]
- def conversation
-   @conversation ||= mailbox.conversations.find(params[:id])
- end
-
- protected
-
 
 end

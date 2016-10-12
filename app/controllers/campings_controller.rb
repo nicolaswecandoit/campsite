@@ -125,20 +125,42 @@ class CampingsController < ApplicationController
         redirect_to action: :index and return
       else
         @campings = Camping.search(params[:query])
-
+#lien sponsorisés
         if params[:query] == "aube"
           @pub = Camping.find_by_id(1)
-        else
-        end
-        # @campings = Camping.search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results, aggs: [:nomdep]
-        # Fonctionne avec elasticsearch classique
-        # @campings = Camping.custom_search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results
-        # Test qui ne fonctionne pas pour la facet...
-        # @campings = Camping.search((params[:q].present? ? params[:q] : '*'))
-        # @campings = Camping.search(params[:q].present?, params[:nomdep].present?)
-        # @response = Camping.search(@campings).to_json
-        # @campings = Camping.search(params[:q]) if params[:q].present?
-        # @campings = @campings.nomdep(params[:nomdep]) if params[:nomdep].present?
+
+          elsif params[:query] == "vendée"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "Vendée"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "Vendee"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "vendee"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "bretignolles"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "bretignolles-sur-mer"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "bretignolles sur mer"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "Bretignolles sur mer"
+            @pubtwo = Camping.find_by_id(5268)
+
+          elsif params[:query] == "alsace"
+            @pubtwo = Camping.find_by_id(1)
+
+          elsif params[:query] == "narbonne"
+            @pubtwo = Camping.find_by_id(15)
+
+          else
+          end
       end
 
       @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|

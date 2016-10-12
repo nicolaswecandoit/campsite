@@ -55,6 +55,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'rails-i18n'
 #mailboxer
 gem 'mailboxer', github: 'mailboxer/mailboxer'
+#pagination
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
