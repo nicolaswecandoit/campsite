@@ -16,6 +16,12 @@
   Malheureusement aucun camping ne correspond à votre recherche.
   <%else%>
 
+  <%if @pub.present? %>
+  <%= @pub.name%>
+  <%else%>
+  <%end%>
+
+
   <% @campings.each do |camping| %>
     <div class="col-md-6">
       <div class="campingitem">

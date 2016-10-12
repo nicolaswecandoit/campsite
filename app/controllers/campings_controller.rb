@@ -125,6 +125,11 @@ class CampingsController < ApplicationController
         redirect_to action: :index and return
       else
         @campings = Camping.search(params[:query])
+
+        if params[:query] == "aube"
+          @pub = Camping.find_by_id(1)
+        else
+        end
         # @campings = Camping.search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results, aggs: [:nomdep]
         # Fonctionne avec elasticsearch classique
         # @campings = Camping.custom_search((params[:q].present? ? params[:q] : '*')).page(params[:page]).per(14).results
@@ -154,6 +159,11 @@ class CampingsController < ApplicationController
             redirect_to action: :index and return
           else
           @campings = Camping.searchi(params[:query], params[:handicap], params[:animaux], params[:television], params[:plage], params[:etang], params[:lac])
+            if params[:query] == "aube"
+              @pub = Camping.find_by_id(1)
+            else
+            end
+
         end
 
           @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|

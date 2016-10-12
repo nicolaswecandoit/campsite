@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :campings
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   root 'campings#homesearch'
   get '/result/' => 'campings#result'
   get '/resultnohome/' => 'campings#resultnohome'
@@ -25,4 +24,18 @@ Rails.application.routes.draw do
   get '/profil-campeur/' => 'campeurs#index'
   get '/connexion/' => 'profils#index'
   get '/search/' => 'search#search'
+
+  # mailbox folder routes
+  get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
+  get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
+  get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
+
+  # conversations
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
 end

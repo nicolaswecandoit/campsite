@@ -12,11 +12,19 @@
       <div id="map"></div>
     </div>
   </div>
+
+
   <% if @campings.empty? %>
     Malheureusement aucun camping ne correspond à votre recherche.
     <%else%>
 <!--<article>-->
 <div class="col-md-62">
+
+<%if @pub.present? %>
+<%= @pub.name%>
+<%else%>
+<%end%>
+
   <% @campings.each do |camping| %>
     <div class="col-md-6">
       <div class="campingitem">
