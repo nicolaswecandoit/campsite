@@ -1,15 +1,15 @@
-<p><%= link_to 'Start conversation', new_message_path, class: 'btn btn-lg btn-primary' %></p>
 <!--Balises SEO-->
 <% set_meta_tags site: "Nomsite",
 title: "#{@camping.name.titleize}",
 reverse: true,
 description: "#{@camping.name.titleize} : Découvrez ce camping situé dans le département #{@camping.nomdep.titleize} à #{@camping.commune.titleize} en région #{@camping.nomregion}",
 canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
-
+<div class="containershow">
 <div class="col-md-8">
     <h3><span class="label label-success" style="float:right;"><%= "#{@camping.etoile} étoiles" %></span></h3>
     <h1><%= @camping.name %></h1>
-    <p><strong><%= @camping.code_postale %> <%= @camping.commune.titleize %> - <%= @camping.nomdep %></strong></p>
+    <p><strong><%= @camping.code_postale %> <%= @camping.commune.mb_chars.titleize.to_s %> - <%= @camping.nomdep %></strong></p>
+    <div class="imagecamp"><%= image_tag @camping.image%></div>
     <p><h3>Description du camping:</h3></p>
 
     <p><%= if @camping.description.empty?
@@ -23,40 +23,65 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       <div id="map_fiche"></div>
     <hr />
 
-    <p><strong>Adresse: </strong><%= @camping.adresse.titleize %></p>
-    <p><strong>Nomregion: </strong><%= @camping.nomregion %></p>
-    <p><strong>Numdep: </strong><%= @camping.numdep %></p>
-    <p><strong>Latitude: </strong><%= @camping.latitude %></p>
-    <p><strong>Longitude: </strong><%= @camping.longitude %></p>
-    <p><strong>Etoile :</strong><%= @camping.etoile %></p>
-
+<br />
+    <hr />
+<h3>Caractéristiques et équipements du camping</h3>
     <!--Affiche les parametres de la table caracteristiquetest -->
     <% @camping.caracteristiquetests.each do |caracteristiquetest| %>
-      <p> Piscine: <%= caracteristiquetest.handicap %></p>
-      <p> Barbecue: <%= caracteristiquetest.barbecue %></p>
-      <p> Animaux: <%= caracteristiquetest.animaux %></p>
-      <p> Handicap: <%= caracteristiquetest.handicap %></p>
-      <%if caracteristiquetest.animaux =="oui"%>animaux<%else%><s>animaux</s><%end%>
-      <%if caracteristiquetest.handicap =="oui"%>handicap<%else%><s>handicap</s><%end%>
-
+    <div class="col-md-4">
+      <p> <%if caracteristiquetest.animaux =="oui"%><b>animaux</b><%else%><s>animaux</s><%end%></p>
+      <p> <%if caracteristiquetest.television =="oui"%><b>television</b><%else%><s>television</s><%end%></p>
+      </div>
+      <div class="col-md-4">
+      <p> <%if caracteristiquetest.handicap =="oui"%><b>handicap</b><%else%><s>handicap</s><%end%></p>
+      <p> <%if caracteristiquetest.piscine =="oui"%><b>piscine</b><%else%><s>piscine</s><%end%></p>
+      </div>
+      <div class="col-md-4">
+      <p> <%if caracteristiquetest.barbecue =="oui"%><b>barbecue</b><%else%><s>barbecue</s><%end%></p>
+      <p> <%if caracteristiquetest.barbecue =="oui"%><b>barbecue</b><%else%><s>barbecue</s><%end%></p>
+      </div>
     <%end%>
-    <!--Affiche les parametres de la table situation-->
+
+<hr />
+
+<h3>Situation géographique</h3>
+
     <% @camping.situations.each do |situation| %>
-      <%if situation.plage =="oui"%>plage<%else%><s>plage</s><%end%>
-      <%if situation.etang =="oui"%>etang<%else%><s>etang</s><%end%>
-      <%if situation.montagne =="oui"%>montagne<%else%><s>montagne</s><%end%>
-      <%if situation.riviere =="oui"%>riviere<%else%><s>riviere</s><%end%>
-          <p> Plage: <%=situation.plage %> à <%=situation.distanceplage%> km</p>
+        <div class="col-md-4">
+    <p>  <%if situation.plage =="oui"%><b>plage à <%=situation.distanceplage%> km</b><%else%><s>plage</s><%end%></p>
+    <p>  <%if situation.etang =="oui"%><b>etang</b><%else%><s>etang</s><%end%></p>
+     </div>
+        <div class="col-md-4">
+    <p>  <%if situation.montagne =="oui"%><b>montagne</b><%else%><s>montagne</s><%end%></p>
+         </div>
+        <div class="col-md-4">
+    <p>  <%if situation.riviere =="oui"%><b>riviere</b><%else%><s>riviere</s><%end%></p>
+       </div>
+      
+          <!--<p> Plage: <%=situation.plage %> à <%=situation.distanceplage%> km</p>
           <p> Etang: <%=situation.etang%></p>
           <p> Montagne: <%=situation.montagne %></p>
-          <p> Rivière: <%=situation.riviere%></p>
+          <p> Rivière: <%=situation.riviere%></p>-->
     <%end%>
+
+
 
       <% if @camping.youtube_url.present? %>
     <div class="embed-container">
     <%= embed(@camping.youtube_url) %>
   </div>
     <%end%>
+
+<h3>Coordonnées du camping</h3>
+<div ="col-md-8">
+    <p><strong>Adresse: </strong><%= @camping.adresse.titleize %></p>
+    <p><strong>Nomregion: </strong><%= @camping.nomregion %></p>
+    <p><strong>Numdep: </strong><%= @camping.numdep %></p>
+    <p><strong>Latitude: </strong><%= @camping.latitude %></p>
+    <p><strong>Longitude: </strong><%= @camping.longitude %></p>
+    <p><strong>Etoile :</strong><%= @camping.etoile %></p>
+    <!--Affiche les parametres de la table situation-->
+</div>
 
     <hr />
 
@@ -80,9 +105,9 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
 <div class="col-md-12">
     <!--Affiche les campings proche du camping sélectionné -->
-      <% if @camping.nearbys(10).present?%>
+      <% if @camping.nearbys(4).present?%>
         <h3>Les campings proches de <%=@camping.commune%></h3>
-          <% for camping in @camping.nearbys(10) %>
+          <% for camping in @camping.nearbys(4) %>
             <p><%= link_to camping.name, camping %> - <%= camping.distance.round(2) %> kilomètres </p>
             <% end %>
         <%else%>
@@ -108,3 +133,5 @@ handler.bounds.extendWith(markers);
 handler.fitMapToBounds();
 });
 </script>
+
+</div>

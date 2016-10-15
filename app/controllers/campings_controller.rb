@@ -45,6 +45,8 @@ class CampingsController < ApplicationController
       if request.path != camping_path(@camping)
     redirect_to @camping, status: :moved_permanently
       end
+      
+
       #Systeme de Geotag avec map pour les campings
       @hash = Gmaps4rails.build_markers(@camping) do |camping, marker|
         marker.lat camping.latitude
@@ -67,7 +69,7 @@ class CampingsController < ApplicationController
 
   # Edition du cammping
     def edit
-
+  
     end
 # Nouveau camping
     def create
@@ -166,15 +168,16 @@ class CampingsController < ApplicationController
       @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
         marker.lat camping.latitude
         marker.lng camping.longitude
-        marker.infowindow "
-        <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
-        <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>"
+        marker.infowindow render_to_string(:partial => "/campings/infowindow", :locals => { :camping => camping})
         marker.picture ({
           "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
         end
       end
+      
+    
+          
 
       def resultnohome
           if params[:query].blank?
@@ -211,6 +214,6 @@ class CampingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
       def camping_params
-        params.require(:camping).permit(:name, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :image_content_type, :youtube_url, caracteristiquetests_attributes: [:id, :animaux, :handicap])
+        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage])
       end
 end

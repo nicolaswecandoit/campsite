@@ -28,18 +28,6 @@ GIT
       rails (>= 4.2.0)
 
 GIT
-  remote: git://github.com/mdeering/gravatar_image_tag.git
-  revision: 61ba79bd92d23a1edd5126d903d76b0c94f09641
-  specs:
-    gravatar_image_tag (1.2.0)
-
-GIT
-  remote: git://github.com/mislav/will_paginate.git
-  revision: 67e11dce90a75d98d184e4bcc1120457e58b477b
-  specs:
-    will_paginate (3.1.3)
-
-GIT
   remote: git://github.com/rails/sass-rails.git
   revision: dfbcc6a53653d8908007e26324a0f299f026ec4f
   specs:
@@ -48,13 +36,6 @@ GIT
       sass (~> 3.4)
       sprockets (~> 4.x)
       sprockets-rails (< 4.0)
-
-GIT
-  remote: git://github.com/yrgoldteeth/bootstrap-will_paginate.git
-  revision: 702b4b1f9c179d236d2698289a6bd1673e37c014
-  specs:
-    bootstrap-will_paginate (0.0.10)
-      will_paginate
 
 GEM
   remote: https://rubygems.org/
@@ -120,6 +101,7 @@ GEM
     arel (7.1.1)
     autoprefixer-rails (6.3.7)
       execjs
+    bcrypt (3.1.11)
     bcrypt (3.1.11-x86-mingw32)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -128,6 +110,7 @@ GEM
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.2)
+    byebug (9.0.6)
     cancancan (1.15.0)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
@@ -196,6 +179,10 @@ GEM
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jquery-fileupload-rails (0.4.7)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sass (>= 3.2)
     jquery-rails (4.1.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -222,6 +209,9 @@ GEM
     multi_json (1.12.1)
     multipart-post (2.0.0)
     nio4r (1.2.1)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     nokogiri (1.6.8-x86-mingw32)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -284,6 +274,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.3.11)
     sqlite3 (1.3.11-x86-mingw32)
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -308,12 +299,12 @@ GEM
     websocket-extensions (0.1.2)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
   activeadmin (~> 1.0.0.pre4)
   bootstrap-sass (~> 3.3.6)
-  bootstrap-will_paginate!
   byebug
   cancancan
   carrierwave
@@ -326,10 +317,10 @@ DEPENDENCIES
   geocoder
   gmaps-autocomplete-rails
   gmaps4rails
-  gravatar_image_tag!
   has_scope
   inherited_resources!
   jbuilder (~> 2.5)
+  jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
   kaminari
@@ -349,7 +340,6 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console
-  will_paginate!
 
 BUNDLED WITH
    1.12.5

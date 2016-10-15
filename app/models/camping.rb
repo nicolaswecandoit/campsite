@@ -6,8 +6,12 @@ class Camping < ApplicationRecord
   belongs_to :proprietaire
   has_many :caracteristiquetests, :foreign_key => :camping_id
   has_many :situations, :foreign_key => :camping_id
-
+  
   accepts_nested_attributes_for :caracteristiquetests
+    accepts_nested_attributes_for :situations
+  
+  has_attached_file :image
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"] 
 
 #Permet de générer les URL SEO
   def to_param
@@ -42,13 +46,16 @@ class Camping < ApplicationRecord
   end
 
 
+
+
+
     resourcify
     #Geocoding par adresse
     geocoded_by :fulladress
     after_validation :geocode
   #Generer une adresse complete pour le géocoding
   def fulladress
-    [adresse,code_postale,commune].to_a.compact.join(",")
+    [adresse, code_postale, commune].to_a.compact.join(", ")
   end
 
 end

@@ -13,5 +13,4 @@ module Campsite
     # -- all .rb files in that directory are automatically loaded.
   end
 
-Paperclip.options[:command_path] = 'C:\Program Files (x86)\GnuWin32\bin'
 end

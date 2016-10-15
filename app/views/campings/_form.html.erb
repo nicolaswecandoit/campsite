@@ -89,21 +89,47 @@
 
    <div class="form-group">
 
-     <%#= label :piscine, "Piscine" %>
-<%#= f.select :piscine, ['oui',"oui"], ['non',"non"] %>
+
+
+
+<% # jquery upload template # %>  
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script> 
 
 
 </div>
 
 <%= f.fields_for :caracteristiquetests do |builder| %>
-<%#= builder.text_field :animaux %>
-<%#= builder.select(:animaux, [['Non renseigné',"Non renseigné"], ['Oui',"Oui"], ['Non',"Non"]], {:selected => (:animaux?)}, {class:"form-control", id:"exampleSelect1"}) %>
-<%#= check_box_tag :animaux, "oui", :class => "barbecue"%>
-<label for="animaux">Animaux</label>
-<%= builder.select :animaux?, ["", "oui","non"] %>
-<label for="handicap">Handicap</label>
-<%= builder.select :handicap?, ["", "oui","non"] %>
+
+<p><label for="handicap">Handicap</label>
+<%= builder.select :handicap, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Piscine</label>
+<%= builder.select :piscine, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Animaux</label>
+<%= builder.select :animaux, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Barbecue</label>
+<%= builder.select :barbecue, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Television</label>
+<%= builder.select :television, ["oui","non"], :include_blank => true %></p>
+
+
 <% end %>
+
+<%= f.fields_for :situations do |s| %>
+
+<p><label for="plage">Plage</label>
+<%= s.select :plage, ["oui","non"], :include_blank => true %> à <%= s.text_field :distanceplage %> km</p>
+
+
+<% end %>
+
+<%= f.file_field :image %>
+
+
+
 
 
   <div class="actions">

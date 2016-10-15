@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require underscore
 //= require gmaps/google
+//= require_tree .

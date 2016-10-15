@@ -1,14 +1,27 @@
   <h3>Mon camping</h3>
     <!--Si le proprietaire possède un camping alors il affiche le camping sinon il invite à nous contacter -->
+  
+  <div class="col-md-8">
     <p><% if @campings.present? %>
        <% @campings.each do |camping| %>
-        <p><%= camping.name %></p>
-        <p><%= camping.adresse %></p>
-        <p><%= camping.code_postale%></p>
-        <p><%= camping.ville%></p>
-            <%=  link_to "Éditer mon camping", edit_camping_path(camping), :class => "btn btn-primary" %>
+        
+        <p><%= link_to camping.name, camping_path(camping.id) %></p>
+         <% if camping.image.present? %>
+          <div class="imagecamp"><%= image_tag camping.image%></div>
+          <%else%>
+          <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="100%">
+          <%end%>
+        <%= camping.adresse %> <%= camping.code_postale %> <%= camping.commune %>
+        <p><%= camping.nomdep %></p>
+        <%= camping.nomregion %>
+        <p>Latitude : <%= camping.latitude %></p>
+        <p>Longitude : <%= camping.longitude %></p>
+        Nombre d'étoiles : <%= camping.etoile %>
+        
+           <p> <%=  link_to "Éditer mon camping", edit_camping_path(camping), :class => "btn btn-primary" %> </p>
 
        <% end %>
        <%else%>
        Vous avez un camping mais il ne figure pas encore dans notre base. Ou vous souhaitez pouvoir éditer votre fiche camping ? contactez-nous
     <% end %></p>
+    </div>

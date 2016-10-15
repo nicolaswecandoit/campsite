@@ -761,3 +761,13 @@ list-style-type: none;
 {
 	display:block
 }
+
+.imagecamp img {
+    width: 100%;
+}
+
+.containershow {
+width: 80%;
+margin-right: auto;
+margin-left:auto;
+}

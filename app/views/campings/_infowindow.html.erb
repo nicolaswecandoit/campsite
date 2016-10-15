@@ -1,4 +1,9 @@
 
-<h3><%= camping.name %> </h3>
+<h3><%= link_to camping.name, camping_path(camping.id) %></h3>
 <p>Camping <b><%= camping.etoile%></b> à <%= camping.commune %></b></p>
-<p><%= link_to "Voir la fiche", camping_path(camping.id), class:"btn-primary", role:"button" %></p>
+
+<%if camping.image.present? %>
+ <div class="imagecamp"><%= image_tag camping.image%></div>
+   <%else%>
+  <img src='http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg' width='265px' height='150px'>
+<%end%>
