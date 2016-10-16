@@ -1,0 +1,36 @@
+<!--prenium 1-->
+    <%if @pubtwo.present? %>
+    <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-mask">
+                             <a href="/campings/<%=@pub[:id]%>">
+                             <% if @pubtwo.image.present? %>
+                          <div class="imagecamp"><%= image_tag @pubtwo.image%></div>
+                          <%else%>
+                          <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="100%">
+                          <%end%>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body-header">
+                       
+                            <div class="card-body-header-category"><%= @pubtwo.etoile %> *</div>
+                            <div class="card-body-header-category-sponso">COUP DE COEUR</div>
+                            <h2 class="titleblock"><%= link_to @pubtwo.name.mb_chars.titleize, camping_path(@pubtwo.id) %></h2>
+                            <p class="card-body-header-sentence">
+                                </span><%= @pubtwo.commune %><span>
+                            </p>
+                        </div>
+                        <p class="card-body-description">
+                            <%= @pubtwo.nomdep %>
+                            <%= @pubtwo.nomregion %>
+                           <div class="card-body-footer"><p> Emplacements : <%= @pubtwo.emplacement%></p></div>
+                            
+                        </p>
+                    </div>
+                </div>
+          </div>
+    <%else%>
+    <%end%>

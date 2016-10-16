@@ -83,7 +83,7 @@
 
 
   <div class="form-group">
-      <label for="youtube_url">Vidéo youtube de votre camping<small>Copier l'url de votre vidéo youtube</small></label>
+      <label for="youtube_url">Vidéo youtube de votre camping<p><small>Copier l'url de votre vidéo youtube</small></p></label>
       <%= f.text_field :youtube_url, class:"form-control" %>
     </div>
 
@@ -112,9 +112,11 @@
 <p><label for="animaux">Barbecue</label>
 <%= builder.select :barbecue, ["oui","non"], :include_blank => true %></p>
 
-<p><label for="animaux">Television</label>
-<%= builder.select :television, ["oui","non"], :include_blank => true %></p>
 
+<p><label for="animaux">Television</label>
+<div class="styled-select">
+<%= builder.select :television, ["oui","non"], :include_blank => true %></p>
+</div>
 
 <% end %>
 
@@ -125,9 +127,16 @@
 
 
 <% end %>
+  <label for="imageform">Choisissez une photo pour illustrer votre camping<small><p>Votre photo doit être assez grande (600px de large minimum)</p></small></label>
+<p><%= f.file_field :image %></p>
 
-<%= f.file_field :image %>
-
+<div class="imageform">
+  <p><label for="image">Photo de votre camping</label></p>
+<%if @camping.image.present? %>
+<p><%= image_tag @camping.image%></p>
+<%else%>
+<%end%>
+</div>
 
 
 

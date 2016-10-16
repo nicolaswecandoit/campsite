@@ -7,6 +7,8 @@ class Camping < ApplicationRecord
   has_many :caracteristiquetests, :foreign_key => :camping_id
   has_many :situations, :foreign_key => :camping_id
   
+
+  
   accepts_nested_attributes_for :caracteristiquetests
     accepts_nested_attributes_for :situations
   
@@ -23,7 +25,7 @@ class Camping < ApplicationRecord
 #Permet de générer la recherche avec filtres
   def self.searchi(query, handicap, animaux, television, plage, etang, lac)
     return scoped unless query.present?
-         result = left_outer_joins(:caracteristiquetests, :situations).where('nomdep LIKE ? OR name LIKE ? OR nomregion LIKE ? OR commune LIKE?', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+         result = left_outer_joins(:caracteristiquetests, :situations).where('nomdep LIKE ? OR name LIKE ? OR nomregion LIKE ? OR commune LIKE ?', "%#{query.mb_chars.downcase}%", "%#{query.mb_chars.downcase}%", "%#{query.mb_chars.downcase}%", "%#{query.mb_chars.downcase}%")
          result = result.where('handicap LIKE ?', "%#{handicap}%") if handicap
          result = result.where('animaux LIKE ?', "%#{animaux}%") if animaux
          result = result.where('television LIKE ?', "%#{television}%") if television
@@ -36,7 +38,7 @@ class Camping < ApplicationRecord
 #Recherche de base pour la home
   def self.search(query)
      return scoped unless query.present?
-     where(['nomdep LIKE ? OR name LIKE ? OR nomregion LIKE ? OR commune LIKE?', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"])
+     where(['nomdep LIKE ? OR name LIKE ? OR nomregion LIKE ? OR commune LIKE?', "%#{query.mb_chars.downcase}%", "%#{query.mb_chars.downcase}%", "%#{query.mb_chars.downcase}%", "%#{query.mb_chars.downcase}%"])
   end
 
 

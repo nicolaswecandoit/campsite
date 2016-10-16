@@ -42,6 +42,7 @@ class CampingsController < ApplicationController
   #Affiche le camping suivant l'ID
     def show
       @camping = Camping.find(params[:id])
+      
       if request.path != camping_path(@camping)
     redirect_to @camping, status: :moved_permanently
       end
@@ -108,17 +109,6 @@ class CampingsController < ApplicationController
 
 #Systeme de recherche de la home
     def homesearch
-      #Fonctionne avec elasticsearch classique
-      #@campings = Camping.custom_search((params[:q].present? ? params[:q] : '*'))
-      #@campings = Camping.search((params[:q].present? ? params[:q] : '*'))
-      #  @campings = Camping.all
-      #  @campings = Camping.search(params[:q]) unless params[:q].blank?
-      #  @campings = @campings.piscine unless params[:nomdep].blank?
-      #    @camping = Departement.all
-      #      if params[:q].blank? || params[:nomdep].blank?
-      #      @campings = Camping.__elasticsearch__.search params[:nomdep]
-      #      else
-      #    end
     end
 
 #Page de résultats
@@ -129,14 +119,26 @@ class CampingsController < ApplicationController
         @campings = Camping.search(params[:query])
 #lien sponsorisés
         if params[:query] == "aube"
-          @pub = Camping.find_by_id(1)
+          @pubtwo = Camping.find_by_id(1)
 
           elsif params[:query] == "vendée"
-            @pubtwo = Camping.find_by_id(5268)
+            @pub = Camping.find_by_id(5268)
 
+              if params[:query] == "vendée"
+                @pubtwo = Camping.find_by_id(5050)
+              else
+              
+              end
+              
           elsif params[:query] == "Vendée"
-            @pubtwo = Camping.find_by_id(5268)
+            @pub = Camping.find_by_id(5268)
 
+              if params[:query] == "Vendée"
+                @pubtwo = Camping.find_by_id(5050)
+              else
+              
+              end
+          
           elsif params[:query] == "Vendee"
             @pubtwo = Camping.find_by_id(5268)
 
@@ -184,12 +186,29 @@ class CampingsController < ApplicationController
             redirect_to action: :index and return
           else
           @campings = Camping.searchi(params[:query], params[:handicap], params[:animaux], params[:television], params[:plage], params[:etang], params[:lac])
+            
             if params[:query] == "aube"
-              @pub = Camping.find_by_id(1)
-            else
-            end
+          @pubtwo = Camping.find_by_id(1)
 
-        end
+          elsif params[:query] == "vendée"
+            @pub = Camping.find_by_id(5268)
+
+              if params[:query] == "vendée"
+                @pubtwo = Camping.find_by_id(5050)
+              else
+              
+              end
+              
+          elsif params[:query] == "Vendée"
+            @pub = Camping.find_by_id(5268)
+
+              if params[:query] == "Vendée"
+                @pubtwo = Camping.find_by_id(5050)
+              else
+              
+              end
+            end
+end
 
           @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
             marker.lat camping.latitude

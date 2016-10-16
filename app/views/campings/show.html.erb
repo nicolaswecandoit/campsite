@@ -8,8 +8,13 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 <div class="col-md-8">
     <h3><span class="label label-success" style="float:right;"><%= "#{@camping.etoile} étoiles" %></span></h3>
     <h1><%= @camping.name %></h1>
-    <p><strong><%= @camping.code_postale %> <%= @camping.commune.mb_chars.titleize.to_s %> - <%= @camping.nomdep %></strong></p>
+    <p><strong><%= @camping.code_postale %> <%= @camping.commune.mb_chars.titleize %> - <%= @camping.nomdep %></strong></p>
+    
+    <%if @camping.image.present? %>
     <div class="imagecamp"><%= image_tag @camping.image%></div>
+    <%else%>
+    <%end%>
+    
     <p><h3>Description du camping:</h3></p>
 
     <p><%= if @camping.description.empty?
@@ -74,9 +79,9 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
 <h3>Coordonnées du camping</h3>
 <div ="col-md-8">
-    <p><strong>Adresse: </strong><%= @camping.adresse.titleize %></p>
-    <p><strong>Nomregion: </strong><%= @camping.nomregion %></p>
-    <p><strong>Numdep: </strong><%= @camping.numdep %></p>
+    <p><strong>Adresse: </strong><%= @camping.adresse.mb_chars.titleize %></p>
+    <p><strong>Nomregion: </strong><%= @camping.nomregion.mb_chars.titleize %></p>
+    <p><strong>Numdep: </strong><%= @camping.numdep.mb_chars.titleize %></p>
     <p><strong>Latitude: </strong><%= @camping.latitude %></p>
     <p><strong>Longitude: </strong><%= @camping.longitude %></p>
     <p><strong>Etoile :</strong><%= @camping.etoile %></p>

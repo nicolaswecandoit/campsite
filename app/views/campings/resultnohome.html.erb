@@ -1,4 +1,6 @@
-  <!--MAPS -->
+ <div class="containershow">
+   
+    <!--MAPS -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-61">
@@ -16,28 +18,48 @@
   Malheureusement aucun camping ne correspond à votre recherche.
   <%else%>
 
-  <%if @pub.present? %>
-  <%= @pub.name%>
-  <%else%>
-  <%end%>
 
+<div class="col-md-12">
 
-  <% @campings.each do |camping| %>
-    <div class="col-md-6">
-      <div class="campingitem">
-        <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="265px" height="150px">
-        <p class="titleblock"><%= link_to camping.name, camping_path(camping.id) %></p>
+<%= render 'sponso', camping: @camping %>
+<%= render 'sponso2', camping: @camping %>
 
-        <%= camping.adresse %> <%= camping.code_postale %> <%= camping.commune %>
-        <p><%= camping.nomdep %></p>
-        <%= camping.nomregion %>
-        <p>Latitude : <%= camping.latitude %></p>
-        <p>Longitude : <%= camping.longitude %></p>
-        Nombre d'étoiles : <%= camping.etoile %>
+<% @campings.each do |camping| %>
+<div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-mask">
+                         <a href="/campings/<%=camping[:id]%>">
+                         <% if camping.image.present? %>
+                      <div class="imagecamp"><%= image_tag camping.image%></div>
+                      <%else%>
+                      <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="100%">
+                      <%end%>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-body-header">
+                   
+                        <div class="card-body-header-category"><%= camping.etoile %> *</div>
+                        <h2 class="titleblock"><%= link_to camping.name.mb_chars.titleize, camping_path(camping.id) %></h2>
+                        <p class="card-body-header-sentence">
+                            </span><%= camping.commune %><span>
+                        </p>
+                    </div>
+                    <p class="card-body-description">
+                        <%= camping.nomdep %>
+                        <%= camping.nomregion %>
+                       <div class="card-body-footer"><p> Emplacements : <%= camping.emplacement%></p></div>
+                        
+                    </p>
+                </div>
+            </div>
       </div>
-    </div>
   <% end %>
 </div>
+
+
 
 <%end%>
     <script src="//maps.google.com/maps/api/js?v=3.23&key=AIzaSyBHYJLTgnFqxMyLcqlOYg00RFmD6_7lLDM"></script>
@@ -54,5 +76,6 @@
       });
     </script>
 
+</div>
 </div>
 </div>
