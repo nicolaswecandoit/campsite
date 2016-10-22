@@ -63,10 +63,7 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     <p>  <%if situation.riviere =="oui"%><b>riviere</b><%else%><s>riviere</s><%end%></p>
        </div>
       
-          <!--<p> Plage: <%=situation.plage %> à <%=situation.distanceplage%> km</p>
-          <p> Etang: <%=situation.etang%></p>
-          <p> Montagne: <%=situation.montagne %></p>
-          <p> Rivière: <%=situation.riviere%></p>-->
+          
     <%end%>
 
 
@@ -76,6 +73,12 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     <%= embed(@camping.youtube_url) %>
   </div>
     <%end%>
+
+<% if @camping.dailymotion.present? %>
+    <div class="embed-container">
+<%= embedd(@camping.dailymotion) %>
+</div>
+<%end%>
 
 <h3>Coordonnées du camping</h3>
 <div ="col-md-8">
@@ -96,10 +99,21 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 <div class="col-md-4">
   <div class="alert alert-warning text-justify" role="alert">
     <p><strong>Courriel: </strong><%= @camping.courriel %></p>
-    <p><strong>Site internet: </strong><%= @camping.site_internet %></p>
+    
+    <% if @camping.site_internet.present? %>
+    <%= link_to "Site internet", @camping.site_internet, :target => "_blank" %></p>
+    <%else%>
+    <%end%>
+    
     <p><strong>Tel: </strong><%= @camping.tel %></p>
 
-    <!--Affiche le nom du proprietaire -->
+<% if @camping.facebook_url.present?%>
+<%= link_to "Page Facebook", @camping.facebook_url, :target => "_blank" %>
+
+<%else%>
+<%end%>
+
+    <!--Affiche le nom du proprietaire ne fonctionne pas sans le proprietaire id -->
     <p><% if @camping.proprietaire.present? %>
       <%= "Propriétaire : #{@camping.proprietaire.name} #{@camping.proprietaire.surname}" %>
     <%else%>
@@ -123,6 +137,12 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     <%=  link_to "Edit", edit_camping_path(@camping) %>
   <%else%>
       <%end%>
+      
+      <%if (proprietaire_signed_in? && (current_proprietaire.email == @camping.courriel)) %>
+    <%=  link_to "Edit", edit_camping_path(@camping) %>
+  <%else%>
+      <%end%>
+      
 
 <%= link_to 'Back', campings_path %>
 

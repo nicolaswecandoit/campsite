@@ -1,3 +1,4 @@
+
 <div class="col-md-12">
 
 <%= form_for(camping) do |f| %>
@@ -13,6 +14,7 @@
   <% end %>
 
 <% f.hidden_field :proprietaire_id , :value => current_proprietaire.id %>
+
 
 <div class="form-group">
    <label for="name">Nom du camping</label>
@@ -86,6 +88,20 @@
       <label for="youtube_url">Vidéo youtube de votre camping<p><small>Copier l'url de votre vidéo youtube</small></p></label>
       <%= f.text_field :youtube_url, class:"form-control" %>
     </div>
+    
+    
+      <div class="form-group">
+      <label for="dailymotion">Vidéo dailymotion de votre camping<p><small>Copier l'url de votre vidéo dailymotion</small></p></label>
+      <%= f.text_field :dailymotion, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <label for="facebook_url">Entrez l'adresse de votre page Facebook</label>
+      <%=f.text_field :facebook_url, class:"form-control"%>
+      
+    </div>
+    
+    
 
    <div class="form-group">
 

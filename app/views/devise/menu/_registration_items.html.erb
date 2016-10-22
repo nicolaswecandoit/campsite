@@ -1,6 +1,7 @@
 <% if proprietaire_signed_in? %>
 <nav id="primary_nav_wrap">
 <ul>
+  <li class="avatarround"><%= image_tag current_proprietaire.avatar(:small) %></li>
   <li><%=current_proprietaire.name%>
     <ul>
       <li><%= link_to('Mon compte', profil_proprietaire_path) %></li>

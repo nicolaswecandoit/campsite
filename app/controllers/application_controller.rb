@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     #Lors de l'inscription
     devise_parameter_sanitizer.permit(:sign_up, keys: [:surname, :name])
     #Lors de la modification
-    devise_parameter_sanitizer.permit(:account_update, keys: [:surname, :name, :gender, :telephone, :adresse, :cp, :ville, :fonction, :birthday])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:surname, :name, :gender, :telephone, :adresse, :cp, :ville, :fonction, :birthday, :avatar])
   end
 
   def current_user

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009192423) do
+ActiveRecord::Schema.define(version: 20161022222133) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20161009192423) do
     t.string   "piscine"
     t.string   "barbecue"
     t.string   "youtube_url"
+    t.string   "dailymotion"
+    t.string   "facebook_url"
   end
 
   create_table "caracteristiquetests", force: :cascade do |t|
@@ -204,6 +206,10 @@ ActiveRecord::Schema.define(version: 20161009192423) do
     t.text     "description"
     t.string   "fonction"
     t.boolean  "verified"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_proprietaires_on_email", unique: true
     t.index ["reset_password_token"], name: "index_proprietaires_on_reset_password_token", unique: true
   end

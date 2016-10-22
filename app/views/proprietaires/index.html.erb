@@ -8,6 +8,7 @@
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
     <h3>Mes infos personnelles</h3>
+    <p><%= image_tag current_proprietaire.avatar(:thumb) %></p>
     <p><%= current_proprietaire.surname %></p>
     <p><%= current_proprietaire.name %></p>
     <p><%= current_proprietaire.gender.to_s %></p>

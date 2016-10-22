@@ -9,5 +9,6 @@ class ProprietairesController < ApplicationController
 
   def moncamping
       @campings = Camping.where(:proprietaire_id => current_proprietaire.id)
+      @campingsemail = Camping.where(:courriel => current_proprietaire.email)
   end
 end

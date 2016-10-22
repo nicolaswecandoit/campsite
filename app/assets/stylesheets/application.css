@@ -920,3 +920,12 @@ margin-left:auto;
     height: 14px;
     background: url(../images/icon-comment.png) no-repeat;
 }
+
+.avatarround img {
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: -6px;
+    border: 1px solid #b9dcad;
+    padding: 1px;
+    background: #a1d491;
+}

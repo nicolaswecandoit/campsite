@@ -7,11 +7,13 @@ class CampingsController < ApplicationController
 
     #Autoriser le proprietaire à modifier son camping s'il a le proprietaire_id
   def proprio_owner
-    unless @camping.proprietaire_id == current_proprietaire.id
+    unless  @camping.proprietaire_id == current_proprietaire.id || @camping.courriel == current_proprietaire.email
       flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
       redirect_to campings_path
     end
   end
+
+
 
 
   #Permet de chercher les campings proches du camping courant
@@ -233,6 +235,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
       def camping_params
-        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage])
+        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, :dailymotion, :facebook_url, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage])
       end
 end

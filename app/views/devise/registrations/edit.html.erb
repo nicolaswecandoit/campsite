@@ -10,7 +10,12 @@
     <label for="name">Nom</label><br />
     <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Entrez votre nom" %>
   </div>
-
+  
+   <div class="form-group">
+    <label for="avatar">Choisissez une image de profil</label><br />
+  <%= f.file_field :avatar %>
+    </div>
+  
   <div class="form-group">
     <label for="surname">Prénom</label><br />
     <%= f.text_field :surname, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>

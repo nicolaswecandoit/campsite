@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+#gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -56,7 +57,8 @@ gem 'rails-i18n'
 #mailboxer
 gem 'mailboxer', github: 'mailboxer/mailboxer'
 #uploadimage
-gem 'jquery-fileupload-rails' 
+gem 'jquery-fileupload-rails'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
