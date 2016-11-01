@@ -37,8 +37,7 @@
      width: 550px;
  }
  .form-control {
-    height: 50px!important;
-    font-size: 20px!important;
+    font-size: 15px!important;
 }
  .container2 {
     width: 98%;
@@ -772,6 +771,10 @@ list-style-type: none;
 
 .imagecamp img {
     width: 100%;
+}
+
+.imagecamp {
+
 }
 
 .imageform img {

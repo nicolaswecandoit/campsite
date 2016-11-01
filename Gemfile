@@ -59,6 +59,7 @@ gem 'mailboxer', github: 'mailboxer/mailboxer'
 #uploadimage
 gem 'jquery-fileupload-rails'
 
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

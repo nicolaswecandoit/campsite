@@ -1,13 +1,13 @@
 ActiveAdmin.register Camping do
   controller do
-    def permitted_params
-      params.permit camping: [:name, :adresse, :code_postale, :commune, 
+    def permitted_params 
+      params.permit :utf8, :_method, :authenticity_token, :commit, :id,
+      camping: [:id, :name, :adresse, :code_postale, :commune, 
       :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, 
       :region_id, :departement_id, :latitude, :longitude, :etoile, :emplacement, :proprietaire_id, :proprietaire, 
-      :adressecomplete, :piscine, :barbecue, :youtube_url, :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at]
+      :adressecomplete, :piscine, :barbecue, :youtube_url, :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at, ":image_updated_at(1i)", ":image_updated_at(2i)", ":image_updated_at(3i)", ":image_updated_at(4i)", ":image_updated_at(5i)", :dailymotion, :facebook_url, :updated_at, :created_at]
     end
   end
-  
   
   form do |f|
     f.inputs "Camping Details" do
@@ -30,15 +30,16 @@ ActiveAdmin.register Camping do
       f.input :longitude
       f.input :etoile
       f.input :emplacement
-      f.input :proprietaire_id
-      f.input :proprietaire 
       f.input :adressecomplete
-      f.input :youtube_url
-      f.input :image, :as => :file, :hint => f.template.image_tag(f.camping.image.url(:image))
-      # Will preview the image when the object is edited
+      f.input :updated_at
+      
+      if :image.present?
+      f.input :image, :as => :file, :label => "Image",:hint => f.template.image_tag(f.object.image.url(:original)).present?
+      end
     end
     f.actions
   end
+  
   
   
 
@@ -62,15 +63,13 @@ ActiveAdmin.register Camping do
       row :longitude
       row :etoile
       row :emplacement
-      row :proprietaire_id
-      row :proprietaire 
       row :adressecomplete
-      row :youtube_url
-        row :image do
-          image_tag(ad.image.url(:image))
-        end
+      row :updated_at
+    
+        
         # Will display the image on show object page
       end
     end
+  
   
 end

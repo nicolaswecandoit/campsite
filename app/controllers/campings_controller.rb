@@ -170,6 +170,7 @@ class CampingsController < ApplicationController
       end
 
       @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
+        cache camping do
         marker.lat camping.latitude
         marker.lng camping.longitude
         marker.infowindow render_to_string(:partial => "/campings/infowindow", :locals => { :camping => camping})
@@ -177,6 +178,7 @@ class CampingsController < ApplicationController
           "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
+        end
         end
       end
       

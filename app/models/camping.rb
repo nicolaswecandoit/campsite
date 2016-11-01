@@ -12,8 +12,8 @@ class Camping < ApplicationRecord
   accepts_nested_attributes_for :caracteristiquetests
     accepts_nested_attributes_for :situations
   
-  has_attached_file :image, default_url: "/images/:style/missing.jpg"
-  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"] 
+  has_attached_file :image, default_url: "/images/missing.jpg"
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 #Permet de générer les URL SEO
   def to_param

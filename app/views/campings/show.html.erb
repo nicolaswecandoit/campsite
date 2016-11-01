@@ -1,3 +1,4 @@
+<% cache do %>
 <!--Balises SEO-->
 <% set_meta_tags site: "Nomsite",
 title: "#{@camping.name.titleize}",
@@ -63,7 +64,6 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     <p>  <%if situation.riviere =="oui"%><b>riviere</b><%else%><s>riviere</s><%end%></p>
        </div>
       
-          
     <%end%>
 
 
@@ -156,7 +156,9 @@ handler.buildMap({ provider: {}, internal: {id: 'map_fiche'}}, function(){
 markers = handler.addMarkers(<%=raw @hash.to_json %>);
 handler.bounds.extendWith(markers);
 handler.fitMapToBounds();
+
 });
 </script>
 
 </div>
+<%end%>
