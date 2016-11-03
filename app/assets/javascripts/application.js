@@ -18,7 +18,5 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require underscore
 //= require gmaps/google
-//= require geocomplete
-//= require geocompletemin
 //= validyoutube
 //= require_tree .

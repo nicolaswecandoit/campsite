@@ -1,0 +1,170 @@
+
+<div class="col-md-12">
+
+<%= form_for(camping) do |f| %>
+  <% if camping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(camping.errors.count, "error") %> prohibited this camping from being saved:</h2>
+      <ul>
+      <% camping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+<div class="form-group">
+   <label for="name">Nom du camping</label>
+      <%= f.text_field :name, autofocus: true, class:"form-control", id:"name", :required => true%>
+  </div>
+
+  <div class="form-group">
+    <label for="adresse">Adresse du camping</label>
+    <%= f.text_field :adresse, class:"form-control", :required => true%>
+  </div>
+
+<div class="form-group">
+    <label for="code_postale">Code postal</label>
+    <%= f.text_field :code_postale, class:"form-control", :required => true%>
+  </div>
+
+<div class="form-group">
+    <label for="commune">Commune</label>
+    <%= f.text_field :commune, class:"form-control", :required => true%>
+  </div>
+
+<fieldset disabled>
+<div class="form-group">
+    <label for="courriel">Email</label>
+    <%= f.text_field :courriel, :value => current_user.email, class:"form-control" %>
+  </div>
+</fieldset>
+
+<div class="form-group">
+    <label for="site_internet">Site internet</label>
+    <%= f.text_field :site_internet, class:"form-control", :required => true %>
+  </div>
+
+<div class="form-group">
+    <label for="tel">Numéro de téléphone <small>(permettant de joindre l'accueil)</small></label>
+    <%= f.text_field :tel, class:"form-control", :required => true %>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description de votre camping <small>(Rédigez 5 à 15 lignes pour présenter votre camping)</small></label>
+    <%= f.text_area :description, class:"form-control", rows:"9", placeholder:"Décrivez en 5 à 15 lignes tous les atouts de votre camping (situation géographique, proche de la mer, d'un lieu touristique, les offres, les petits plus...). Evitez les listes de mots et préférez des phrases. Ne faites pas de copier/coller d'autres sites. Le plus important c'est de donner envie à vos clients ! Courage vous allez y arriver :)", :required => true%>
+  </div>
+
+  <div class="form-group">
+    <label for="nomdep">Département</label>
+    <%= f.select :nomdep, Camping.order("nomdep ASC").pluck(:nomdep).uniq, class:"form-control", :required => true %>
+  </div>
+
+  <div class="form-group">
+    <label for="nomregion">Région</label>
+    <%= f.select :nomregion, Camping.order("nomregion ASC").pluck(:nomregion).uniq, class:"form-control", :required => true %>
+  </div>
+
+<div class="form-group">
+    <label for="numdep">Numéro de département</label>
+    <%= f.select :numdep, Camping.pluck(:numdep).uniq, class:"form-control", :required => true %>
+  </div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="latitude">Latitude</label>
+    <%= f.text_field :latitude, class:"form-control" %>
+  </div>
+
+<div class="form-group">
+    <label for="longitude">Longitude</label>
+    <%= f.text_field :longitude, class:"form-control" %>
+  </div>
+</fieldset>
+
+<div class="form-group">
+    <label for="etoile">Nombre d'étoiles</label>
+    <%= f.select :etoile, ["0","1","2","3","4","5"], class:"form-control", :required => true %></p>
+  </div>
+
+<div class="forum-group">
+  <label for="emplacement">Nombre d'emplacements</label>
+  <% f.text_field :emplacement, class:"form-control", :required => true%>
+</div>
+
+  <div class="form-group">
+      <label for="youtube_url">Vidéo youtube de votre camping<p><small>Copier l'url de votre vidéo youtube</small></p></label>
+      <%= f.text_field :youtube_url, class:"form-control" %>
+    </div>
+    
+    
+      <div class="form-group">
+      <label for="dailymotion">Vidéo dailymotion de votre camping<p><small>Copier l'url de votre vidéo dailymotion</small></p></label>
+      <%= f.text_field :dailymotion, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <label for="facebook_url">Entrez l'adresse de votre page Facebook</label>
+      <%=f.text_field :facebook_url, class:"form-control"%>
+      
+    </div>
+    
+    
+   <div class="form-group">
+
+<% # jquery upload template # %>  
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script> 
+
+
+</div>
+
+<%= f.fields_for :caracteristiquetests do |builder| %>
+
+<p><label for="handicap">Handicap</label>
+<%= builder.select :handicap, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Piscine</label>
+<%= builder.select :piscine, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Animaux</label>
+<%= builder.select :animaux, ["oui","non"], :include_blank => true %></p>
+
+<p><label for="animaux">Barbecue</label>
+<%= builder.select :barbecue, ["oui","non"], :include_blank => true %></p>
+
+
+<p><label for="animaux">Television</label>
+<div class="styled-select">
+<%= builder.select :television, ["oui","non"], :include_blank => true %></p>
+</div>
+
+<% end %>
+
+<%= f.fields_for :situations do |s| %>
+
+<p><label for="plage">Plage</label>
+<%= s.select :plage, ["oui","non"], :include_blank => true %> à <%= s.text_field :distanceplage %> km</p>
+
+
+<% end %>
+  <label for="imageform">Choisissez une photo pour illustrer votre camping<small><p>Votre photo doit être assez grande (600px de large minimum)</p></small></label>
+<p><%= f.file_field :image %></p>
+
+<div class="imageform">
+  <p><label for="image">Photo de votre camping</label></p>
+<%if @camping.image.present? %>
+<p><%= image_tag @camping.image%></p>
+<%else%>
+<%end%>
+</div>
+
+
+
+
+  <div class="actions">
+    <%= f.submit "Enregistrer", class:"btn btn-success" %>
+  </div>
+<% end %>
+</div>

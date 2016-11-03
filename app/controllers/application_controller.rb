@@ -7,17 +7,21 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     #Lors de l'inscription
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:surname, :name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:surname, :name, :nom, :prenom, :proprio])
     #Lors de la modification
-    devise_parameter_sanitizer.permit(:account_update, keys: [:surname, :name, :gender, :telephone, :adresse, :cp, :ville, :fonction, :birthday, :avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:surname, :name, :gender, :telephone, :adresse, :cp, :ville, :fonction, :birthday, :avatar, :proprio, :nom, :prenom, :metier, :naissance, :genre])
+    
+    
   end
 
-  def current_user
-    if current_campeur
-       current_campeur
-     else
-      current_proprietaire
-    end
-  end
+# def current_user
+     # current_user
+      
+  #  if current_campeur
+   #    current_campeur
+    # else
+     # current_proprietaire
+    #end
+ # end
 
 end

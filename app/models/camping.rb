@@ -4,6 +4,7 @@ class Camping < ApplicationRecord
   belongs_to :departement
   belongs_to :region
   belongs_to :proprietaire
+  belongs_to :user
   has_many :caracteristiquetests, :foreign_key => :camping_id
   has_many :situations, :foreign_key => :camping_id
   

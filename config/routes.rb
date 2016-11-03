@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+
   get 'home/index'
 
+  devise_for :users
   devise_for :campeurs
   devise_for :proprietaires
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -21,6 +23,10 @@ Rails.application.routes.draw do
   get '/profil-proprietaire/' => 'proprietaires#index'
   get '/profil-proprietaire/mon-camping' => 'proprietaires#moncamping'
   get '/profil-campeur/' => 'campeurs#index'
+  #Ajout user
+  get '/profil/' => 'users#index' 
+  get '/profil/mon-camping' => 'users#moncamping'
+  
   get '/connexion/' => 'profils#index'
   get '/search/' => 'search#search'
 

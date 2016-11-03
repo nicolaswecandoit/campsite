@@ -5,7 +5,7 @@ ActiveAdmin.register Camping do
       camping: [:id, :name, :adresse, :code_postale, :commune, 
       :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, 
       :region_id, :departement_id, :latitude, :longitude, :etoile, :emplacement, :proprietaire_id, :proprietaire, 
-      :adressecomplete, :piscine, :barbecue, :youtube_url, :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at, ":image_updated_at(1i)", ":image_updated_at(2i)", ":image_updated_at(3i)", ":image_updated_at(4i)", ":image_updated_at(5i)", :dailymotion, :facebook_url, :updated_at, :created_at]
+      :adressecomplete, :piscine, :barbecue, :youtube_url, :publish, :user_id, :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at, ":image_updated_at(1i)", ":image_updated_at(2i)", ":image_updated_at(3i)", ":image_updated_at(4i)", ":image_updated_at(5i)", :dailymotion, :facebook_url, :updated_at, :created_at]
     end
   end
   
@@ -15,7 +15,6 @@ ActiveAdmin.register Camping do
       f.input :adresse
       f.input :code_postale
       f.input :commune 
-      f.input :courriel 
       f.input :site_internet 
       f.input :tel
       f.input :description
@@ -32,6 +31,9 @@ ActiveAdmin.register Camping do
       f.input :emplacement
       f.input :adressecomplete
       f.input :updated_at
+      f.input :publish
+      f.input :courriel
+      f.input :user_id
       
       if :image.present?
       f.input :image, :as => :file, :label => "Image",:hint => f.template.image_tag(f.object.image.url(:original)).present?
@@ -45,10 +47,10 @@ ActiveAdmin.register Camping do
 
   show do |ad|
       attributes_table do
+        row :user_id
       row  :name
       row :adresse
       row :code_postale
-    	row :courriel 
       row :site_internet 
       row :tel
       row :description
@@ -64,7 +66,9 @@ ActiveAdmin.register Camping do
       row :etoile
       row :emplacement
       row :adressecomplete
+      row :publish
       row :updated_at
+
     
         
         # Will display the image on show object page

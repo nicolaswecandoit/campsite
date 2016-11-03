@@ -932,3 +932,96 @@ margin-left:auto;
     padding: 1px;
     background: #a1d491;
 }
+
+
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.badgeverif {
+    background-image: url(badgeproprio.png);
+    background-size: 72%;
+    height: 27px;
+    background-repeat: no-repeat;
+    width: 29px;
+    float: left;
+}
+
+.propriobadge {
+    display: inline-table;
+}
+
+.imagehote {
+    float: left;
+    margin-right: 10px;
+}
+
+.imagehote img {
+
+    width: 75px;
+    border-radius: 50px;
+}
+
+.hote {
+    height: 89px;
+    background: #fff;
+    padding: 7px;
+    border: 1px solid;
+}
+
+.prenomhote {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.infohote {
+    margin-top: 15px;
+}
+
+.validation {
+    font-weight: bold;
+    color: red;
+    padding: 5px;
+    border: 1px solid;
+    background: #ffe6e6;
+    margin-top: 21px;
+}

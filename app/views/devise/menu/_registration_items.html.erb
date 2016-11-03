@@ -1,44 +1,24 @@
-<% if proprietaire_signed_in? %>
-<nav id="primary_nav_wrap">
-<ul>
-  <li class="avatarround"><%= image_tag current_proprietaire.avatar(:small) %></li>
-  <li><%=current_proprietaire.name%>
-    <ul>
-      <li><%= link_to('Mon compte', profil_proprietaire_path) %></li>
-      <li><%= link_to('Mon camping', profil_proprietaire_mon_camping_path) %></li>
-      <li><%= link_to('Déconnexion', destroy_proprietaire_session_path, :method => :delete) %></li>
-    </ul>
-  </li>
-</ul>
-</nav>
-
-<% elsif campeur_signed_in?%>
-    <nav id="primary_nav_wrap">
+  <% if user_signed_in? %>
+  
+  <nav id="primary_nav_wrap">
   <ul>
-    <li><%= current_campeur.name %>
+      <li class="avatarround"><%= image_tag current_user.avatar(:small) %></li>
+    <li><%= current_user.prenom %>
       <ul>
-        <li><a href="#"><%= link_to('Mon compte', profil_campeur_path) %></a></li>
-        <li><%= link_to('Déconnexion', destroy_campeur_session_path, :method => :delete) %></li>
+        <li><a href="#"><%= link_to('Mon compte', profil_path) %></a></li>
+        
+        <%if current_user.proprio == true %>
+        <li><a href=""><%= link_to('Mon camping', profil_mon_camping_path)%></a></li>
+        <%else%>
+        <%end%>
+        <li><%= link_to('Déconnexion', destroy_user_session_path, :method => :delete) %></li>
       </ul>
     </li>
   </ul>
   </nav>
+  
+
   <%else%>
-    <li><%= link_to('Accès campeurs', connexion_path)  %></li>
-    <li><%= link_to('Accès professionnels', connexion_path)  %></li>
+    <li><%= link_to('Accès users', connexion_path) %></li>
+
   <% end %>
-
-
-  <!--
-  <% if proprietaire_signed_in? %>
-    <li><%= link_to("#{current_proprietaire.name}", profil_proprietaire_path) %></li>
-    <li><%= link_to('Déconnexion', destroy_proprietaire_session_path, :method => :delete) %></li>
-
-  <% elsif campeur_signed_in?%>
-    <li><%= link_to("#{current_campeur.name}", profil_campeur_path) %></li>
-    <li><%= link_to('Déconnexion', destroy_campeur_session_path, :method => :delete) %></li>
-  <%else%>
-    <li><%= link_to('Accès campeurs', connexion_path)  %></li>
-    <li><%= link_to('Accès professionnels', connexion_path)  %></li>
-  <% end %>
-  -->

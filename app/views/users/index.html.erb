@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="container-fluid">
+    <h3>Mes infos personnelles</h3>
+        <p><%= image_tag  current_user.avatar(:thumb) %></p>
+        <p><%= current_user.prenom %></p>
+        <p><%= current_user.nom %></p>
+        <p><%= current_user.naissance%></p>
+        <p><%= current_user.genre.to_s %></p>
+        <p><%= current_user.adresse %></p>
+        <p><%= current_user.cp %></p>
+        <p><%= current_user.ville %></p>
+        <p><%= current_user.metier %></p>
+        <p><%= current_user.telephone %></p>
+        <p><%= current_user.email %></p>
+        
+        <p><% if user_signed_in? %>
+        <%= link_to 'Éditer votre profil', edit_user_registration_path, :class => "btn btn-primary" %>
+    
+        <% else %>
+        <% end %></p>
+  
+  </div>
+</div>

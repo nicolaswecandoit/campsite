@@ -13,60 +13,66 @@
     </div>
   <% end %>
 
-<% f.hidden_field :proprietaire_id , :value => current_proprietaire.id %>
-
+  <%#= f.hidden_field :user_id, :value => current_user.id %>
 
 <div class="form-group">
    <label for="name">Nom du camping</label>
-      <%= f.text_field :name, autofocus: true, class:"form-control", id:"name"%>
+      <%= f.text_field :name, autofocus: true, class:"form-control", id:"name", :required => true%>
   </div>
 
   <div class="form-group">
     <label for="adresse">Adresse du camping</label>
-    <%= f.text_field :adresse, class:"form-control"%>
+    <%= f.text_field :adresse, class:"form-control", :required => true%>
   </div>
 
 <div class="form-group">
     <label for="code_postale">Code postal</label>
-    <%= f.text_field :code_postale, class:"form-control"%>
+    <%= f.text_field :code_postale, class:"form-control", :required => true%>
   </div>
 
 <div class="form-group">
     <label for="commune">Commune</label>
-    <%= f.text_field :commune, class:"form-control" %>
+    <%= f.text_field :commune, class:"form-control", :required => true%>
   </div>
 
+<fieldset disabled>
 <div class="form-group">
     <label for="courriel">Email</label>
-    <%= f.text_field :courriel, class:"form-control" %>
+    <%= f.text_field :courriel, :value => current_user.email, class:"form-control" %>
   </div>
+</fieldset>
 
 <div class="form-group">
     <label for="site_internet">Site internet</label>
-    <%= f.text_field :site_internet, class:"form-control" %>
+    <%= f.text_field :site_internet, class:"form-control", :required => true %>
   </div>
 
 <div class="form-group">
     <label for="tel">Numéro de téléphone <small>(permettant de joindre l'accueil)</small></label>
-    <%= f.text_field :tel, class:"form-control" %>
+    <%= f.text_field :tel, class:"form-control", :required => true %>
   </div>
 
   <div class="form-group">
     <label for="description">Description de votre camping <small>(Rédigez 5 à 15 lignes pour présenter votre camping)</small></label>
-    <%= f.text_area :description, class:"form-control", rows:"9", placeholder:"Décrivez en 5 à 15 lignes tous les atouts de votre camping (situation géographique, proche de la mer, d'un lieu touristique, les offres, les petits plus...). Evitez les listes de mots et préférez des phrases. Ne faites pas de copier/coller d'autres sites. Le plus important c'est de donner envie à vos clients ! Courage vous allez y arriver :)"%>
+    <%= f.text_area :description, class:"form-control", rows:"9", placeholder:"Décrivez en 5 à 15 lignes tous les atouts de votre camping (situation géographique, proche de la mer, d'un lieu touristique, les offres, les petits plus...). Evitez les listes de mots et préférez des phrases. Ne faites pas de copier/coller d'autres sites. Le plus important c'est de donner envie à vos clients ! Courage vous allez y arriver :)", :required => true%>
   </div>
 
-<fieldset disabled>
   <div class="form-group">
     <label for="nomdep">Département</label>
-    <%= f.text_field :nomdep, class:"form-control" %>
+    <%= f.select :nomdep, Camping.order("nomdep ASC").pluck(:nomdep).uniq, class:"form-control", :required => true %>
   </div>
 
   <div class="form-group">
     <label for="nomregion">Région</label>
-    <%= f.text_field :nomregion, class:"form-control" %>
+    <%= f.select :nomregion, Camping.order("nomregion ASC").pluck(:nomregion).uniq, class:"form-control", :required => true %>
   </div>
 
+<div class="form-group">
+    <label for="numdep">Numéro de département</label>
+    <%= f.select :numdep, Camping.pluck(:numdep).uniq, class:"form-control", :required => true %>
+  </div>
+
+<fieldset disabled>
   <div class="form-group">
     <label for="latitude">Latitude</label>
     <%= f.text_field :latitude, class:"form-control" %>
@@ -80,9 +86,13 @@
 
 <div class="form-group">
     <label for="etoile">Nombre d'étoiles</label>
-    <%= f.text_field :etoile, class:"form-control" %>
+    <%= f.select :etoile, ["0","1","2","3","4","5"], class:"form-control", :required => true %></p>
   </div>
 
+<div class="forum-group">
+  <label for="emplacement">Nombre d'emplacements</label>
+  <% f.text_field :emplacement, class:"form-control", :required => true%>
+</div>
 
   <div class="form-group">
       <label for="youtube_url">Vidéo youtube de votre camping<p><small>Copier l'url de votre vidéo youtube</small></p></label>
@@ -102,11 +112,7 @@
     </div>
     
     
-
    <div class="form-group">
-
-
-
 
 <% # jquery upload template # %>  
 <script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script> 

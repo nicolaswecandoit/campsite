@@ -3,15 +3,16 @@
       <%= devise_error_messages! %>
 
         <div class="form-signin">
-          <h2 class="form-signin-heading">Please sign in</h2>
-            <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Entrez votre nom" %>
-            <%= f.text_field :surname, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>
+          <h2 class="form-signin-heading">Rejoignez la communauté !</h2>
+            <%= f.text_field :nom, autofocus: true, class:"form-control", placeholder:"Entrez votre nom" %>
+            <%= f.text_field :prenom, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>
             <%= f.email_field :email, autofocus: true, class:"form-control", id:"inputEmail", ariadescribedby:"emailHelp", placeholder:"Entrez votre email" %>
             <%= f.password_field :password, autocomplete: "off", class:"form-control", id:"inputPassword", placeholder:"Indiquez votre mot de passe" %>
             <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", id:"inputPassword", placeholder:"Confirmation du mot de passe" %>
-
+           <br />
+            Etes vous propriétaire d'un camping ? <%= f.check_box :proprio %>
             <br />
-
+ <br />
             <div class="form-group">
               <%= f.submit "Sign up", class:"btn btn-lg btn-primary btn-block", type:"submit" %>
             </div>

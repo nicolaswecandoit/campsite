@@ -15,5 +15,12 @@ class Ability
   
   end
   
+    include CanCan::Ability
+  can [:edit, :update], User do |camping|
+   user.proprio == true && camping.courriel == user.email
+   
+  end
+  
+  end
   
 end

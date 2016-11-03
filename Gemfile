@@ -53,7 +53,7 @@ gem 'meta-tags'
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 #Traduction
-gem 'rails-i18n'
+gem 'rails-i18n', '~> 5.0.0' # For 5.0.x
 #mailboxer
 gem 'mailboxer', github: 'mailboxer/mailboxer'
 #uploadimage

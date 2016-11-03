@@ -1,39 +1,43 @@
 class CampingsController < ApplicationController
   before_action :set_camping, only: [:show, :edit, :update, :proprio_owner]
-  before_action :authenticate_proprietaire!,except:[:homesearch, :index, :result, :show, :resultnohome]
-  before_action :proprio_owner, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!,except:[:homesearch, :index, :result, :show, :resultnohome]
+  before_action :proprio_owner, only: [:edit, :update, :create]
 
   has_scope :nomdep
 
     #Autoriser le proprietaire à modifier son camping s'il a le proprietaire_id
-  def proprio_owner
-    unless  @camping.proprietaire_id == current_proprietaire.id || @camping.courriel == current_proprietaire.email
-      flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
-      redirect_to campings_path
-    end
-  end
+ # def proprio_owner
+  #  unless  @camping.proprietaire_id == current_proprietaire.id || @camping.courriel == current_proprietaire.email
+   #   flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
+    #  redirect_to campings_path
+  #  end
+  # end
 
+def proprio_owner
+  unless  current_user.proprio == true && current_user.email == @camping.courriel || current_user.proprio == true && @camping.user_id == current_user.id 
+    flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
+    redirect_to campings_path
+  end
+end
 
 
 
   #Permet de chercher les campings proches du camping courant
   def index
-    if params[:search].present?
-      @campings = Camping.near(params[:search], 10, :order => :distance).page(params[:page]).per(14)
-    else
-      @campings = Camping.all
-      #Avec la Pagination
-      #@campings = Camping.all.page(params[:page]).per(14)
-    end
+  #  if params[:search].present?
+  #   @campings = Camping.near(params[:search], 10, :order => :distance).page(params[:page]).per(14)
+  #  else
+  # Avec la Pagination
+  # @campings = Camping.all.page(params[:page]).per(14)
+  #  end
 
+      @campings = Camping.all
+      
         #Systeme de Geocode avec marker permet d'encoder les adresse en GEOTAG
-      @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
+        @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
         marker.lat camping.latitude
         marker.lng camping.longitude
-        marker.infowindow "
-        <h3><a href='#{camping_path(camping.id)}' class='nice-link info-link'class='btn-primary' role='button'>#{camping.name}</a> </h3>
-        <p>Camping <b>#{camping.etoile} à #{camping.commune}</b></p>
-        "
+        marker.infowindow render_to_string(:partial => "/campings/infowindow", :locals => { :camping => camping})
         marker.picture ({
           "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
@@ -44,11 +48,11 @@ class CampingsController < ApplicationController
   #Affiche le camping suivant l'ID
     def show
       @camping = Camping.find(params[:id])
-      
-      if request.path != camping_path(@camping)
-    redirect_to @camping, status: :moved_permanently
-      end
-      
+     
+          if request.path != camping_path(@camping)
+            redirect_to @camping, status: :moved_permanently
+          end
+          
 
       #Systeme de Geotag avec map pour les campings
       @hash = Gmaps4rails.build_markers(@camping) do |camping, marker|
@@ -58,7 +62,7 @@ class CampingsController < ApplicationController
           "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
-        marker.infowindow "
+          marker.infowindow "
           <h3>#{camping.name}</h3>
           <p>#{camping.adresse}</p>
           <p>#{camping.code_postale}, #{camping.commune}</p>"
@@ -68,15 +72,21 @@ class CampingsController < ApplicationController
   # Nouveau camping
     def new
       @camping = Camping.new
+      @campings = Camping.all
     end
 
   # Edition du cammping
     def edit
   
+  
+  
     end
 # Nouveau camping
     def create
-      @camping = Camping.new(camping_params)
+     # @camping = Camping.new(camping_params)
+      
+        @camping = Camping.new((camping_params).merge(:user_id => current_user.id))
+      
       respond_to do |format|
         if @camping.save
           format.html { redirect_to @camping, notice: 'Camping was successfully created.' }
@@ -89,7 +99,8 @@ class CampingsController < ApplicationController
     end
 
     def update
-      @camping = Camping.find(params[:id])
+    @camping = Camping.find(params[:id])
+    #  @camping = Camping.update((camping_params).merge(:user_id => current_user.id))
       respond_to do |format|
         if @camping.update(camping_params)
           format.html { redirect_to @camping, notice: 'Camping was successfully updated.' }
@@ -170,7 +181,7 @@ class CampingsController < ApplicationController
       end
 
       @hash = Gmaps4rails.build_markers(@campings) do |camping, marker|
-        cache camping do
+
         marker.lat camping.latitude
         marker.lng camping.longitude
         marker.infowindow render_to_string(:partial => "/campings/infowindow", :locals => { :camping => camping})
@@ -178,7 +189,6 @@ class CampingsController < ApplicationController
           "url" => "http://avantjetaisriche.com/map-pin.png",
           "width" =>  29,
           "height" => 32})
-        end
         end
       end
       
@@ -237,6 +247,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
       def camping_params
-        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, :dailymotion, :facebook_url, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage])
+        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, :dailymotion, :facebook_url, :emplacement, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage])
       end
 end

@@ -45,7 +45,10 @@ config.action_controller.action_on_unpermitted_parameters = :raise
   # Suppress logger output for asset requests.
   config.assets.quiet = true
   #Traduction
-  #config.i18n.avalaible_locales = :fr
+config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = :fr
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+  
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

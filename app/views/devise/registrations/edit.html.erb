@@ -1,26 +1,34 @@
 <div class="container marketing">
 <div class="col-md-9">
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edition de votre profil</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+
+
+
   <div class="form-group">
     <label for="name">Nom</label><br />
-    <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Entrez votre nom" %>
+    <%= f.text_field :nom, autofocus: true, class:"form-control", placeholder:"Entrez votre nom" %>
+  </div>
+
+  <div class="form-group">
+    <label for="surname">Prénom</label><br />
+    <%= f.text_field :prenom, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>
+  </div>
+
+ <div class="form-group">
+    <label for="avatar">Image de profil</label><br />
+       <p><%= image_tag current_user.avatar(:thumb) %></p>
+    <%= f.file_field :avatar %>
   </div>
   
    <div class="form-group">
-    <label for="avatar">Choisissez une image de profil</label><br />
-  <%= f.file_field :avatar %>
+  <label for="naissance">Date de naissance</label><br />
+  <%= f.date_select :naissance, :start_year=>1900 %>
     </div>
-  
-  <div class="form-group">
-    <label for="surname">Prénom</label><br />
-    <%= f.text_field :surname, autofocus: true, class:"form-control", placeholder:"Entrez votre prénom" %>
-  </div>
-
 
 <div class="form-group">
   <label for="adresse">Adresse</label><br />
@@ -36,7 +44,7 @@
   <label for="ville">Commune</label><br />
   <%= f.text_field :ville, autofocus: true, class:"form-control", placeholder:"Indiquez votre lieu de résisdence" %>
 </div>
-<%if campeur_signed_in? %>
+<%if user_signed_in? %>
 <!--Si c'est un campeur-->
 <div class="form-group">
   <label for="telephone">Téléphone</label><br />
@@ -44,44 +52,26 @@
   <div class="form-group">
       <label for="fonction">Profession</label><br />
   <small class="form-text text-muted">Indiquez votre profession.</small>
-      <%= f.select(:fonction, [['Non renseigné',"Non renseigné"],
+      <%= f.select(:metier, [['Non renseigné',"Non renseigné"],
       ['Agriculteurs exploitants',"Agriculteurs exploitants"],
+      ['Propriétaire de camping',"Propriétaire de camping"],
       ["Artisans, commerçants et chefs d'entreprise","Artisans, commerçants et chefs d'entreprise"],
       ['Cadres et professions intellectuelles supérieures',"Cadres et professions intellectuelles supérieures"],
       ['Professions Intermédiaires',"Professions Intermédiaires"],
       ["Employés","Employés"],
       ['Ouvriers',"Ouvriers"],
       ["Retraités","Retraités"],
-      ["sans activité professionnelle","sans activité professionnelle"]], {:selected => (@campeur.fonction?)}, {class:"form-control", id:"exampleSelect1"}) %>
-  </div>
-</div>
-<div class="form-group">
-    <label for="gender">Sexe</label><br />
-    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@campeur.gender?)}, {class:"form-control", id:"exampleSelect1"}) %>
-</div>
-
-
-
-<% else %>
-<!--Si c'est un proprietaire-->
-<div class="form-group">
-  <label for="telephone">Téléphone</label><br />
-  <%= f.text_field :telephone, autofocus: true, class:"form-control", placeholder:"Indiquez votre numéro de téléphone sans indicatif" %>
-  <div class="form-group">
-      <label for="fonction">Fonction</label><br />
-  <small class="form-text text-muted">Indiquez la fonction que vous exercez au sein de l'établissement.</small>
-      <%= f.select(:fonction, [['Non renseigné',"Non renseigné"], ['Dirigeant',"Dirigeant"], ['Employé',"Employé"], ['Chargé de la promotion',"Chargé de la promotion"], ['Autre',"Autre"]], {:selected => (@proprietaire.fonction?)}, {class:"form-control", id:"exampleSelect1"}) %>
+      ["sans activité professionnelle","sans activité professionnelle"]], {:selected => (@user.metier?)}, {class:"form-control", id:"exampleSelect1"}) %>
   </div>
 </div>
 
+<label for="proprio">Etes vous propriétaire d'un camping ?</label><br />
+<%= f.check_box :proprio %>
+
 <div class="form-group">
     <label for="gender">Sexe</label><br />
-    <%= f.select(:gender, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@proprietaire.gender?)}, {class:"form-control", id:"exampleSelect1"}) %>
+    <%= f.select(:genre, [['Non renseigné',"Non renseigné"], ['Femme',"Femme"], ['Homme',"Homme"]], {:selected => (@user.genre?)}, {class:"form-control", id:"exampleSelect1"}) %>
 </div>
-
-
-<% end %></p>
-
 
  <fieldset disabled>
 <div class="form-group">
@@ -100,6 +90,12 @@
     <br /><p><%= f.submit "Enregistrer", class:"btn btn-success" %></p>
   </div>
   <hr />
+
+<% end %>
+
+
+
+
 <h3>Changer votre mot de passe</h3>
 
 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -110,7 +106,9 @@
   <label for="exampleInputPassword1">Votre nouveau mot de passe</label>
   <% if @minimum_password_length %>
   <small id="emailHelp" class="form-text text-muted">(Votre mot de passe doit contenir plus de <%= @minimum_password_length %> caractères)</small>
-  <% end %><br />
+  <% end %>
+  <br />
+  
   <%= f.password_field :password, autocomplete: "off", class:"form-control", id:"exampleInputPassword1", placeholder:"Indiquez votre nouveau mot de passe" %>
 </div>
 
@@ -122,7 +120,11 @@
   <br /><p><%= f.submit "Enregistrer", class:"btn btn-success" %></p>
 </div>
 
+
 <% end %>
+
+
+
 
 <hr />
 <h3>Supprimer mon compte ?</h3>

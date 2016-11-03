@@ -1,15 +1,28 @@
-<% cache do %>
 <!--Balises SEO-->
-<% set_meta_tags site: "Nomsite",
+<%# set_meta_tags site: "Nomsite",
 title: "#{@camping.name.titleize}",
 reverse: true,
 description: "#{@camping.name.titleize} : Découvrez ce camping situé dans le département #{@camping.nomdep.titleize} à #{@camping.commune.titleize} en région #{@camping.nomregion}",
 canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
+
+
 <div class="containershow">
 <div class="col-md-8">
+   <% if @camping.publish == false %>
+        <div class="validation">Votre camping est en attente de validation pour notre équipe.</div>
+        <%else %>
+        <%end%>
     <h3><span class="label label-success" style="float:right;"><%= "#{@camping.etoile} étoiles" %></span></h3>
+ 
+   
+        
     <h1><%= @camping.name %></h1>
+        
+        
+        
     <p><strong><%= @camping.code_postale %> <%= @camping.commune.mb_chars.titleize %> - <%= @camping.nomdep %></strong></p>
+    
+ 
     
     <%if @camping.image.present? %>
     <div class="imagecamp"><%= image_tag @camping.image%></div>
@@ -54,14 +67,15 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
     <% @camping.situations.each do |situation| %>
         <div class="col-md-4">
-    <p>  <%if situation.plage =="oui"%><b>plage à <%=situation.distanceplage%> km</b><%else%><s>plage</s><%end%></p>
-    <p>  <%if situation.etang =="oui"%><b>etang</b><%else%><s>etang</s><%end%></p>
-     </div>
+    <p><%if situation.plage =="oui"%><b>plage à <%=situation.distanceplage%> km</b><%else%><s>plage</s><%end%></p>
+    <p><%if situation.etang =="oui"%><b>etang</b><%else%><s>etang</s><%end%></p>
+        </div>
+        
         <div class="col-md-4">
-    <p>  <%if situation.montagne =="oui"%><b>montagne</b><%else%><s>montagne</s><%end%></p>
-         </div>
+        <p><%if situation.montagne =="oui"%><b>montagne</b><%else%><s>montagne</s><%end%></p>
+        </div>
         <div class="col-md-4">
-    <p>  <%if situation.riviere =="oui"%><b>riviere</b><%else%><s>riviere</s><%end%></p>
+        <p><%if situation.riviere =="oui"%><b>riviere</b><%else%><s>riviere</s><%end%></p>
        </div>
       
     <%end%>
@@ -100,26 +114,40 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
   <div class="alert alert-warning text-justify" role="alert">
     <p><strong>Courriel: </strong><%= @camping.courriel %></p>
     
-    <% if @camping.site_internet.present? %>
-    <%= link_to "Site internet", @camping.site_internet, :target => "_blank" %></p>
-    <%else%>
-    <%end%>
-    
-    <p><strong>Tel: </strong><%= @camping.tel %></p>
+        <% if @camping.site_internet.present? %>
+        <%= link_to "Site internet", @camping.site_internet, :target => "_blank" %></p>
+        <%else%>
+        <%end%>
+        
+        <p><strong>Tel: </strong><%= @camping.tel %></p>
+        
+        <% if @camping.facebook_url.present?%>
+        <%= link_to "Page Facebook", @camping.facebook_url, :target => "_blank" %>
+        
+        <%else%>
+        <%end%>
 
-<% if @camping.facebook_url.present?%>
-<%= link_to "Page Facebook", @camping.facebook_url, :target => "_blank" %>
-
-<%else%>
-<%end%>
-
-    <!--Affiche le nom du proprietaire ne fonctionne pas sans le proprietaire id -->
-    <p><% if @camping.proprietaire.present? %>
-      <%= "Propriétaire : #{@camping.proprietaire.name} #{@camping.proprietaire.surname}" %>
-    <%else%>
-    <%end%></p>
+  
   </div>
-</div>
+
+
+
+     <!--Affiche le nom du proprietaire ne fonctionne pas sans le proprietaire id -->
+    <p><% if @camping.user.present? %>
+        <p><h4>Votre hôte</h4></p>
+        <div class="hote">
+          <div class="imagehote"><%= image_tag @camping.user.avatar(:thumb), class:"imagehote" %></div>
+          <div class="infohote">
+          <div class ="prenomhote"><%= @camping.user.prenom %></div>
+          <div class ="propriobadge"><div class="badgeverif"></div>Proprietaire vérifié</div>
+          </div>
+        </div>
+        <%else%>
+        <%end%>
+    </p>
+
+
+    </div>
 
 
 <div class="col-md-12">
@@ -133,12 +161,12 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       <%end%>
     </div>
   <!--Si le proprietaire a un camping et que celui-ci est connecté alors il peut éditer -->
-<%if (proprietaire_signed_in? && (current_proprietaire.id == @camping.proprietaire_id)) %>
-    <%=  link_to "Edit", edit_camping_path(@camping) %>
-  <%else%>
-      <%end%>
+<%#if (user_signed_in? && (current_user.id == @camping.user_id)) %>
+    <%#=  link_to "Edit", edit_camping_path(@camping) %>
+  <%#else%>
+      <%#end%>
       
-      <%if (proprietaire_signed_in? && (current_proprietaire.email == @camping.courriel)) %>
+      <%if (user_signed_in? && (current_user.proprio == true && current_user.email == @camping.courriel)) || (user_signed_in? && (current_user.proprio == true && current_user.id == @camping.user_id))%>
     <%=  link_to "Edit", edit_camping_path(@camping) %>
   <%else%>
       <%end%>
@@ -161,4 +189,3 @@ handler.fitMapToBounds();
 </script>
 
 </div>
-<%end%>

@@ -1,0 +1,87 @@
+
+<div class="containershow">
+    <div class="container-fluid">
+  <div class="col-md-8">
+     <h3>Mon camping</h3>
+    <!--Si le proprietaire possède un id camping alors il affiche le camping sinon il invite à nous contacter -->
+  
+    <p><% if @campings.present? %>
+       <% @campings.each do |camping| %>
+          
+       <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-mask">
+                                 <a href="/campings/<%=camping[:id]%>">
+                                 <% if camping.image.present? %>
+                              <div class="imagecamp"><%= image_tag camping.image%></div>
+                              <%else%>
+                              <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="100%">
+                              <%end%>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body-header">
+                           
+                                <div class="card-body-header-category"><%= camping.etoile %> *</div>
+                                <h2 class="titleblock"><%= link_to camping.name, camping_path(camping.id) %></h2>
+                            </div>
+                            <p class="card-body-description">
+                                 
+                                    <% if camping.publish == false %>
+                                        <div class="validation">En attente de validation</div>
+                                    <%else %>
+                                    <%end%>
+                                 
+                                 <%= camping.adresse %> <%= camping.code_postale %> <%= camping.commune %>
+                                <div class="card-body-footer"><p> <%=  link_to "Éditer mon camping", edit_camping_path(camping), :class => "btn btn-primary" %></p></div>
+                                
+                            </p>
+                        </div>
+                    </div>
+              </div>
+       <%end%>
+         <!--Si le proprietaire possède email d'un camping alors il affiche le camping sinon il invite à nous contacter -->
+   <p><% elsif @campingsemail.present? %>
+       <% @campingsemail.each do |camping| %>
+       <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-mask">
+                                 <a href="/campings/<%=camping[:id]%>">
+                                <% if camping.image.present? %>
+                              <div class="imagecamp"><%= image_tag camping.image%></div>
+                              <%else%>
+                              <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="100%">
+                              <%end%>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body-header">
+                           
+                                <div class="card-body-header-category"><%= camping.etoile %> *</div>
+                                <h2 class="titleblock"><%= link_to camping.name, camping_path(camping.id) %></h2>
+                            </div>
+                            <p class="card-body-description">
+                                 <%= camping.adresse %> <%= camping.code_postale %> <%= camping.commune %>
+                                <div class="card-body-footer"><p> <%=  link_to "Éditer mon camping", edit_camping_path(camping), :class => "btn btn-primary" %></p></div>
+                                
+                            </p>
+                        </div>
+                    </div>
+              </div>
+
+     <% end %>
+       
+       
+       
+       
+       
+       <%else%>
+       <%= link_to "Ajouter mon camping", new_camping_path%>
+    <% end %></p>
+    </div>
+  </div>
+</div>       
