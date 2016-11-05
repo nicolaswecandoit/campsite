@@ -17,7 +17,7 @@
  @import "bootstrap";
 
  body {
-     font-family: "open sans", sans-serif!important;
+     font-family: "roboto", sans-serif!important;
      font-size: 15px!important;
  }
 
@@ -988,33 +988,33 @@ margin-left:auto;
 
 .propriobadge {
     display: inline-table;
+    margin-bottom: -2px;
 }
 
 .imagehote {
     float: left;
     margin-right: 10px;
+    margin-top: -3px;
 }
 
 .imagehote img {
-
-    width: 75px;
+    width: 80px;
     border-radius: 50px;
 }
 
 .hote {
-    height: 89px;
-    background: #fff;
-    padding: 7px;
-    border: 1px solid;
+    height: 109px;
+    background: #f5f5f5;
+    padding: 18px;
+    border: 1px solid #e5e5e5;
 }
-
 .prenomhote {
     font-weight: bold;
     font-size: 16px;
 }
 
 .infohote {
-    margin-top: 15px;
+    margin-top: -4px;
 }
 
 .validation {
@@ -1024,4 +1024,54 @@ margin-left:auto;
     border: 1px solid;
     background: #ffe6e6;
     margin-top: 21px;
+}
+
+.textdesc {
+    text-align: justify;
+}
+
+.imageavatarmessage {
+    float: left;
+    margin-right: 10px;
+}
+
+.imageavatarmessage img {
+    width: 35px;
+    border-radius: 50px;
+    margin-top: 5px;
+}
+
+.messaging {
+    margin-bottom: 10px;
+    background-color: rgba(255, 236, 223, 0.58);
+    padding: 12px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    list-style-type: none; 
+}
+
+.mailtouser {
+    background-image: url("mail.png");
+}
+
+.messagingprenom {
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-table;
+}
+
+
+.btnmessage {
+    padding: 4px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.428571;
+    text-align: center;
+    border-radius: 4px;
+    background: #6cdc56;
+    color: #fff;
+    border: 1px solid #65cb50;
 }

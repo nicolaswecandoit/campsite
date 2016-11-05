@@ -6,7 +6,6 @@
     <li><%= current_user.prenom %>
       <ul>
         <li><a href="#"><%= link_to('Mon compte', profil_path) %></a></li>
-        
         <%if current_user.proprio == true %>
         <li><a href=""><%= link_to('Mon camping', profil_mon_camping_path)%></a></li>
         <%else%>

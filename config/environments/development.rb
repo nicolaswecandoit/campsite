@@ -25,9 +25,11 @@ config.action_controller.action_on_unpermitted_parameters = :raise
 
     config.cache_store = :null_store
   end
+  
+  config.action_controller.action_on_unpermitted_parameters = :raise
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -55,5 +57,17 @@ config.i18n.enforce_available_locales = true
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'https://campsite-wecandoit.c9users.io/' }
+
+  config.action_mailer.smtp_settings = {
+    address: "auth.smtp.1and1.fr",
+    port: 465,
+    authentication: 'plain',
+    user_name: 'test@1kg.fr',
+    password: 'Mgdfdv28!'
+}
 
 end

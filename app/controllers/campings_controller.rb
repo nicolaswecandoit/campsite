@@ -48,6 +48,7 @@ end
   #Affiche le camping suivant l'ID
     def show
       @camping = Camping.find(params[:id])
+       @users = User.all
      
           if request.path != camping_path(@camping)
             redirect_to @camping, status: :moved_permanently

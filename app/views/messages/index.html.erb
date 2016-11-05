@@ -1,0 +1,37 @@
+<div class="container">
+<h1>Boite de réception</h1>
+Retrouvez ici vos conversations. Vous pouvez communiquer ici à tout moment, attention ne donnez pas vos coordonnées bancaires ici. 
+Nous ne gérons pas les transactions. Pour plus d'informations utilisez la rubrique contact.
+
+<% if @over_ten %>
+ <%= link_to 'Show Previous', "?m=all" %>
+<% end %>
+
+<div class="ui segment">
+ <% @messages.each do |message| %>
+  <% if message.body %>
+   <% user = User.find(message.user_id) %>
+   
+   <li class="messaging">
+      <div class="imageavatarmessage"><%= image_tag user.avatar(:thumb), class:"imageavatarmessage" %></div>
+      <div class="messagingprenom"><%= user.prenom %></div>
+      <%= message.message_time %>
+      <div class="list">
+
+         <%= message.body %>
+          <% end %>
+         <% end %>
+
+
+    </div>
+</li>
+</div>
+
+<%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+ <div class=”field”>
+   <%= f.text_area :body, class: "form-control" %>
+ </div>
+ <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+   <%= f.submit "Add Reply", class: "ui blue labeled submit icon button" %>
+<% end %>
+</div>

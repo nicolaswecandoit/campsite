@@ -31,11 +31,11 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     
     <p><h3>Description du camping:</h3></p>
 
-    <p><%= if @camping.description.empty?
+    <p><% if @camping.description.empty?%>
       "Cette fiche ne contient pas de description pour le moment. Si vous êtes le propriétaire de ce camping, contactez-nous."
-          else
-          @camping.description
-          end %></p>
+          <%else%>
+          <div class="textdesc"><%= simple_format(@camping.description)%></div>
+        <%end %></p>
 
     <hr />
 <!--Affichage de la map-->
@@ -138,10 +138,23 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
         <div class="hote">
           <div class="imagehote"><%= image_tag @camping.user.avatar(:thumb), class:"imagehote" %></div>
           <div class="infohote">
-          <div class ="prenomhote"><%= @camping.user.prenom %></div>
-          <div class ="propriobadge"><div class="badgeverif"></div>Proprietaire vérifié</div>
-          </div>
+          <div class ="prenomhote">
+              <%= @camping.user.prenom %></div>
+          
+        
+          
+          <div class ="propriobadge"><div class="badgeverif"></div>Profil vérifié</div>
+
+  <% if @camping.user.id != current_user.id && @camping.user.proprio == false %>
+               <%= button_to "Contacter le propriétaire", conversations_path(conversation: { sender_id: current_user.id, recipient_id: @camping.user.id }), class:"btnmessage" %>
+          <% end %>
+
+           </div>
         </div>
+        
+
+  
+
         <%else%>
         <%end%>
     </p>
@@ -167,7 +180,7 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       <%#end%>
       
       <%if (user_signed_in? && (current_user.proprio == true && current_user.email == @camping.courriel)) || (user_signed_in? && (current_user.proprio == true && current_user.id == @camping.user_id))%>
-    <%=  link_to "Edit", edit_camping_path(@camping) %>
+    <%=  link_to "Editez votre camping", edit_camping_path(@camping), class:"btnmessage" %>
   <%else%>
       <%end%>
       

@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   resources :departements
   resources :campings
   
+  resources :conversations do
+  resources :messages
+ end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'campings#homesearch'
   get '/result/' => 'campings#result'
@@ -20,12 +24,11 @@ Rails.application.routes.draw do
   get '/departement/' => 'departements#index'
   get '/ville/' => 'villes#index'
   get '/camping/' => 'campings#index'
-  get '/profil-proprietaire/' => 'proprietaires#index'
-  get '/profil-proprietaire/mon-camping' => 'proprietaires#moncamping'
-  get '/profil-campeur/' => 'campeurs#index'
   #Ajout user
   get '/profil/' => 'users#index' 
   get '/profil/mon-camping' => 'users#moncamping'
+  
+  
   
   get '/connexion/' => 'profils#index'
   get '/search/' => 'search#search'
