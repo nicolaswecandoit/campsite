@@ -3,6 +3,9 @@
   <nav id="primary_nav_wrap">
   <ul>
       <li class="avatarround"><%= image_tag current_user.avatar(:small) %></li>
+   
+  
+  
     <li><%= current_user.prenom %>
       <ul>
         <li><a href="#"><%= link_to('Mon compte', profil_path) %></a></li>
@@ -10,9 +13,30 @@
         <li><a href=""><%= link_to('Mon camping', profil_mon_camping_path)%></a></li>
         <%else%>
         <%end%>
-        <li><%= link_to('Déconnexion', destroy_user_session_path, :method => :delete) %></li>
+        
+        
+        
+        <li><a href="#"><%= link_to('Mes messages', conversations_path) %></a></li>
+
+        <li><a href="#"><%= link_to('Déconnexion', destroy_user_session_path, :method => :delete) %></a></li>
       </ul>
     </li>
+
+  
+     
+      <li class="nav-item btn-group" data-behavior="notifications">
+          <a class="dropdown-toggle nav-link" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <%= fa_icon "bell" %> <span data-behavior="unread-count"></span>
+          </a>
+          
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+  
+          </div>
+         
+        </li>
+  
+
+
   </ul>
   </nav>
   

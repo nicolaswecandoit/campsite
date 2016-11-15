@@ -1,29 +1,59 @@
-<div class="ui segment">
- <h3>Mailbox</h3>
- <div class="ui list">
-  <div class="item">
+
+
+
+
    <% @conversations.each do |conversation| %>
    <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-    <% if conversation.sender_id == current_user.id %>
-      <% recipient = User.find(conversation.recipient_id) %>
-    <% else %>
-      <% recipient = User.find(conversation.sender_id) %>
-    <% end %>
-    Conversation avec <%= link_to recipient.prenom,   conversation_messages_path(conversation)%>
+      <% if conversation.sender_id == current_user.id %>
+        <% recipient = User.find(conversation.recipient_id) %>
+       <% else %>
+        <% recipient = User.find(conversation.sender_id) %>
+       <% end %>
+
+     
+    <div class="col-md-12">
+<div class="messaging2"> 
+         <div class="col-md-2">
+               <div class="entete">
+               <p><%= image_tag recipient.avatar(:thumb), class:"avatarmessage" %></p>
+               <p><%= link_to recipient.prenom, conversation_messages_path(conversation)%></p>
+               </div>
+         </div>
+
+
+          <div class="col-md-8">
+
+<!--Permet d'afficher le camping du proprio et la ville-->
+        <%if recipient.proprio == true %>
+            <% @tt = recipient.camping_ids %>
+            <% @ww = Camping.find(@tt) %>
+            
+             <% @ww.each do |w| %>
+               <div class="titlemessage">  Discution avec <%=recipient.prenom%> de <b><%= link_to w.name.mb_chars.humanize, camping_path(@tt) %></b>
+                 situé à <%= w.ville %></div>
+            <% end %>
+        <%else%>
+             <div class="titlemessage">  Discution avec <%=recipient.prenom%> <%=recipient.nom %> de <%= recipient.ville%></b></div>
+            
+        <%end%>
+
+
+             <!--affiche le dernier message de la conversation avec 200 caractères max-->
+              <div class="lastmessage"><%= link_to conversation.messages.last.body.truncate(200), conversation_messages_path(conversation) %></div>
+          </div>
+    
+          <div class="col-md-2">
+              <p>Il y a <%= time_ago_in_words(conversation.updated_at)%></p>
+          </div>
+    </div>
+</div>
+
+
+ 
    <% end %>
   <% end %>
+
+
+
   </div>
- </div>
-</div>
-<div class="ui segment">
- <h3>All Users</h3>
-  <div class="ui list">
-   <% @users.each do |user| %>
-    <% if user.id != current_user.id %>
-     <div class="item">
-   <%= user.prenom %> <%= button_to 'Message me', conversations_path(conversation: { sender_id: current_user.id, recipient_id: user.id }), class: 'btn btn-primary m-t' %>
- </div>
-  <% end %>
- <% end %>
- </div>
-</div>
+

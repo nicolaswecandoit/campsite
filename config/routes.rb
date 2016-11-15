@@ -12,9 +12,21 @@ Rails.application.routes.draw do
   resources :departements
   resources :campings
   
+
+  resources :notifications do
+     collection do
+       post :mark_as_read
+     end
+   end
+  
+  
   resources :conversations do
   resources :messages
  end
+ 
+ resources :campings do
+  resources :comments
+end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'campings#homesearch'
@@ -27,8 +39,6 @@ Rails.application.routes.draw do
   #Ajout user
   get '/profil/' => 'users#index' 
   get '/profil/mon-camping' => 'users#moncamping'
-  
-  
   
   get '/connexion/' => 'profils#index'
   get '/search/' => 'search#search'

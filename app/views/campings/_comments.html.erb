@@ -1,0 +1,33 @@
+<%= form_for [@camping, Comment.new] do |f| %>
+        <p>
+        <div class="form-group">
+          <label for="body">Ajoutez un commentaire sur ce camping</label>
+          <p>Vous avez déjà séjourné dans ce camping ? Donnez-nous votre avis !</p>
+          
+          <label for="title"><small>Ajoutez un titre à votre commentaire</small></label>
+          <p><%= f.text_field :title, class:"form-control", :required => true%></p>
+           <label for="body"><small>Donnez votre avis sur le séjour</small></label>
+         <p> <%= f.text_area :body, class:"form-control", :required => true %> </p>
+          
+         <p>  <label for="service"><small>Notez les services du camping</small></label>
+          <%= f.select :service, ["1","2", "3", "4", "5"], :include_blank => true, :required => true %> </p>
+         <p>  <label for="communication"><small>Notez la communication pour votre réservation</small></label>
+          <%= f.select :communication, ["1","2", "3", "4", "5"], :include_blank => true, :required => true %> </p>
+         <p>  <label for="qualiteprix"><small>Notez la qualité / prix</small></label>
+          <%= f.select :qualiteprix, ["1","2", "3", "4", "5"], :include_blank => true, :required => true %> </p>
+        <p>   <label for="situation"><small>Notez la situation géographique du camping</small></label>
+          <%= f.select :situation, ["1","2", "3", "4", "5"], :include_blank => true, :required => true %> </p>
+        <p>   <label for="proprete"><small>Notez la propreté du camping / location</small></label>
+          <%= f.select :proprete, ["1","2", "3", "4", "5"], :include_blank => true, :required => true %> </p>
+         <p>  <label for="animation"><small>Notez les animations du camping</small></label>
+          <%= f.select :animation, ["1","2", "3", "4", "5"], :include_blank => true, :required => true %> </p>
+        </div>
+        </p>
+        
+        <div class="actions">
+            <%= f.submit "Ajouter votre commentaire", class:"btn btn-success" %>
+        </div>
+
+<% end %>
+
+

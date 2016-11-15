@@ -5,9 +5,14 @@ class Camping < ApplicationRecord
   belongs_to :region
   belongs_to :proprietaire
   belongs_to :user
+  belongs_to :conversation
+  
+  
   has_many :caracteristiquetests, :foreign_key => :camping_id
   has_many :situations, :foreign_key => :camping_id
   
+  has_many :comments
+  #test
 
   
   accepts_nested_attributes_for :caracteristiquetests

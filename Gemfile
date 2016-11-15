@@ -61,6 +61,8 @@ gem 'jquery-fileupload-rails'
 
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
+gem "font-awesome-rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

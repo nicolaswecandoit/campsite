@@ -1,5 +1,5 @@
 <div class="container">
-<h1>Boite de réception</h1>
+<h1>Conversation</h1>
 Retrouvez ici vos conversations. Vous pouvez communiquer ici à tout moment, attention ne donnez pas vos coordonnées bancaires ici. 
 Nous ne gérons pas les transactions. Pour plus d'informations utilisez la rubrique contact.
 
@@ -10,8 +10,9 @@ Nous ne gérons pas les transactions. Pour plus d'informations utilisez la rubri
 <div class="ui segment">
  <% @messages.each do |message| %>
   <% if message.body %>
+  
    <% user = User.find(message.user_id) %>
-   
+
    <li class="messaging">
       <div class="imageavatarmessage"><%= image_tag user.avatar(:thumb), class:"imageavatarmessage" %></div>
       <div class="messagingprenom"><%= user.prenom %></div>
@@ -19,8 +20,12 @@ Nous ne gérons pas les transactions. Pour plus d'informations utilisez la rubri
       <div class="list">
 
          <%= message.body %>
+         
+         
+         
           <% end %>
          <% end %>
+         
 
 
     </div>

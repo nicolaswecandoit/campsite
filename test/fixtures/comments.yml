@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  camping: one
+  body: MyText
+  publish: false
+
+two:
+  user: two
+  camping: two
+  body: MyText
+  publish: false

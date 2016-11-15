@@ -1,0 +1,5 @@
+<%= link_to conversation_messages_path(notification.notifiable, anchor: (notification.notifiable)), class: "dropdown-item #{"unread" if !notification.read_at?}" do %>
+  <%= notification.actor.prenom %>
+  <%= notification.action %>
+  a <%= notification.notifiable_type.underscore.humanize.downcase %>
+<% end %>

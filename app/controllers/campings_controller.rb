@@ -5,13 +5,6 @@ class CampingsController < ApplicationController
 
   has_scope :nomdep
 
-    #Autoriser le proprietaire à modifier son camping s'il a le proprietaire_id
- # def proprio_owner
-  #  unless  @camping.proprietaire_id == current_proprietaire.id || @camping.courriel == current_proprietaire.email
-   #   flash[:notice] = "Vous n'êtes pas autorisé à modifier ce camping"
-    #  redirect_to campings_path
-  #  end
-  # end
 
 def proprio_owner
   unless  current_user.proprio == true && current_user.email == @camping.courriel || current_user.proprio == true && @camping.user_id == current_user.id 

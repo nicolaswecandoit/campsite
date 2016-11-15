@@ -6,8 +6,11 @@ description: "#{@camping.name.titleize} : Découvrez ce camping situé dans le d
 canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
 
-<div class="containershow">
+
 <div class="col-md-8">
+    
+    
+    
    <% if @camping.publish == false %>
         <div class="validation">Votre camping est en attente de validation pour notre équipe.</div>
         <%else %>
@@ -145,16 +148,14 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
           
           <div class ="propriobadge"><div class="badgeverif"></div>Profil vérifié</div>
 
-  <% if @camping.user.id != current_user.id && @camping.user.proprio == false %>
-               <%= button_to "Contacter le propriétaire", conversations_path(conversation: { sender_id: current_user.id, recipient_id: @camping.user.id }), class:"btnmessage" %>
+<% if current_user.present? && current_user.proprio == false %>
+               <%= button_to "Contacter le propriétaire", conversations_path(conversation: { sender_id: current_user.id, recipient_id: @camping.user.id }), class:"btn btn-success" %>
+          <%else%>
           <% end %>
 
            </div>
         </div>
         
-
-  
-
         <%else%>
         <%end%>
     </p>
@@ -162,8 +163,40 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
     </div>
 
+<div class="col-md-8"> 
+    <h3>Commentaires</h3>
+ <div id="comments">
+     
+     
+       
+             <%if @camping.comments.present? %>
+                 
+                    <% @camping.comments.each do |comment| %>
+                        <div class="commentglobal col-md-12">
+                    
+                         <div class="prenomcomment col-md-2"><p><div class="imagecomment"><%= image_tag comment.user.avatar(:thumb)%></div></p><p><%= comment.user.prenom %></p> </div>
+                         <div class="commentbody col-md-10"><%= comment.body %></div>
+                         <%=comment.created_at.strftime("%B %Y")%>
+                         </div>
+                         <hr />
+                     <%end%>
+               
+             <%else%>
+             Vous avez déjà séjourné dans ce camping ? Donnez votre avis.
+            <%end%>
+            
+            <!--Condition pour dire que seul les campeurs peuvent poster-->
+                     <% if current_user.present? && current_user.proprio == false %>
+                         <%= render 'comments', camping: @camping %>
+                    <%else%>
+                    
+                    <%end%>
 
-<div class="col-md-12">
+    
+ </div>
+ </div>
+ 
+<div class="col-md-12">    
     <!--Affiche les campings proche du camping sélectionné -->
       <% if @camping.nearbys(4).present?%>
         <h3>Les campings proches de <%=@camping.commune%></h3>
@@ -200,5 +233,3 @@ handler.fitMapToBounds();
 
 });
 </script>
-
-</div>

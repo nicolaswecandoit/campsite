@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104101718) do
+ActiveRecord::Schema.define(version: 20161113195944) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -121,6 +121,24 @@ ActiveRecord::Schema.define(version: 20161104101718) do
     t.string   "television"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "camping_id"
+    t.text     "body"
+    t.boolean  "publish"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "title"
+    t.integer  "service"
+    t.integer  "communication"
+    t.integer  "qualiteprix"
+    t.integer  "situation"
+    t.integer  "proprete"
+    t.integer  "animation"
+    t.index ["camping_id"], name: "index_comments_on_camping_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
@@ -200,6 +218,17 @@ ActiveRecord::Schema.define(version: 20161104101718) do
     t.datetime "updated_at"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "personal_messages", force: :cascade do |t|
