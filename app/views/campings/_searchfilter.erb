@@ -1,5 +1,4 @@
 
-
 <div class="col-md-12">
 <%= form_tag(resultnohome_path, method: :get) %>
 <%#= text_field_tag :piscine, params[:piscine], class:"pasdeclassepourlemoment", placeholder:"Piscine" %>
@@ -7,6 +6,20 @@
 <%#= select_tag :piscine, "Red","Green","Blue" %>
 <%#= check_box_tag :piscine, "oui", "non", :class => "piscine" %>
 <%= text_field_tag :query, params[:query], class:"SearchFilter", placeholder:"Ex : Vendée, Corse..." %>
+
+
+<script>
+  function init() {
+    var options = {
+        types: ['(regions)'],
+        componentRestrictions: {country: "fr"}};
+    var input = document.getElementById('query');
+    var autocomplete = new google.maps.places.Autocomplete(input, options);}
+    
+    google.maps.event.addDomListener(window, 'load', init);
+</script>
+
+
 <div class="dropdown">
 <p><span class="btn btn-default dropdown-toggle">Equipements <span class="caret"></span></span></p>
 <div class="dropdown-content">
@@ -106,3 +119,4 @@ $(document).ready(function () {
 
   });
 </script>
+

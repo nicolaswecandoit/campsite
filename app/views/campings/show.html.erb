@@ -1,5 +1,5 @@
 <!--Balises SEO-->
-<%# set_meta_tags site: "Nomsite",
+<% set_meta_tags site: "Nomsite",
 title: "#{@camping.name.titleize}",
 reverse: true,
 description: "#{@camping.name.titleize} : Découvrez ce camping situé dans le département #{@camping.nomdep.titleize} à #{@camping.commune.titleize} en région #{@camping.nomregion}",
@@ -37,7 +37,10 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     <p><% if @camping.description.empty?%>
       "Cette fiche ne contient pas de description pour le moment. Si vous êtes le propriétaire de ce camping, contactez-nous."
           <%else%>
-          <div class="textdesc"><%= simple_format(@camping.description)%></div>
+          <div id="moretext">
+          <%= simple_format(@camping.description)%>
+          </div>
+           <a id="showmore">voir plus</a>
         <%end %></p>
 
     <hr />
@@ -83,7 +86,7 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       
     <%end%>
 
-
+<br />
 
       <% if @camping.youtube_url.present? %>
     <div class="embed-container">
@@ -96,8 +99,8 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 <%= embedd(@camping.dailymotion) %>
 </div>
 <%end%>
-
-<h3>Coordonnées du camping</h3>
+<br />
+<p><h3>Coordonnées du camping</h3></p>
 <div ="col-md-8">
     <p><strong>Adresse: </strong><%= @camping.adresse.mb_chars.titleize %></p>
     <p><strong>Nomregion: </strong><%= @camping.nomregion.mb_chars.titleize %></p>
@@ -175,22 +178,68 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
                         <div class="commentglobal col-md-12">
                     
                          <div class="prenomcomment col-md-2"><p><div class="imagecomment"><%= image_tag comment.user.avatar(:thumb)%></div></p><p><%= comment.user.prenom %></p> </div>
-                         <div class="commentbody col-md-10"><%= comment.body %></div>
-                         <%=comment.created_at.strftime("%B %Y")%>
+                         
+                         <p><b><%= comment.title %></b></p>
+                         <p><div class="commentbody col-md-10"><%= comment.body %></div></p>
+                         <div class="col-md-5">
+                             
+                        
+                            <p>Service <span class="ratyli" data-rate="<%= comment.service %>" data-ratemax="5"></span></p>
+                            <p>Communication <span class="ratyli" data-rate="<%= comment.communication %>" data-ratemax="5"></span></p>
+                            <p>Qualité / prix  <span class="ratyli" data-rate="<%= comment.qualiteprix %>" data-ratemax="5"></span></p>
+                        </div>
+                        
+                        <div class="col-md-5">
+                            <p>Situation <span class="ratyli" data-rate="<%= comment.situation %>" data-ratemax="5"></span></p>
+                            <p>Propreté <span class="ratyli" data-rate="<%= comment.proprete %>" data-ratemax="5"></span></p>
+                            <p>Animations <span class="ratyli" data-rate="<%= comment.animation %>" data-ratemax="5"></span></p>
+                        </div>
+  
+  
+  <script>
+                                 $(function() {
+                                       $(".ratyli").ratyli({disable:true})({
+                                              full:"<i class='fa fa-star'></i>",
+                                              empty:"<i class='fa fa-star'></i>",
+                                        });
+                                    });
+                                    
+                             </script>
+                             
+  
+                           
+                         
+                         <div class="datecomment"><%=comment.created_at.strftime("%B %Y")%></div>
                          </div>
                          <hr />
-                     <%end%>
+                         
+                         <%end%>
+                         
+                        <% if current_user.present? && current_user.proprio == false %>
+                             <%= render 'comments', camping: @camping %>
+                        <%elsif current_user.present? && current_user.proprio == true %>
+                            Seuls les campeurs peuvent donner leur avis.
+                        <%else%>
+                            Connectez-vous pour donner votre avis
+                        <%end%>
+                    
+                     
                
              <%else%>
-             Vous avez déjà séjourné dans ce camping ? Donnez votre avis.
-            <%end%>
-            
-            <!--Condition pour dire que seul les campeurs peuvent poster-->
-                     <% if current_user.present? && current_user.proprio == false %>
-                         <%= render 'comments', camping: @camping %>
-                    <%else%>
+             Aucun commentaire sur ce camping.
+             
+             <% if current_user.present? && current_user.proprio == false %>
+                             <%= render 'comments', camping: @camping %>
+                        <%elsif current_user.present? && current_user.proprio == true %>
+                            Seuls les campeurs peuvent donner leur avis.
+                        <%else%>
+                            <p>Créez un compte gratuit <%= link_to "ici", new_user_session_path() %> pour donner votre avis !</p>
+                        <%end%>
                     
-                    <%end%>
+                     <%end%>
+                     
+   
+            
 
     
  </div>
@@ -201,7 +250,10 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       <% if @camping.nearbys(4).present?%>
         <h3>Les campings proches de <%=@camping.commune%></h3>
           <% for camping in @camping.nearbys(4) %>
+          <%= image_tag camping.image %>
+          
             <p><%= link_to camping.name, camping %> - <%= camping.distance.round(2) %> kilomètres </p>
+            <%= camping.adresse%>
             <% end %>
         <%else%>
       <%end%>

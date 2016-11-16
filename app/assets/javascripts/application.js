@@ -17,5 +17,10 @@
 //= require underscore
 //= require gmaps/google
 //= require notifications
+//= require showmore
+//= require raty
 //= validyoutube
 //= require_tree .
+
+
+
