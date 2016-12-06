@@ -1,4 +1,5 @@
 class Camping < ApplicationRecord
+
 #Liste des associations
   belongs_to :ville
   belongs_to :departement
@@ -7,20 +8,25 @@ class Camping < ApplicationRecord
   belongs_to :user
   belongs_to :conversation
   
-  
+
   has_many :caracteristiquetests, :foreign_key => :camping_id
   has_many :situations, :foreign_key => :camping_id
   
   has_many :comments
   #test
+  
+ has_attached_file :image, styles: { small: "30x30#", medium: "300x300#", thumb: "100x100#", big: "700x700#" },
+    default_url: "/images/:style/missing.jpg"
+    validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+    
 
   
   accepts_nested_attributes_for :caracteristiquetests
     accepts_nested_attributes_for :situations
+#upload pour carrierwave
+  has_many :post_attachments
+   accepts_nested_attributes_for :post_attachments
   
-  has_attached_file :image, default_url: "/images/missing.jpg"
-  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-
 #Permet de générer les URL SEO
   def to_param
       "#{id} #{name}".parameterize

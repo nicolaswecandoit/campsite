@@ -150,7 +150,9 @@
 
 <% end %>
   <label for="imageform">Choisissez une photo pour illustrer votre camping<small><p>Votre photo doit être assez grande (600px de large minimum)</p></small></label>
-<p><%= f.file_field :image %></p>
+<p><%#= f.file_field :image %></p>
+<%= file_field_tag "images[]", type: :file, multiple: true %>
+
 
 <div class="imageform">
   <p><label for="image">Photo de votre camping</label></p>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113195944) do
+ActiveRecord::Schema.define(version: 20161123202750) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 20161113195944) do
     t.index ["reset_password_token"], name: "index_campeurs_on_reset_password_token", unique: true
   end
 
+  create_table "camping_pictures", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "camping_id"
+  end
+
   create_table "campings", force: :cascade do |t|
     t.string   "name"
     t.string   "adresse"
@@ -108,6 +118,7 @@ ActiveRecord::Schema.define(version: 20161113195944) do
     t.string   "facebook_url"
     t.integer  "user_id"
     t.boolean  "publish",                default: false
+    t.         "picture"
   end
 
   create_table "caracteristiquetests", force: :cascade do |t|
@@ -239,6 +250,13 @@ ActiveRecord::Schema.define(version: 20161113195944) do
     t.datetime "updated_at",      null: false
     t.index ["conversation_id"], name: "index_personal_messages_on_conversation_id"
     t.index ["user_id"], name: "index_personal_messages_on_user_id"
+  end
+
+  create_table "post_attachments", force: :cascade do |t|
+    t.integer  "camping_id"
+    t.string   "gallerie"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "proprietaires", force: :cascade do |t|

@@ -717,6 +717,11 @@ list-style-type: none;
 
 #primary_nav_wrap ul a:hover {
     color: #333;
+    background-color: #fff!important;
+}
+
+a:hover {
+  
 }
 
 #primary_nav_wrap ul li
@@ -1077,7 +1082,6 @@ list-style-type: none;
 
 .commentbody {
     background: #ffffff;
-    padding: 12px;
 }
 
 .commentglobal {
@@ -1171,7 +1175,7 @@ list-style-type: none;
 /* all sign style */
 .ratyli .rate {
     color: #ffbb21;
-    font-size: 18px;}
+    font-size: 20px;}
 
 /* empty sign style */
 .ratyli .rate-empty{color: #ccc;}
@@ -1184,4 +1188,9 @@ list-style-type: none;
 
 .datecomment {
     float: right;
+}
+
+#rightstars {
+    float: right;
+    margin-right: 60px;
 }

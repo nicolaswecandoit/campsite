@@ -2,6 +2,8 @@ class CampingsController < ApplicationController
   before_action :set_camping, only: [:show, :edit, :update, :proprio_owner]
   before_action :authenticate_user!,except:[:homesearch, :index, :result, :show, :resultnohome]
   before_action :proprio_owner, only: [:edit, :update, :create]
+  
+
 
   has_scope :nomdep
 
@@ -17,12 +19,6 @@ end
 
   #Permet de chercher les campings proches du camping courant
   def index
-  #  if params[:search].present?
-  #   @campings = Camping.near(params[:search], 10, :order => :distance).page(params[:page]).per(14)
-  #  else
-  # Avec la Pagination
-  # @campings = Camping.all.page(params[:page]).per(14)
-  #  end
 
       @campings = Camping.all
       
@@ -40,9 +36,20 @@ end
 
   #Affiche le camping suivant l'ID
     def show
-      @camping = Camping.find(params[:id])
+
+      @post_attachments = @camping.post_attachments.all
        @users = User.all
+       
+         
+       
+      where_camping = Comment.where(:camping_id => params[:id])
+    @ratings = [:service, :communication, :qualiteprix, :animation, :proprete, :situation].map{|key|[key, where_camping.average(key).to_i]}.to_h
+
+       @ratingall = @ratings.values.sum.to_f/@ratings.size
      
+     @commentcurrentuser = Comment.all
+       
+       
           if request.path != camping_path(@camping)
             redirect_to @camping, status: :moved_permanently
           end
@@ -67,6 +74,7 @@ end
     def new
       @camping = Camping.new
       @campings = Camping.all
+      @post_attachment = @camping.post_attachments.build
     end
 
   # Edition du cammping
@@ -83,6 +91,11 @@ end
       
       respond_to do |format|
         if @camping.save
+          
+       params[:post_attachments]['gallerie'].each do |a|
+          @post_attachment = @camping.post_attachments.create!(:gallerie => a)
+        end
+
           format.html { redirect_to @camping, notice: 'Camping was successfully created.' }
           format.json { render :show, status: :created, location: @camping }
         else
@@ -93,10 +106,16 @@ end
     end
 
     def update
-    @camping = Camping.find(params[:id])
+
     #  @camping = Camping.update((camping_params).merge(:user_id => current_user.id))
       respond_to do |format|
         if @camping.update(camping_params)
+          
+      params[:post_attachments]['gallerie'].each do |a|
+          @post_attachment = @camping.post_attachments.create!(:gallerie => a)
+        end
+
+          
           format.html { redirect_to @camping, notice: 'Camping was successfully updated.' }
           format.json { render :show, status: :ok, location: @camping }
         else
@@ -118,57 +137,26 @@ end
     def homesearch
     end
 
-#Page de résultats
-    def result
+  def result
+      
+    #Page de résultats
       if params[:query].blank?
         redirect_to action: :index and return
       else
         @campings = Camping.search(params[:query])
-#lien sponsorisés
+
+        #lien sponsorisés
         if params[:query] == "aube"
           @pubtwo = Camping.find_by_id(1)
 
           elsif params[:query] == "vendée"
             @pub = Camping.find_by_id(5268)
 
-              if params[:query] == "vendée"
-                @pubtwo = Camping.find_by_id(5050)
-              else
-              
-              end
               
           elsif params[:query] == "Vendée"
             @pub = Camping.find_by_id(5268)
 
-              if params[:query] == "Vendée"
-                @pubtwo = Camping.find_by_id(5050)
-              else
-              
-              end
           
-          elsif params[:query] == "Vendee"
-            @pubtwo = Camping.find_by_id(5268)
-
-          elsif params[:query] == "vendee"
-            @pubtwo = Camping.find_by_id(5268)
-
-          elsif params[:query] == "bretignolles"
-            @pubtwo = Camping.find_by_id(5268)
-
-          elsif params[:query] == "bretignolles-sur-mer"
-            @pubtwo = Camping.find_by_id(5268)
-
-          elsif params[:query] == "bretignolles sur mer"
-            @pubtwo = Camping.find_by_id(5268)
-
-          elsif params[:query] == "Bretignolles sur mer"
-            @pubtwo = Camping.find_by_id(5268)
-
-          elsif params[:query] == "alsace"
-            @pubtwo = Camping.find_by_id(1)
-
-          elsif params[:query] == "narbonne"
-            @pubtwo = Camping.find_by_id(15)
 
           else
           end
@@ -230,6 +218,7 @@ end
               "url" => "http://avantjetaisriche.com/map-pin.png",
               "width" =>  29,
               "height" => 32})
+
             end
         end
 
@@ -241,6 +230,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
       def camping_params
-        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, :dailymotion, :facebook_url, :emplacement, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage])
+        params.require(:camping).permit(:name, :proprietaire_id, :adresse, :code_postale, :commune, :courriel, :site_internet, :tel, :description, :nomdep, :nomregion, :numdep, :slug, :ville_id, :region_id, :departement_id, :latitude, :longitude, :etoile, :user_id, :image, :youtube_url, :dailymotion, :facebook_url, :emplacement, caracteristiquetests_attributes: [:id, :animaux, :handicap, :piscine, :barbecue, :television], situations_attributes: [:id, :plage, :distanceplage], post_attachments_attributes: [:id, :post_id, :gallerie])
       end
 end

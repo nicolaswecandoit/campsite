@@ -30,6 +30,10 @@
 
         <% @campings.each do |camping| %>
 
+<!--CACHE-->
+<% cache camping do %>
+
+
 <% if camping.publish == true %>
 
 
@@ -71,8 +75,11 @@
 
           <% end %>
         </div>
-        
-        <%end%>
+ 
+   <!--End cache-->
+   <%end%>
+          
+<%end%>
         
 
 

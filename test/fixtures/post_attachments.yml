@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  camping_id: 1
+  gallerie: MyString
+
+two:
+  camping_id: 1
+  gallerie: MyString

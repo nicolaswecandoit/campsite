@@ -7,14 +7,24 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
 
 
 
+
 <div class="col-md-8">
     
+   
     
     
    <% if @camping.publish == false %>
         <div class="validation">Votre camping est en attente de validation pour notre équipe.</div>
         <%else %>
         <%end%>
+   
+   <%if (user_signed_in? && (current_user.proprio == true && current_user.email == @camping.courriel)) || (user_signed_in? && (current_user.proprio == true && current_user.id == @camping.user_id))%>
+    <%=  link_to "Editez votre camping", edit_camping_path(@camping), class:"btnmessage" %>
+  <%else%>
+      <%end%>
+      <br />
+   
+   
     <h3><span class="label label-success" style="float:right;"><%= "#{@camping.etoile} étoiles" %></span></h3>
  
    
@@ -167,11 +177,40 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
     </div>
 
 <div class="col-md-8"> 
-    <h3>Commentaires</h3>
+    <% if @camping.comments.count == 1 %>
+        <h3><%=@camping.comments.count %> commentaire <span class="ratyli" data-rate="<%= @ratingall.to_i %>" data-ratemax="5"></span></h3>
+    <% elsif @camping.comments.count > 1 %> 
+        <h3><%=@camping.comments.count %> commentaires <span class="ratyli" data-rate="<%= @ratingall.to_i %>" data-ratemax="5"></span></h3>
+    <% else %>
+        <h3>Aucun commentaire</h3>
+    <%end%>
+ 
+ 
  <div id="comments">
      
      
-       
+       <%if @camping.comments.present? %>  
+                     <% if (@ratingcommunication && @ratingservice && @ratingqualiteprix && @ratinganimation && @ratingproprete && @ratingsituation ) != 0 %>
+                      
+                      <div class=col-md-6>
+                        <p>Service <span class="ratyli" data-rate="<%= @ratings[:service] %>" data-ratemax="5" id="rightstars"></span></p>
+                    
+                        <p>Communication  <span class="ratyli" data-rate="<%= @ratings[:communication] %>" data-ratemax="5" id="rightstars"></span></p>
+                        <p>Qualité / prix <span class="ratyli" data-rate="<%= @ratings[:qualiteprix] %>" data-ratemax="5" id="rightstars"></span></p>
+                      </div>
+                     
+                     <div class=col-md-6>     
+                        <p>Situation <span class="ratyli" data-rate="<%= @ratings[:situation] %>" data-ratemax="5" id="rightstars"></span></p>
+                        <p>Propreté <span class="ratyli" data-rate="<%= @ratings[:proprete] %>" data-ratemax="5" id="rightstars"></span></p>
+                        <p>Animations <span class="ratyli" data-rate="<%= @ratings[:animation] %>" data-ratemax="5" id="rightstars"></span></p>
+                    </div>
+                     
+                     <%else%>
+                     
+                     <%end%>
+         <%else%>
+         <%end%>
+         
              <%if @camping.comments.present? %>
                  
                     <% @camping.comments.each do |comment| %>
@@ -181,22 +220,10 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
                          
                          <p><b><%= comment.title %></b></p>
                          <p><div class="commentbody col-md-10"><%= comment.body %></div></p>
-                         <div class="col-md-5">
-                             
-                        
-                            <p>Service <span class="ratyli" data-rate="<%= comment.service %>" data-ratemax="5"></span></p>
-                            <p>Communication <span class="ratyli" data-rate="<%= comment.communication %>" data-ratemax="5"></span></p>
-                            <p>Qualité / prix  <span class="ratyli" data-rate="<%= comment.qualiteprix %>" data-ratemax="5"></span></p>
-                        </div>
-                        
-                        <div class="col-md-5">
-                            <p>Situation <span class="ratyli" data-rate="<%= comment.situation %>" data-ratemax="5"></span></p>
-                            <p>Propreté <span class="ratyli" data-rate="<%= comment.proprete %>" data-ratemax="5"></span></p>
-                            <p>Animations <span class="ratyli" data-rate="<%= comment.animation %>" data-ratemax="5"></span></p>
-                        </div>
+                         
   
-  
-  <script>
+                      <!--SCRIPT pour les étoiles -->
+                          <script>
                                  $(function() {
                                        $(".ratyli").ratyli({disable:true})({
                                               full:"<i class='fa fa-star'></i>",
@@ -206,40 +233,41 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
                                     
                              </script>
                              
-  
-                           
-                         
-                         <div class="datecomment"><%=comment.created_at.strftime("%B %Y")%></div>
+                          <div class="datecomment">
+                              <%=comment.created_at.strftime("%B %Y")%></div>
                          </div>
                          <hr />
                          
                          <%end%>
                          
-                        <% if current_user.present? && current_user.proprio == false %>
-                             <%= render 'comments', camping: @camping %>
-                        <%elsif current_user.present? && current_user.proprio == true %>
-                            Seuls les campeurs peuvent donner leur avis.
-                        <%else%>
-                            Connectez-vous pour donner votre avis
-                        <%end%>
-                    
-                     
+
                
              <%else%>
-             Aucun commentaire sur ce camping.
-             
-             <% if current_user.present? && current_user.proprio == false %>
-                             <%= render 'comments', camping: @camping %>
-                        <%elsif current_user.present? && current_user.proprio == true %>
-                            Seuls les campeurs peuvent donner leur avis.
-                        <%else%>
-                            <p>Créez un compte gratuit <%= link_to "ici", new_user_session_path() %> pour donner votre avis !</p>
-                        <%end%>
+            
+            
                     
                      <%end%>
                      
-   
-            
+
+
+<%# @commentcurrentuser.each do |com|%>
+                                <%#= @rr = com.user_id %>
+                                <%#= current_user.id%>
+                                 <%# end%>
+                                 
+                        <% if (current_user.present? && current_user.proprio == false) %>
+                                
+                                
+                                 <%= render 'comments', camping: @camping %>
+                                
+                            <%elsif current_user.present? && current_user.proprio == true %>
+                                Seuls les campeurs peuvent donner leur avis.
+                        
+                            <%else%>
+                                <p>Créez un compte gratuit <%= link_to "ici", new_user_session_path() %> pour donner votre avis !</p>
+                        
+                            <%end%>
+  
 
     
  </div>
@@ -250,7 +278,7 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
       <% if @camping.nearbys(4).present?%>
         <h3>Les campings proches de <%=@camping.commune%></h3>
           <% for camping in @camping.nearbys(4) %>
-          <%= image_tag camping.image %>
+          <%#= image_tag camping.image %>
           
             <p><%= link_to camping.name, camping %> - <%= camping.distance.round(2) %> kilomètres </p>
             <%= camping.adresse%>
@@ -264,13 +292,8 @@ canonical: "#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>
   <%#else%>
       <%#end%>
       
-      <%if (user_signed_in? && (current_user.proprio == true && current_user.email == @camping.courriel)) || (user_signed_in? && (current_user.proprio == true && current_user.id == @camping.user_id))%>
-    <%=  link_to "Editez votre camping", edit_camping_path(@camping), class:"btnmessage" %>
-  <%else%>
-      <%end%>
       
-
-<%= link_to 'Back', campings_path %>
+    
 
 <script src="//maps.google.com/maps/api/js?v=3.23&key=AIzaSyBHYJLTgnFqxMyLcqlOYg00RFmD6_7lLDM"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>

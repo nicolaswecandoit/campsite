@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :post_attachments
   get 'home/index'
 
   devise_for :users

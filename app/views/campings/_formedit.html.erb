@@ -115,7 +115,6 @@
    <div class="form-group">
 
 <% # jquery upload template # %>  
-<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script> 
 
 
 </div>
@@ -150,7 +149,15 @@
 
 <% end %>
   <label for="imageform">Choisissez une photo pour illustrer votre camping<small><p>Votre photo doit être assez grande (600px de large minimum)</p></small></label>
-<p><%= f.file_field :image %></p>
+<p><%#= f.file_field :image %></p>
+
+<%= f.fields_for :post_attachments do |pp| %>
+     <div class="field">
+       <%= pp.file_field :gallerie, :multiple => true, name: "post_attachments[gallerie][]" %>
+     </div>
+     <%end%>
+     
+         <%#= file_field_tag "post_attachments[gallerie][]", type: :file, multiple: true %>
 
 <div class="imageform">
   <p><label for="image">Photo de votre camping</label></p>

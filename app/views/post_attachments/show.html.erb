@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Camping:</strong>
+  <%= @post_attachment.camping_id %>
+</p>
+
+<p>
+  <strong>Gallerie:</strong>
+  <%= @post_attachment.gallerie %>
+</p>
+
+<%= link_to 'Edit', edit_post_attachment_path(@post_attachment) %> |
+<%= link_to 'Back', post_attachments_path %>
