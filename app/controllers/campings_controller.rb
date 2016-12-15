@@ -39,8 +39,7 @@ end
 
       @post_attachments = @camping.post_attachments.all
        @users = User.all
-       
-         
+
        
       where_camping = Comment.where(:camping_id => params[:id])
     @ratings = [:service, :communication, :qualiteprix, :animation, :proprete, :situation].map{|key|[key, where_camping.average(key).to_i]}.to_h

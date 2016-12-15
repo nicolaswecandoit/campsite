@@ -27,6 +27,11 @@
 
 <%= csrf_meta_tags %>    
   <body>
+    
+    <div id="loading-indicator">
+ <%= image_tag("loader.gif", :id => "loading-indicator") %>
+</div>
+    
   <%= render 'layouts/partials/nav' %>
 
 <div class="containershow">
@@ -35,6 +40,25 @@
   
       <%= render 'layouts/partials/messages' %>
 <%= yield(:search) %>
+
+
+
+<script>
+$(function() {
+  $('#loading-indicator').hide();  // hide it initially.
+  $(document)  
+    .ajaxStart(function() {
+      $('#loading-indicator').show(); // show on any Ajax event.
+      $('.containershow').hide();
+    })
+    .ajaxStop(function() {
+      $('#loading-indicator').hide(); // hide it when it is done.
+      $('.containershow').show();
+  });
+});
+</script>
+
+
       <%= yield %>
   
   </div>

@@ -67,8 +67,8 @@ config.i18n.enforce_available_locales = true
     address: "auth.smtp.1and1.fr",
     port: 465,
     authentication: 'plain',
-    user_name: 'test@1kg.fr',
-    password: 'Mgdfdv28!'
+    user_name: 'xxx@xxx.fr',
+    password: 'xxxx!'
 }
 
 end

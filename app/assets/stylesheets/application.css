@@ -1194,3 +1194,8 @@ a:hover {
     float: right;
     margin-right: 60px;
 }
+
+#loading-indicator {
+
+   top: 10px;
+ }

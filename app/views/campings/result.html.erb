@@ -45,7 +45,7 @@
                                  <% if camping.image.present? %>
                               <div class="imagecamp"><%= image_tag camping.image%></div>
                               <%else%>
-                              <img src="http://cdn-jpg2.theactivetimes.net/sites/default/files/camping.jpg" width="100%">
+                              <%= image_tag("camping-defaut.jpg")%>
                               <%end%>
                                 </a>
                             </div>
